@@ -1,0 +1,573 @@
+<title>Array methods</title>
+<script src="./arrays.js"> </script>
+<script id="=================Find method=====================">
+
+    // usualy till now 
+
+    // const findBetween = (nums, from, to) => {
+    //     let between = null; 
+
+    //     nums.forEach(num => {
+    //         if (between !== null) return; // this line break foEach loop if we already
+    //         //                               found first number that fits our conditions
+
+    //         if (num > from && num < to) {
+    //             between = num;
+    //         }
+    //     });
+    //     return between;
+    // };
+
+    // // Same out but can be done with for loop
+    // const findBetween = (nums, from, to) => {
+    //     for (const num of nums) {
+    //         if (num > from && num < to) {
+    //             return num;
+    //         }
+    //     }
+    //     return null; // this line output null if elements dont fit conditions
+    // }
+    // const between = findBetween(numbers, 10, 30 );
+    // console.log(between)
+
+    // However this can be done much easier with .find method
+
+    // const x = numbers.find(number => number > 10 && number <30);
+    // console.log(x)
+
+    // Currying - partial application of arguments to function // double arrow function 
+
+    // const isBetween = (from, to) => (number) => number > from && number < to;
+
+    // // this above can be put another like this 
+
+    // function isBetween2(from,to) {
+    //     return function(number) {
+    //         return number > from && number < to;
+    //     }
+    // }
+    // const y = numbers.find(isBetween(10, 30)) // this will return first fitting argument
+    // console.log(y)
+
+</script>
+
+<script id="What if not founded">
+
+    // const z = [1, 2, 3].find(n => n === 100);
+    // console.log({ z }); // in this case find method return udefined 
+
+</script>
+
+<script id=".find .inculdes players">
+
+    // const e = players.find(p => p.name.toLowerCase().includes("e"));
+    // console.log(e)
+</script>
+
+<script id="Finding posts">
+
+//     const ai = posts.find(post => post.title.toUpperCase().includes("AI"));
+//     console.log( ai )
+
+//     const aiTitle = posts.find(post => post.tag.includes("JavaScript"))?.title; // this at the end display only title of article
+// console.log(aiTitle);
+
+</script>
+
+<script id="--------------------FindIndex method-------------">
+
+    // const index = players.findIndex(player => player.role ==="Paladin");
+    // console.log(index)
+</script>
+
+<script id="if no item have serched parameter">
+
+    // const index = players.findIndex(player => player.role ==="Rouge");
+    // console.log(index)  // output value will be -1
+
+</script>
+
+<script id="========================Every methode===========================">
+
+//     //this method checks if EVERY elemnt of input and have boolean value true/false its like && between every elemnt 
+
+//     const x = numbers.every(num => num >0 );
+//     console.log( {x} );
+
+//     const y = numbers.every(num => num <100);
+//     console.log({ y });
+
+//     // if we would like to make our own .every it would look like this 
+    
+//    console.log( numbers.map(num => num > 0) );
+//    console.log( numbers.map(num => num< 100) );
+   
+//     const isEvery= (nums, cb) => nums.map(cb).filter(Boolean).length === nums.length
+
+//     console.log(
+//         isEvery(numbers, (x) => x>0 ),
+//         isEvery(numbers, (x) => x<100),
+//     );
+
+</script>
+
+<script id="Every method example with players">
+
+    //Lets say that to continiu mission every player has to to have at least 20 lvl we can use every for this 
+
+    // const isEligbleForMission = (player) => player.level >= 20;
+
+    // console.log(players.every(isEligbleForMission)) // result is false so our party cant continue mission
+
+</script>
+<script id="----------------------------Some Methode-------------------------">
+
+    // if every works like && then some works like || or, this mean that its check if ANY argument fit conditions
+    // const a = [1,2,3].some(number => number>0);
+    //     console.log(a); true
+        
+    // const b = [1,2,3].some(number => number%2 === 0)
+    //     console.log(b)
+</script>
+
+<script id=".some method example with players">
+
+// // analogicly to every lets say that party must have at least one player on 20 level to atempt mission 
+
+// const isEligbleForMission = (player) => player.level >= 20; // this can be destruturize example in next line
+// const isEligbleForMissionDestr = ({ level }) => level >= 20;
+
+// console.log(players.some(isEligbleForMission)) 
+// console.log(players.some(isEligbleForMissionDestr)) // resault is true, so yeay lets save princes 
+</script>
+
+<script id="------------------------------.toSorted Method-------------------------------">
+
+    // const a = [3, 1, 2];
+
+    // // console.log( a.sort() )     // if we would just use sort method it will
+    // // console.log( a )            // change original array which some times my no be desirable 
+
+    // // if we would like to just sort in new array with out changing original array helpfull is .toSorted()
+
+    // console.log( a.toSorted() )
+    // console.log( a )                // original array remains the same 
+
+</script>
+
+<script id="descending  toSorted">
+
+    // normaly .toSorted will sort our array in asceding order 
+    // but we can manipulate it to sor descending 
+
+    // const nums = [2, 3, 1];
+
+    // const descending = nums.toSorted((a, b) => b - a)
+    // console.log(descending)
+
+    // here first element                               a = 3 
+    // second element will be first element of array    b = 2
+    // normaly to sorted will do a - b and depanding or result will sort array 
+    // how ever wen we change in brackets to do b - a it will sort array in descending manor 
+</script>
+
+<script id="Sorting arry of objects based on one of the values">
+
+    // we want to sort our players array based on players lvl to do it we need to use .toSorted 
+
+    // const topLevelng = players.toSorted((a, b) => a.level - b.level)
+    // console.log(topLevelng)
+
+    // // but oh now as we see first will be the the lowest level 
+    // //{name: 'Beth', level: 1, role: 'Warrior'}
+    // //1
+    //     // : 
+    // // {name: 'Cecil', level: 7, role: 'Mage'}
+    // // 2
+    // // : 
+    // // {name: 'Greg', level: 21, role: 'Archer'}
+    // // 3
+    // // : 
+    // // {name: 'Adam', level: 42, role: 'Warrior'}
+    // // 4
+    // // : 
+    // // {name: 'Henry', level: 56, role: 'Mage'}
+    // // 5
+    // // : 
+    // // {name: 'Faith', level: 69, role: 'Paladin'}
+    // // 6
+    // // : 
+    // // {name: 'Dorothy', level: 74, role: 'Tank'}
+    // // 7
+    // // : 
+    // // {name: 'Edmund', level: 99, role: 'Paladin'}
+
+    // // this not what we wanted we wanted descending level to do just that we need to change a - b to b - a,
+
+    // const topLevelProperly = players.toSorted((a, b) => b.level - a.level)
+    // console.log(topLevelProperly)
+
+    // // now first position will have Edmund with 99 level
+
+    // // but what if we wanted our list to just show name of the best and weakest player 
+
+    // // to do this we need to use arrow function map with p => p.name
+
+    // console.log("Top levels:", topLevelProperly.map(p => p.name) )
+    // console.log("Bottom level:", topLevelng.map(p => p.name))
+
+</script>
+
+<script id="Sorting commants based on publication date">
+
+    // // here we will sort based on publish date but what if we wanted so sort from the latest 
+
+    // const commants = [
+    //     {text: "Lorem ipsum", publishDate: new Date(2020, 0, 4)},
+    //     {text: "Lorem ipsum", publishDate: new Date(2020, 0, 27)},
+    //     {text: "Lorem ipsum", publishDate: new Date(2020, 0, 17)},
+    //     {text: "Lorem ipsum", publishDate: new Date(2020, 0, 11)},
+    //     {text: "Lorem ipsum", publishDate: new Date(2020, 0, 1)},
+    // ]
+    // console.log(
+    //     commants.toSorted((x, y) => x.publishDate - y.publishDate)
+    // )
+
+    //  // here we will sort based on publish date but what if we wanted so sort from the latest 
+    //  // easy as changing two parameters 
+
+    //  console.log(
+    //     commants.toSorted((x, y) => y.publishDate - x.publishDate)
+    // ) 
+    // // to be pedantic we can add getTime and we have exact time staps based on miliseconds
+    // console.log(
+    //     commants.toSorted((x, y) => x.publishDate.getTime() - y.publishDate.getTime())
+    // )
+</script>
+
+<script id="------------------------------.toReversed Method-------------------------------">
+
+    // const b = [3, 2, 1];
+
+    // // console.log( b.reverse() )     // if we would just use reverse method it will
+    // // console.log( b )            // change original array which some times my no be desirable 
+
+    // // if we would like to just reverse in new array with out changing original array helpfull is .toReversed()
+
+    // console.log( b.toReversed() )
+    // console.log( b )                // original array remains the same 
+
+</script>
+
+<script id="***********************.reduce Method the most versatile ***********************">
+
+  
+    // const startingValue = 0;
+
+    // // const accumulated = [42, 42, 42].reduce((accumulator, element, index, array) => {
+    // //     console.log([ accumulator ]);
+    // //     return accumulator + 1
+    // // }, startingValue)
+
+    // // // in this case this could deciving but we did not use any element value 
+    // // // so if starting value will be 0 value of array are nonexitentlike reduce count how many time its ocure
+    // // // 2 iteration acc = (0 + 1) = 1 from before 0+1
+    // // // 3 iteration acc = (1 + 1) = 2 from pr
+
+    // // console.log([ accumulated ])
+
+    // const nums = [3, 2, 1];
+
+    // const sum = nums.reduce((acc, num) => acc + num, 0)
+    // // iteration after iteration 
+    // //1.    staring value    0 + 3 (1-elemnt of num)    = 3
+    // //2 acc = from previus = 3 + 2 (2-elemnt of num)    = 5
+    // //3 acc = from previus = 5 + 1 (3-element of num)   = 6  // And this is our last and final value 
+
+    // console.log(sum)
+
+    // // lets try this on strings 
+    // const letters = ["a", "b", "c", "d", "e"]
+
+    // const joined = letters.reduce((acc, letter) => acc + letter, "") //"" because we want our first element to be empty string
+    // // 1.   ""      + "a"    = "a"
+    // // 2.  "a"      + "b"    = "ab"
+    // // 3.  "ab"     + "c"    = "abc"
+    // // 4   "abc"    + "d"    = "abcd"
+    // // 5    "abcd"  + "e"    = "abcde"
+
+    // console.log(joined)
+</script>
+
+<script id="reduce example">
+
+    nums1 = [42, 12, 15, 76, 91];
+
+    // const doubled = nums1.reduce((acc, n) => [...acc, n*2], [])
+
+    // //1         []           + [n*2]   = [42*2]                      = [82]
+    // //2      [82]            + [n*2]   = [82, 12*2]                  = [82, 24]   
+    // //3      [82, 24]        + [n*2]   = [82, 24, 15*2]              = [82, 24, 30]
+    // //4 [82, 24, 30]         + [n*2]   = [82, 24, 30, 76*2 ]         = [82, 24, 30, 152]
+    // //5 [82, 24, 30, 152]    + [n*2]   = [82, 24, 30, 152, 91*2]     = [82, 24, 30, 152, 182] // last and final array 
+
+    // console.log(doubled) 
+
+    // const doubleed = nums1.reduce((acc, n, i) =>{
+    //         const newValue = [...acc, n*2];
+    //         console.log(i, newValue);
+    //         return newValue
+    // }, []);
+
+    // console.log( doubleed )
+
+</script>
+
+<script id="reproduction filter with reduce">
+
+    // const filtered = nums1.reduce((acc, n) => {
+    //     if (n > 50) {           // if elemnt us bigger then 50 
+    //         return [...acc, n]; // retur all previus elements and elemnt 
+
+    //     }
+        
+    //     return acc;             // at the end return all acc
+
+    // }, [])
+
+    // // 1. 42     > 50 ? no       // doing nothing
+    // // 2. 12     > 50 ? no       // doing nothing 
+    // // 3. 15     > 50 ? no       // doing nothing 
+    // // 4. 76     > 50 ? yes      // pushing it to new array 
+    // // 5 [76] 91 > 50 ? yes      // pushing it to the final array which is [76, 91]
+
+    // // return acc which is [76, 91]
+
+    // console.log(filtered)
+
+    // // if we would like to reproduced it completly 
+
+    // const reduceFilter = (arr, callback, initialValue) => {
+    //     let accumulator = initialValue;
+
+    //     for (let i=0; i < arr.length; i++ ) {
+    //         accumulator = callback(accumulator, arr[i], i, arr);
+    //     }
+    //     return accumulator;
+    // }
+    // const filtered2 = reduceFilter(nums1, (acc, n) => {
+    //     return n > 50 ? [...acc, n] : acc; 
+    // }, []);
+
+    // console.log(filtered2)
+</script>
+
+<script id="chat gpt call back">
+// const reduceFilter = (arr, callback, initialValue) => {
+//     let accumulator = initialValue;
+
+//     for (let i = 0; i < arr.length; i++) {
+//         const currentElement = arr[i];
+
+//         console.log(`\nITERACJA ${i + 1}`);
+//         console.log("accumulator:", accumulator);
+//         console.log("currentElement:", currentElement);
+//         console.log("index:", i);
+//         console.log("array:", arr);
+
+//         accumulator = callback(accumulator, currentElement, i, arr);
+
+//         console.log("Wynik callbacka:", accumulator);
+//     }
+
+//     return accumulator;
+// };
+
+// const nums1 = [13, 99, 25, 88, 2];
+
+// const filtered2 = reduceFilter(
+//     nums1,
+//     (acc, n, i, arr) => {
+//         // tylko liczby większe niż 50 przechodzą
+//         return n > 50 ? [...acc, n] : acc;
+//     },
+//     []
+// );
+
+// console.log("\nOstateczny wynik:", filtered2);
+</script>
+
+<script id=" reduce and filter player by level and role">
+
+    // const warriotsOver40 = players.reduce((acc, player) => {
+    //     // if (player.role === "Warrior" && player.level >=40) {
+    //     //     return [...acc, player.name];
+    //     // }
+    //     // return acc,
+    //     return (player.role === "Warrior" && player.level >= 40)
+    //     ? [...acc, player.name]
+    //     : acc;
+    // }, [])
+
+    // const warriotsOver40 = players.reduce((acc, player) =>    
+    //     (player.role === "Warrior" && player.level >= 40)
+    //     ? [...acc, player.name]
+    //     : acc
+    // , [])
+
+    // console.log(warriotsOver40)
+
+    const topPlayer = players.reduce((acc, player) => {
+        const previousTopPlayerLever = acc?.level ?? 0;
+        if (acc===null || acc?.level === undefined) return player;
+        if (player.level > acc.level) {
+            return player;
+        }
+        return acc
+    }, null);
+     console.log( topPlayer )
+
+</script>
+
+<script id="max & min & sum & product">
+
+//     const nums = [6, 3, 8, 2];
+
+
+//     const sum = nums.reduce((acc, n) => acc + n, null);
+//     const product = nums.reduce((acc, n) => n*acc, null); // product = 0 becasue we started with 0 
+//     const max= nums.reduce((acc, n) => n>acc?n:acc, nums[0]);
+//     const min= nums.reduce((acc, n) => n<acc?n:acc, nums[0]);
+
+
+//     console.log([ sum, product, min, max ])
+
+//     //what would happen if we had array of zero 
+
+//     const nums0 = [0, 0, 0, 0];
+
+
+//     const sum0 = nums0.reduce((acc, n) => acc + n, null);
+//     const product0 = nums0.reduce((acc, n) => n*acc, null); 
+//     const max0= nums0.reduce((acc, n) => n>acc?n:acc, nums0[0]);
+//     const min0= nums0.reduce((acc, n) => n<acc?n:acc, nums0[0]);
+
+
+//     console.log([ sum0, product0, min0, max0 ]) // efect all zeros 
+
+//     // ok what with [] - just an empty array 
+//     const numse = [];
+
+
+//     const sume = nums0.reduce((acc, n) => acc + n, null);
+//     const producte = nums0.reduce((acc, n) => n*acc, null); 
+//     const maxe= nums0.reduce((acc, n) => n>acc?n:acc, numse[0]);
+//     const mine= nums0.reduce((acc, n) => n<acc?n:acc, numse[0]);
+
+
+//     console.log([ sume, producte, mine, maxe ]) // [0, 0, undefined, undefined] to avoid undefined 
+//                                                 // that apear by min and max we could change it to infinity 
+
+// const numsei = [];
+
+
+// const sumei = numsei.reduce((acc, n) => acc + n, 0);
+// const productei = numsei.reduce((acc, n) => n*acc, 1); 
+// const maxei= numsei.reduce((acc, n) => n>acc?n:acc, -Infinity);
+// const minei= numsei.reduce((acc, n) => n<acc?n:acc, Infinity);
+
+// console.log( {sumei, productei, minei, maxei} )    // {sumei: 0, productei: 1, minei: Infinity, maxei: -Infinity} 
+//                                                    // may be zeros but wont ruin rest of a code with undefined 
+</script>
+
+ <script id="=======================Very important UNIQAL values=============================">
+
+//     // Lets say that we want to make a new array with all tags of posts form added array.js
+    
+//     const postTags1 = posts.reduce((tags, post) => {
+//         return [...tags, ...post.tag];
+//     }, []);
+
+//     console.log(postTags1)
+
+
+//     const makeUnique = (arr) => 
+//         arr.filter((x, i) =>            // will check elements and index 
+//           arr.indexOf(x) === i);        // this function arr.indexOf(x) will find the first index where 
+//                                         // element occure then checks if strictly equal to the index of   
+//                                         // iterated element and if its false then filter it out
+//     console.log( makeUnique([1, 2, 3, 1]) );
+
+//     // index of 1 = 0   //true 
+//     // index of 2 = 1   //true 
+//     // index of 3 = 2   //true 
+//     // index of 1 = 3   // it is false arr.indexOf(1) = 0  so elemented is discarded 
+
+//     // another way to make sure that elements are unique is to use set and rest operator 
+//     // set are unique in them self but its diffrient kind of prototype to display it in are we need rest operator 
+
+//     const makeUniqueSet = (array) => [...new Set(arr)] // or we can use array from 
+//     const makeUniqueSetAndArrayfrom = (array) => Array.from(new Set(array))
+
+//     // but lets go back to post 
+
+//     const postTags = posts
+//         .reduce((tags, post) => [...tags, ...post.tag], [])
+//         .toSorted()
+//         .filter((tags, i , arr) => arr.indexOf(tags) === i)
+
+//     console.log(postTags);
+
+//     // now lets make tags counter 
+
+//     const postTagsCounter = posts.reduce((tags, post) => {
+//         post.tag.forEach(tag => {
+//             //if tag key is present (is not udefined) in tags object,
+//                 // increase its value by 1,
+//                 // if not initialize with one 
+//             tags[tag] = tags[tag]
+//             ?tags[tag] + 1
+//             : 1;
+//         });
+//         return tags
+// }, {})
+//         console.log(postTagsCounter)
+
+//         const postTagsCounterEasier = posts.reduce((tags, post) => {
+//             post.tag.forEach(tag => {
+//                 const currentTagCounter = tags[tag];
+
+//                     if (currentTagCounter === undefined) {
+//                         tags[tag] = 1;
+//                     } else {
+//                         tags[tag] = currentTagCounter + 1;
+//                     }
+                
+                    
+//             });
+//             return tags;
+//         }, {})
+
+//         console.log(postTagsCounterEasier)
+// // pierdolony one liner 
+
+// const postTagsCounterOneLine = posts.reduce((tags, post) =>
+//  (post.tag.forEach(tag => 
+//  tags[tag] = (tags[tag] ?? 0) + 1), tags),
+//   {});
+             
+       
+   
+ </script>
+<script id="??>?>?">
+
+    const warriorsLevel = players
+        .reduce(
+            (totalLevel, player) => player.role === "Warrior"
+                ? totalLevel + player.level
+                : totalLevel
+        , 0);
+        
+        console.log(warriorsLevel)
+
+</script>

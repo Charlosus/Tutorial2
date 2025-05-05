@@ -1,0 +1,63 @@
+<title>Array refernace pasiing by value or reference</title>
+
+<script class="Primittive values - passing by value">
+
+    // function addOne(num) {  // when operating on primitives changeing 
+    //     num = num + 1;      // theirs value wont change them if we log
+    // }                       // them letter 
+
+    // let x = 10;
+
+    // addOne(x);
+
+    //  console.log(x);        // Value of let x will not be diffriend 
+                                //After operation 
+
+</script>
+
+<script class="Referance value - passing by reference">
+
+    // function addOneToFirst(num) {       // When operating with array function 
+    //     num[0] = num[0] + 1;            // will change theirs value because 
+    // }                                   // we are operating with specifcly referanced 
+    //                                     // adress or 
+    // let numbers = [10]
+
+    // addOneToFirst(numbers)
+
+    // console.log(numbers)
+
+</script>
+
+<script class="Referanced array">
+
+    // const number = [1,2,3];
+
+    // const a = number;
+
+    // console.log(number, a);
+
+    // a.push(42);
+
+    // console.log(number, a)
+
+</script>
+
+<script class="Referanced array - example">
+
+    // function registerUser(userData) {
+    //     const userName = userData[0];
+    //     const userAge = userData[1];
+
+    //     if (userAge >= 18) {
+    //         users.push(userName);
+    //     } else console.log("User is to young to register!");
+    // }
+
+    // const users = ["Adam", "Beth", "Cecil"];
+
+    // registerUser(["Dorothy", 15]);
+    // registerUser(["Zeke", 42])
+
+    // console.log(users)
+</script>

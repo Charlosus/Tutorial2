@@ -1,0 +1,744 @@
+<title>Method .filter .find .findIndex .every</title>
+<script src="./arrays.js"></script>
+<p id="1-find">
+Dopełnij kod tak, aby zmienna evenNumbers zawierała tablicę liczb parzystych z tablicy numbers, a zmienna oddNumbers zawierała tablicę liczb nieparzystych. Pamiętaj, aby używać metody filter().
+
+Zadeklarowana została zmienna numbers
+Wartością zmiennej numbers jest tablica [17, 24, 82, 61, 36, 18, 47, 52, 73]
+Zadeklarowana została zmienna evenNumbers
+Wartością zmiennej evenNumbers jest tablica [24, 82, 36, 18, 52]
+Zadeklarowana została zmienna oddNumbers
+Wartością zmiennej oddNumbers' jest tablica [17, 61, 47, 73]`
+Do iteracji po tablicy numbers używana jest metoda filter()
+==============================================================================
+</p>
+
+<script id="1">
+//     const numbers = [17, 24, 82, 61, 36, 18, 47, 52, 73];
+
+// const evenNumbers = numbers.filter(number => number%2===0);
+// const oddNumbers = numbers.filter(number => number%2!==0);
+
+// console.log(evenNumbers)
+// console.log(oddNumbers)
+
+</script>
+
+<script id=".filter array of objects example">
+// const LOW_SCORE = 50;
+// const HIGH_SCORE = 80;
+// const students = [
+//   { name: "Mango", score: 83 },
+//   { name: "Poly", score: 59 },
+//   { name: "Ajax", score: 37 },
+//   { name: "Kiwi", score: 94 },
+//   { name: "Houston", score: 64 },
+// ];
+
+// const best = students.filter(student => student.score >= HIGH_SCORE);
+// console.log(best); // Tablica obiektów o nazwach Mango i Kiwi
+
+// const worst = students.filter(student => student.score < LOW_SCORE);
+// console.log(worst); // Tablica z jednym obiektem Ajax
+
+// // W funkcji wywołania zwrotnego można wygodnie destrukturyzować właściwości obiektu
+// const average = students.filter(
+//   ({ score }) => score >= LOW_SCORE && score < HIGH_SCORE
+// );
+// // console.log(average); // Tablica obiektów o nazwach Poly і Houston
+</script>
+
+<p id="2 filter array of objects">
+==========================================================================================================
+ Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwości title, author, rating. Używając metody filter(), dopełnij kod tak, aby:
+
+W zmiennej topRatedBooks znalazła się tablica książek, których ocena (właściwość rating) jest większa lub równa wartości zmiennej MIN_RATING.
+W zmiennej booksByAuthor znalazła się tablica książek napisanych przez autora o nazwisku (właściwość author) pasującym do wartości w zmiennej AUTHOR.
+Zadeklarowana została zmienna books
+Wartością zmiennej books jest tablica obiektów
+Zadeklarowana została zmienna MIN_RATING
+Wartością zmiennej MIN_RATING jest liczba 8
+Zadeklarowana została zmienna AUTHOR
+Wartością zmiennej AUTHOR jest ciąg znaków "Bernard Cornwell"
+Zadeklarowana została zmienna topRatedBooks
+Wartość zmiennej topRatedBooks jest tablicą książek z ratingiem powyżej 8
+Zadeklarowana została zmienna booksByAuthor
+Wartością zmiennej booksByAuthor jest tablica książek, których autorem jest "Bernard Cornwell"
+Do iteracji po tablicy books używana jest metoda filter()
+====================================================================================================
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
+
+const MIN_RATING = 8;
+const AUTHOR = "Bernard Cornwell";
+
+const topRatedBooks = books;
+const booksByAuthor = books;
+</p>
+
+<script id="2 - solved">
+//     const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+//   { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+// ];
+
+// const MIN_RATING = 8;
+// const AUTHOR = "Bernard Cornwell";
+// const topRatedBooksD = books.filter(book => book.rating >= MIN_RATING);
+// const booksByAuthorD = books.filter(book => book.author === AUTHOR);
+
+// // using destructurization 
+// const topRatedBooks = books.filter(({rating}) => rating >= MIN_RATING);
+// const booksByAuthor = books.filter(({author}) => author === AUTHOR);
+
+// console.log(topRatedBooks)
+// console.log(booksByAuthor)
+// console.log(topRatedBooksD)
+// console.log(booksByAuthorD)
+</script>
+
+<p id="3 filter array of obj">
+    =====================================================================================
+    Tę tablicę obiektów będziemy przekazywać do parametru users podczas wywoływania funkcji z zadania.
+    w arrays.js
+ Dopełnij funkcję getUsersWithEyeColor(users, color) tak, aby zwracała tablicę użytkowników, których kolor oczu (właściwość eyeColour) zgadza się z wartością drugiego parametru colour.
+
+Zadeklarowana została zmienna getUsersWithEyeColor
+Do zmiennej getUsersWithEyeColor przypisana została funkcja strzałkowa z parametrami (users, color)
+Do iteracji po parametrze users używana jest metoda filter()
+Jeśli parametr color to blue, funkcja zwraca tablicę obiektów użytkowników o nazwach Moore Hensley, Sharlene Bush i Carey Barr
+Jeśli wartość parametru color to green, funkcja zwraca tablicę obiektów użytkowników o nazwach Ross Vazquez i Elma Head
+Jeśli wartość parametru colour to brown, funkcja zwraca tablicę obiektów użytkowników o nazwach Blackburn Dotson i Sheree Anthony
+Jeśli wartością parametru color jest jakikolwiek inny ciąg znaków, funkcja zwraca pustą tablicę
+=============================================================================================
+</p>
+<script id="3 solved">
+    // const getUsersWithEyeColor = (users, color) => {
+    //     return users.filter(user => user.eyeColor.toLowerCase() === color)
+    // };
+    // console.log(getUsersWithEyeColor(users, "green"))
+    // console.log(getUsersWithEyeColor(users, "brown"))
+    // console.log(getUsersWithEyeColor(users, "yellow"))
+</script>
+
+<p id="4 sorting users between ages">
+    =========================================================================================================
+    Używając tablicy z poprzedniego polecenia 
+    Dopełnij kodu do funkcji getUsersWithAge(users, minAge, maxAge), aby zwrócić tablicę użytkowników, których wiek (przechowywany we właściwości age) należy do określonego zakresu od minAge do maxAge.
+
+Wskazówki:
+
+Użyj metody filter(), aby utworzyć nową tablicę, w której przechowywane są tylko elementy spełniające określony warunek.
+Użyj operatorów >= (większy lub równy) oraz <= (mniejszy lub równy), aby odfiltrować użytkowników, których wiek leży dokładnie pomiędzy wartościami minimalną minAge i maksymalną maxAge.
+Zadeklarowana została zmienna getUsersWithAge
+Do zmiennej getUsersWithAge przypisana została funkcja strzałkowa z parametrami (users, minAge, maxAge)
+Do iteracji po parametrze users używana jest metoda filter()
+Jeśli wartości parametrów minAge i maxAge wynoszą odpowiednio 20 i 30, funkcja zwraca tablicę obiektów użytkowników o nazwach Ross Vazquez, Elma Head, Carey Barr
+Jeśli wartości parametrów minAge i maxAge wynoszą odpowiednio 30 i 40, funkcja zwraca tablicę obiektów użytkowników o nazwach Moore Hensley, Sharlene Bush, Blackburn Dotson, Sheree Anthony
+Jeśli wartości parametrów minAge i maxAge są równe odpowiednio 80 i 100, funkcja zwraca pustą tablicę
+Wywołanie funkcji z losowymi, ale poprawnymi argumentami zwraca poprawną wartość
+=======================================================================================================
+const getUsersWithAge = (users, minAge, maxAge) => {};
+</p>
+
+<script id="4 solved">
+// const getUsersWithAge = (users, minAge, maxAge) => {
+//    return users.filter(user => user.age >= minAge && user.age <= maxAge)
+// };
+// console.log(getUsersWithAge(users, 20, 30))
+</script>
+
+<script id=".find example">
+//     const colorPickerOptions = [
+//   { label: "red", color: "#F44336" },
+//   { label: "green", color: "#4CAF50" },
+//   { label: "blue", color: "#2196F3" },
+//   { label: "pink", color: "#E91E63" },
+//   { label: "indigo", color: "#3F51B5" },
+// ];
+
+// colorPickerOptions.find((option) => option.label === "blue"); // { label: "blue", color: "#2196F3" }
+// colorPickerOptions.find((option) => option.label === "pink"); // { label: "pink", color: "#E91E63" }
+// colorPickerOptions.find((option) => option.label === "white"); // undefined
+
+</script>
+
+<p id="5 .find in books">
+================================================================================================
+
+    Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwości title, author, rating.
+
+Używając metody find(), dopełnij kod tak, aby:
+
+W zmiennej bookWithTitle został utworzony obiekt książki, której nazwa (właściwość title) odpowiada wartości zmiennej BOOK_TITLE.
+W zmiennej bookByAuthor został utworzony obiekt książki, którego autor (właściwość author) odpowiada wartości zmiennej AUTHOR.
+Zadeklarowana została zmienna books
+Wartością zmiennej books jest tablica
+Zadeklarowana została zmienna BOOK_TITLE
+Wartością zmiennej BOOK_TITLE jest ciąg znaków "The Dream of a Ridiculous Man"
+Zadeklarowana została zmienna AUTHOR
+Wartością zmiennej AUTHOR jest ciąg znaków "Robert Sheckley"
+Zadeklarowana została zmienna bookWithTitle
+Wartością zmiennej bookWithTitle jest obiekt książki o nazwie "The Dream of a Ridiculous Man"
+Zadeklarowana została zmienna bookByAuthor
+Wartością zmiennej bookByAuthor jest obiekt książki autora "Robert Sheckley"
+Do iteracji po tablicy books używana jest metoda find()
+================================================================================================
+
+</p>
+
+<script id="5 solved">
+//     const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+// ];
+// const BOOK_TITLE = "The Dream of a Ridiculous Man";
+// const AUTHOR = "Robert Sheckley";
+
+// // const bookWithTitle = books => {
+// //    return books.find(book => book.title === BOOK_TITLE)
+// // };
+// // const bookByAuthor = books => {
+// //    return books.find(book => book.author === AUTHOR)
+// // };
+// const bookWithTitle = boosk => books.find(book => book.title === BOOK_TITLE);
+// const bookByAuthor = boosk => books.find(book => book.author === AUTHOR);
+
+// console.log(bookWithTitle(books))
+// console.log(bookByAuthor(books))
+</script>
+
+<p is="6 find user by email">
+================================================================================================
+    Używając tablicy obiektów users w array.js 
+    Dopełnij funkcję getUserWithEmail(users, email) tak, aby zwracała obiekt użytkownika, którego email (właściwość email) zgadza się z wartością drugiego parametru email.
+
+Zadeklarowana została funkcja getUserWithEmail
+Do zmiennej getUserWithEmail przypisana została funkcja strzałkowa z parametrami (users, email)
+Do iteracji po parametrze users używana jest metoda find()
+Jeśli wartością parametru email jest "shereeanthony@kog.com", funkcja zwraca obiekt użytkownika o nazwie Sheree Anthony
+Jeśli wartością parametru email jest "elmahead@omatom.com", funkcja zwraca obiekt użytkownika o nazwie Elma Head
+Jeśli wartość parametru email wynosi "blackburndotson@furnigeer.com", funkcja zwraca obiekt użytkownika o nazwie Blackburn Dotson
+Jeśli w tablicy users nie ma użytkownika z pocztą z parametru email, funkcja zwraca undefined
+Wywołanie funkcji z losowymi, ale poprawnymi argumentami zwraca poprawną wartość
+================================================================================================
+starting code: const getUserWithEmail = (users, email) => {};
+</p>
+
+<script id="6 solved">
+//     const getUserWithEmail = (users, email) => {
+//         return users.find(user => user.email === email)
+//     };
+// console.log(getUserWithEmail(users, "blackburndotson@furnigeer.com"))
+</script>    
+
+<p id="7 every">
+    ========================================================================================
+    Używając tablicy obiektów users w arrays.js
+    Dopełnij funkcję isEveryUserActive(users) tak, aby sprawdzała, czy wszyscy użytkownicy są teraz aktywni (właściwość isActive) i zwracała true lub false.
+
+Zadeklarowana została zmienna isEveryUserActive
+Do zmiennej isEveryUserActive przypisana została funkcja strzałkowa z parametrem (users)
+Do iteracji po parametrze users używana jest metoda every()
+Wywołanie funkcji z określoną tablicą użytkowników zwraca false
+
+========================================================================================
+
+starting code: const isEveryUserActive = (users) => {};
+</p>
+
+<script id="7">
+    // const isEveryUserActive = (users) => {
+    //    return users.every(user => user.isActive === true) // this code is okey but we dont need to check if true 
+    // };// and also we dont need return if we would use impliced return 
+
+    // const isEveryUserActiveShorter = (users) => 
+    // users.every(user => user.isActive);
+
+// console.log(isEveryUserActive(users))
+// console.log(isEveryUserActiveShorter(users)) // works the same 
+</script>
+
+<p id="8 - analogicly to 7 but with .some" >
+    Analogicznie do zadania 7mego wykorzystaj metode .some by sprawdzić czy jakikolwiek użytkownik jest aktywny 
+</p>
+
+<script id="8">
+    const isAnyUserActive = (users) => 
+    users.some(user => user.isActive);
+    // console.log(isAnyUserActive(users))
+</script>
+
+<p id="9 REDUCE addition">
+    ======================================================================================
+    Serwis gamingowy potrzebuje funkcjonalności do obliczania średniego czasu spędzonego w grach przez jednego gracza. Zmienna players przechowuje obiekt, w którym kluczem jest nazwisko gracza, a wartością jego czas gry. Zmienna playtimes przechowuje tablicę wartości obiektu players, czyli tablicę czasu gry wszystkich graczy. Wartością zmiennej averagePlayTime będzie średni czas spędzony przez jednego gracza w grach.
+
+Dopełnij kod tak, aby zmienna totalPlayTime zawierała całkowity czas gry z tablicy playtimes. Należy użyć metody reduce().
+
+Zadeklarowana została zmienna players
+Wartością zmiennej players jest obiekt graczy z czasem gry każdego z nich
+Zadeklarowana została zmienna playtimes
+Wartością zmiennej playtimes jest tablica [1270, 468, 710, 244]
+Zadeklarowana została zmienna totalPlayTime
+Wartością zmiennej totalPlayTime jest liczba 2692
+Do iteracji po tablicy playtimes używana jest metoda reduce()
+Zadeklarowana została zmienna averagePlayTime
+======================================================================================
+starting code:
+const players = {
+    mango: 1270,
+    poly: 468,
+    ajax: 710,
+    kiwi: 244,
+  };
+  const playtimes = Object.values(players); // [1270, 468, 710, 244]
+  
+  const totalPlayTime = playtimes;
+  
+  const averagePlayTime = totalPlayTime / playtimes.length;
+</p>
+
+<script id="9">
+//     const players9 = {
+//   mango: 1270,
+//   poly: 468,
+//   ajax: 710,
+//   kiwi: 244,
+// };
+// const playtimes = Object.values(players9); // [1270, 468, 710, 244]
+
+// const totalPlayTime = playtimes.reduce((acc, hours) => {
+//     return acc + hours
+// }, 0);
+
+// console.log(totalPlayTime)
+
+// const averagePlayTime = totalPlayTime / playtimes.length;
+
+</script>
+
+<p id="10 reduce arrays of objects to get totalBalanc">
+======================================================================================
+
+    Dopełnij funkcję calculateTotalBalance(users) tak, aby obliczała i zwracała sumę wszystkich środków (właściwość balance), które są przechowywane przez użytkowników z tablicy users.
+
+Zadeklarowana została zmienna calculateTotalBalance
+Do zmiennej calculateTotalBalance przypisana jest funkcja strzałkowa z parametrem (users)
+Do iteracji po parametrze users używana jest metoda reduce()
+Wywołanie funkcji z określoną tablicą użytkowników zwraca liczbę 20916
+
+======================================================================================
+starting code : const calculateTotalBalance = (users) => {};
+</p>
+
+<script id="10">
+    // const calculateTotalBalance = (users) => users.reduce((acc, user) => acc + user.balance, 0)
+    // console.log(calculateTotalBalance(users))
+</script>
+
+<p id="11 reduce OFMG">
+======================================================================================
+
+    Zmienna players przechowuje tablicę obiektów, z których każdy posiada właściwości name, playtime i gamesPlayed.
+
+Nasz serwis musi obliczyć średni czas spędzony w jednej grze dla każdego gracza i uzyskać całkowitą sumę tych wartości czasu w zmiennej totalAveragePlaytimePerGame. Można obliczyć czas dla każdego gracza, dzieląc jego czas (właściwość playtime) przez liczbę gier (właściwość gamesPlayed).
+
+Wskazówki:
+
+Użyj metody reduce() do iteracji po tablicy players i obliczenia całkowitej sumy średniego czasu na grę.
+Wewnątrz callbacku funkcji reduce(), podziel playtime gracza przez gamesPlayed, aby uzyskać średni czas spędzony na grze przez każdego gracza.
+Przechowuj wynik w zmiennej acc i zwracaj go na końcu każdej iteracji.
+Inicjalizuj parametr acc metody reduce() początkową wartością 0, aby uniknąć uzyskania NaN podczas obliczeń.
+W rezultacie zmienna totalAveragePlaytimePerGame będzie zawierać całkowitą sumę średniego czasu gry dla wszystkich graczy.
+Zadeklarowana została zmienna players
+Wartością zmiennej players jest tablica obiektów graczy
+Zadeklarowana została zmienna totalAveragePlaytimePerGame
+Wartością zmiennej totalAveragePlaytimePerGame jest liczba 1023
+Do iteracji po tablicy players używana jest metoda reduce()
+======================================================================================
+starting code: const players = [
+{ name: "Mango", playtime: 1270, gamesPlayed: 4 },
+{ name: "Poly", playtime: 469, gamesPlayed: 2 },
+{ name: "Ajax", playtime: 690, gamesPlayed: 3 },
+{ name: "Kiwi", playtime: 241, gamesPlayed: 1 },
+];
+
+const totalAveragePlaytimePerGame = players;
+</p>
+
+<script id="11">
+//     const players1 = [
+//   { name: "Mango", playtime: 1270, gamesPlayed: 4 },
+//   { name: "Poly", playtime: 469, gamesPlayed: 2 },
+//   { name: "Ajax", playtime: 690, gamesPlayed: 3 },
+//   { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
+// ];
+
+// const totalAveragePlaytimePerGame = players1.reduce((acc, player) => acc + (player.playtime / player.gamesPlayed), 0)
+
+// console.log(totalAveragePlaytimePerGame)
+</script>
+
+<p id="12 .toSorted ">
+======================================================================================
+    
+    Zmienna releaseDates jest tablicą liczb, określających lata publikacji książek. Zmienna authors jest tablicą ciągów znaków obejmującą autorów książek.
+
+Dopełnij kod tak, aby zmienna ascendingReleaseDates zawierała kopię tablicy releaseDates posortowaną rosnąco, a zmienna alphabeticalAuthors zawierała kopię tablicy nazwisk autorów authors posortowaną alfabetycznie. Użyj metody toSorted()
+
+Zadeklarowana została zmienna releaseDates
+Wartością zmiennej releaseDates jest tablica [2016, 1967, 2008, 1984, 1973, 2012, 1997]
+Zadeklarowana została zmienna authors
+Wartością zmiennej authors jest tablica ["Tanith Lee", "Bernard Cornwell", "Robert Sheckley", "Fyodor Dostoevsky"]
+Zadeklarowana została zmienna ascendingReleaseDates
+Wartość zmiennej ascendingReleaseDates jest tablicą [1967, 1973, 1984, 1997, 2008, 2012, 2016]
+Zadeklarowana została zmienna alphabeticalAuthors
+Wartością zmiennej alphabeticalAuthors jest tablica ["Bernard Cornwell", "Fyodor Dostoevsky", "Robert Sheckley", "Tanith Lee"]
+Użyta została metoda toSorted()
+
+======================================================================================
+
+const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+const authors = [
+  "Tanith Lee",
+  "Bernard Cornwell",
+  "Robert Sheckley",
+  "Fyodor Dostoevsky",
+];
+
+const ascendingReleaseDates = releaseDates;
+
+const alphabeticalAuthors = authors;
+</p>
+
+<script id="12">
+//     const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+// const authors = [
+//   "Tanith Lee",
+//   "Bernard Cornwell",
+//   "Robert Sheckley",
+//   "Fyodor Dostoevsky",
+// ];
+
+// const ascendingReleaseDates = releaseDates.toSorted();
+
+// const alphabeticalAuthors = authors.toSorted();
+
+</script>
+
+<p id="13 toSorted descending an ascending">
+======================================================================================
+
+    Zmienna releaseDates jest tablicą liczb, określających lata publikacji książek.
+
+Biblioteka online powinna wyświetlać książki posortowane według daty publikacji, w porządku rosnącym lub malejącym. Dopełnij kod tak, aby zmienna ascendingReleaseDates otrzymała kopię tablicy releaseDates posortowaną rosnąco, a zmienna descendingReleaseDates otrzymała kopię posortowaną malejąco.
+
+Zadeklarowana została zmienna releaseDates
+Wartością zmiennej releaseDates jest tablica [2016, 1967, 2008, 1984, 1973, 2012, 1997]
+Zadeklarowana została zmienna ascendingReleaseDates
+Wartość zmiennej ascendingReleaseDates jest tablicą [1967, 1973, 1984, 1997, 2008, 2012, 2016]
+Zadeklarowana została zmienna descendingReleaseDates
+Wartością zmiennej descendingReleaseDates jest tablica [2016, 2012, 2008, 1997, 1984, 1973, 1967]
+======================================================================================
+
+const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+
+const ascendingReleaseDates = releaseDates.toSorted(a,) 
+
+const descendingReleaseDates = releaseDates;
+</p>
+<script id="13">
+    const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+
+const ascendingReleaseDates = releaseDates.toSorted();
+
+const descendingReleaseDates = releaseDates.toSorted((a, b) => b - a);
+</script>
+
+<p id="14 toSorted on strings">
+    Zmienna authors jest tablicą ciągów znaków obejmującą autorów książek.
+
+Biblioteka online powinna wyświetlać książki posortowane według autora w kolejności alfabetycznej i odwrotnej kolejności alfabetycznej. Dopełnij kod tak, aby zmienna authorsInAlphabetOrder otrzymywała kopię tablicy authors posortowaną alfabetycznie, a zmienna authorsInReversedOrder otrzymywała kopię posortowaną w odwrotnej kolejności alfabetycznej.
+
+Zadeklarowana została zmienna authors
+Wartością zmiennej authors jest tablica ["Tanith Lee", "Bernard Cornwell", "Robert Sheckley", "Fyodor Dostoevsky", "Howard Lovecraft"]
+Zadeklarowana została zmienna authorsInAlphabetOrder
+Wartością zmiennej authorsInAlphabetOrder jest tablica ["Bernard Cornwell", "Fyodor Dostoevsky", "Howard Lovecraft", "Robert Sheckley", "Tanith Lee"]
+Zadeklarowana została zmienna authorsInReversedOrder
+Wartością zmiennej authorsInReversedOrder jest tablica ["Tanith Lee", "Robert Sheckley", "Howard Lovecraft", "Fyodor Dostoevsky", "Bernard Cornwell"]
+Użyta została metoda toSorted()
+
+const authors = [
+  "Tanith Lee",
+  "Bernard Cornwell",
+  "Robert Sheckley",
+  "Fyodor Dostoevsky",
+  "Howard Lovecraft",
+];
+
+const authorsInAlphabetOrder = authors;
+
+const authorsInReversedOrder = authors;
+</p>
+
+<script id="14">
+//     const authors = [
+//   "Tanith Lee",
+//   "Bernard Cornwell",
+//   "Robert Sheckley",
+//   "Fyodor Dostoevsky",
+//   "Howard Lovecraft",
+// ];
+
+// const authorsInAlphabetOrder = authors.toSorted((a, b) => a.localeCompare(b));
+
+// const authorsInReversedOrder = authors.toSorted((a, b) => b.localeCompare(a));
+
+// console.log(authorsInAlphabetOrder);
+// console.log(authorsInReversedOrder);
+
+</script>
+
+<p id="15 to sorted students">
+    Tablica books zawiera tablicę obiektów książek, z których każdy zawiera właściwości title, author, rating.
+
+Dopełnij kod tak, aby:
+
+Zmienna sortedByAuthorName zawierała tablicę książek posortowanych według nazwiska autora w porządku alfabetycznym.
+Zmienna sortedByReversedAuthorName zawierała tablicę książek posortowanych według nazwiska autora w odwrotnej kolejności alfabetycznej.
+Zmienna sortedByAscendingRating zawierała tablicę książek posortowanych rosnąco.
+Zmienna sortedByDescentingRating zawierała tablicę książek posortowanych malejąco.
+Zadeklarowana została zmienna books
+Wartością zmiennej books jest pierwotna tablica obiektów książek
+Zadeklarowana została zmienna sortedByAuthorName
+Wartością zmiennej sortedByAuthorName jest tablica książek posortowanych według nazwiska autora w porządku alfabetycznym
+Zadeklarowana została zmienna sortedByReversedAuthorName
+Wartością zmiennej sortedByReversedAuthorName jest tablica książek posortowanych według nazwiska autora w odwrotnej kolejności alfabetycznej
+Zadeklarowana została zmienna sortedByAscendingRating
+Wartością zmiennej sortedByAscendingRating jest tablica książek posortowanych według rosnącego ratingu
+Zadeklarowana została zmienna sortedByDescentingRating
+Wartością zmiennej sortedByDescentingRating jest tablica książek posortowanych według malejącego ratingu
+Do iteracji po tablicy books używana jest metoda toSorted()
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  {
+    title: "Redder Than Blood",
+    author: "Tanith Lee",
+    rating: 7.94,
+  },
+  {
+    title: "Enemy of God",
+    author: "Bernard Cornwell",
+    rating: 8.67,
+  },
+];
+
+const sortedByAuthorName = books;
+
+const sortedByReversedAuthorName = books;
+
+const sortedByAscendingRating = books;
+
+const sortedByDescentingRating = books;
+
+</p>
+
+<script id="15">
+//     const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   {
+//     title: "Redder Than Blood",
+//     author: "Tanith Lee",
+//     rating: 7.94,
+//   },
+//   {
+//     title: "Enemy of God",
+//     author: "Bernard Cornwell",
+//     rating: 8.67,
+//   },
+// ];
+
+// const sortedByAuthorName = books.toSorted((firstBook, secondBook) => firstBook.author.localeCompare(secondBook.author)) ;
+
+// const sortedByReversedAuthorName = books.toSorted((firstBook, secondBook) => secondBook.author.localeCompare(firstBook.author)) ;
+
+// const sortedByAscendingRating = books.toSorted((firstBook, secondBook) => firstBook.rating - secondBook.rating);
+
+// const sortedByDescentingRating = books.toSorted((firstBook, secondBook) => secondBook.rating - firstBook.rating);
+
+// console.log(sortedByAuthorName)
+// console.log(sortedByReversedAuthorName)
+// console.log(sortedByAscendingRating)
+// console.log(sortedByDescentingRating)
+
+</script>
+
+<script id="16 CHALENGE ============================================ TO DO LATER ">
+//     const names = students
+//   .toSorted((a, b) => a.score - b.score)
+//   .map(student => student.name);
+
+// console.log(names); // ["Ajax", "Poly", "Mango", "Kiwi"]
+
+// // DO THE SAME WITH REDUCE 
+</script>
+
+<p id="17 - sorting by names of authors, and filtering by rating higher then something">
+======================================================================================================================
+    Tablica books zawiera tablicę obiektów książek, z których każdy zawiera właściwości title, author, rating.
+
+Dopełnij kod tak, aby zmienna names zawierała tablicę nazwisk autorów w kolejności alfabetycznej, których oceny książek są większe niż wartość zmiennej MIN_BOOK_RATING. Należy użyć łańcucha metod.
+
+Zadeklarowana została zmienna books
+Wartością zmiennej books jest pierwotna tablica obiektów
+Zadeklarowana została zmienna MIN_BOOK_RATING
+Wartością zmiennej MIN_BOOK_RATING jest liczba 8
+Zadeklarowana została zmienna names
+Wartością zmiennej names jest tablica ["Bernard Cornwell", "Howard Lovecraft", "Robert Sheckley"]
+Zmienna names powinna zostać utworzona przy użyciu łańcucha metod filter, map, toSorted, podczas gdy inne zmienne nie powinny być deklarowane
+===========================================================================================================
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  {
+    title: "The Dreams in the Witch House",
+    author: "Howard Lovecraft",
+    rating: 8.67,
+  },
+];
+const MIN_BOOK_RATING = 8;
+
+const names = books;
+
+</p>
+
+<script id="17">
+    const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  {
+    title: "The Dreams in the Witch House",
+    author: "Howard Lovecraft",
+    rating: 8.67,
+  },
+];
+const MIN_BOOK_RATING = 8;
+
+const names = books
+  .filter(book => book.rating >= MIN_BOOK_RATING)
+  .map(book => book.author)
+  .toSorted((a, b) => a.localeCompare(b) )
+  
+
+
+;
+console.log(names)
+</script>
+
+
+

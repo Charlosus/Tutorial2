@@ -1,0 +1,71 @@
+<title> Conspect Auto check </title>
+<body>
+    <p>
+        Funkcja checkAccess(subType) sprawdza, czy użytkownik może uzyskać
+         dostęp do zawartości. Weryfikacja odbywa się na podstawie typu su
+         bskrypcji. Używając operatora "LUB", uzupełnij kod funkcji w taki
+          sposób, że jeśli wartość parametru subType jest równa ciągom "pro"
+           lub "vip", funkcja zwraca true i użytkownik otrzymuje dostęp. W pr
+           zeciwnym razie zwraca false.
+</p>
+<ul><li>Zadeklarowano funkcję checkAccess(subType)</li>
+    <li>Użyto operatora ||</li>
+    <li>Wywołanie checkAccess("pro") zwraca true</li>
+    <li>Wywołanie checkAccess("starter") zwraca false</li>
+    <li>Wywołanie checkAccess("vip") zwraca true</li>
+    <li>Wywołanie checkAccess("free") zwraca false</li>
+</ul>    
+</body>
+<script>
+// With ternary operator
+function checkAccess(subType) { 
+  return subType === "pro" || subType === "vip" ? true : false
+}
+
+console.log(checkAccess("pro"), checkAccess("vip"), checkAccess("starter"),  checkAccess("free"))
+</script>
+
+<script class="With-IF">
+
+    function checkAccess2(subType) {
+        if (subType === "pro" || subType === "vip") {
+            return true
+        } return false
+
+    }
+    console.log(checkAccess2("pro"), checkAccess2("vip"), checkAccess2("starter"),  checkAccess2("free"))
+</script>
+
+<script class="With-IF-ELSE">
+
+function checkAccess3(subType) {
+        if (subType === "pro" || subType === "vip") {
+            return true
+        } else return false
+
+    }
+    console.log(checkAccess3("pro"), checkAccess3("vip"), checkAccess3("starter"),  checkAccess3("free"))
+    // as you see else is basicly needless 
+</script>
+
+<script class="With-switch">
+
+    function checkAccess4(subType) {
+        switch (subType) {
+            case "vip":
+            case "pro":
+                return true
+            default: return false
+        }
+    }
+    console.log(checkAccess4("pro"), checkAccess4("vip"), checkAccess4("starter"),  checkAccess4("free"))
+</script>
+
+<script class="The fastest the cleanest just the best">
+
+function checkAccess5(subType) {
+  return subType === "pro" || subType === "vip";
+}
+
+console.log(checkAccess5("pro"), checkAccess5("vip"), checkAccess5("starter"),  checkAccess5("free"))
+</script>

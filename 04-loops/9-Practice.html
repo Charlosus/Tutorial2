@@ -1,0 +1,56 @@
+<title> Practice with loops </title>
+<body>
+<p>Funkcja calculateTotal(number) przyjmuje liczbę całkowitą (parametr number) Używając pętli for, uzupełnij kod funkcji tak, aby zwracała sumę wszystkich liczb całkowitych od jeden do tej liczby włącznie. Na przykład, jeśli number wynosi 3, to suma wynosi 1 + 2 + 3, czyli 6.
+
+</p>
+<ul>
+  <li>  Zadeklarowano funkcję calculateTotal(number)</li>
+<li>>Wywołanie funkcji calculateTotal(1) zwraca 1</li>
+<li>Wywołanie funkcji calculateTotal(0) zwraca 0</li>
+<li>Wywołanie funkcji calculateTotal(7) zwraca 28</li>
+<li>Wywołanie funkcji calculateTotal(18) zwraca 171</li>
+<li>Wywołanie funkcji calculateTotal(24) zwraca 300</li>
+<li>Wywołanie funkcji calculateTotal() z losową liczbą zwraca poprawną wartość</li>
+</ul>
+<script class="Calculating total with loop FOR">
+function calculateTotal(number) {
+    let total = 0  
+  for ( let i = 0; i <= number; i++) {
+    total += i
+  }return total
+}
+
+</script>
+
+<script class="Calc total but only even">
+
+function calculateEvenTotal(number) {
+  let total = 0
+  for (let i = 0; i <= number; i++) {
+    if ( i % 2 == 0 ){
+      total += i;
+    }
+  }return total
+}
+console.log(calculateEvenTotal(1));
+console.log(calculateEvenTotal(3));
+console.log(calculateEvenTotal(6));
+console.log(calculateEvenTotal(11));
+console.log(calculateEvenTotal(12));
+</script>
+
+<script class="Break at modulo 5">
+
+const start = 6;
+const end = 17;
+let number;
+
+for ( i = start; i <= end; i++) {
+  
+  if (i % 5 == 0) {
+    number = i;
+      break;
+  } 
+}
+</script>
+</body>

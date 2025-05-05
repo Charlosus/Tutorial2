@@ -1,0 +1,90 @@
+<title> Data types</title>
+
+<script class="Numbers">
+
+    const num = 42; // integer
+
+    console.log(num + 2)
+
+    const floatingPointNumber = 3.14; // float/double
+
+    const tousand = 1000;
+
+    const twoThousand = 2_000; //you can type big numbers with underscore for better clarity 
+
+    console.log(twoThousand)
+    console.log(Number.MAX_SAFE_INTEGER); //Bigest number possible
+</script>
+
+<script class="Strings">
+
+    const text = "Hello";  // string can be write with those three ""  
+    const text2 = 'Hello'; //''
+    const text3 = `Hello`; //``
+
+    console.log(text + " there!");
+    console.log(text2 + " there!");
+    console.log(text3 + " there!");
+
+    console.log("We are learnign JavaScript ! " + 100) // JavaScript after adding number to string will change all to string witch can cause issus
+</script>
+
+<script class="Boolean">
+
+    const isAdmin = false; //Boolean type is false or true, on in numerical 0 or 1 values
+    const isActive = true; 
+    console.log("Are you an admin? " + isAdmin) // added to string will transfer whole type to string 
+    console.log("Are you an admin? " + !isAdmin) // adding ! will revers its value 
+    console.log(1 + isAdmin) // added to number would not change its value
+
+</script>
+
+<script class="Undefind">
+    // console.log(nothing); // this will cause error this is undefind
+
+    let nothingAgain; // not addint value to variable will return as undefind
+
+    console.log(nothingAgain)
+</script>
+
+<script class="null">
+
+    let nothingForNow = null;
+
+    console.log(nothingForNow);
+
+    nothingForNow = "some values assigne/initilized later on"
+
+    console.log(nothingForNow)
+</script>
+
+<script class="typeof">
+    //This let us check variable what types they are 
+
+    let maybeNumber = 42;
+    let maybeString = "42";
+    let maybeBoolean = true;
+    let maybeSomething;
+    let maybeNothing = null
+
+    console.log("maybeNumber is", typeof maybeNumber);
+    console.log("maybeString is", typeof maybeString);
+    console.log("maybeBoolean is", typeof maybeBoolean);
+    console.log("maybeSomething is", typeof maybeSomething);
+    console.log("maybeNothing is", typeof maybeNothing);
+
+    function sum() {
+        return 2 + 2;
+    }
+    console.log("Function is ", typeof sum)
+
+    const q = parseInt("q");
+
+    console.log(q)
+
+    console.log("String q after parseInt is ", typeof q) // after parseInt string "q" is NaN-not a number which have type number :D
+
+    console.log("[]table", typeof [])
+
+    console.log("This is object {} and its a", typeof{})
+</script>

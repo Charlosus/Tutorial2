@@ -1,0 +1,39 @@
+<title> Exircies</title>
+<body>
+    <p>
+        Funkcja getFileName(file) przyjmuje jeden parametr
+
+file - ciąg znaków z nazwą pliku. Nazwa pliku może być z rozszerzeniem, na przykład: styles.css, app.js lub bez, na przykład: styles, app.
+Używając metod indexOf i slice, uzupełnij kod funkcji tak, aby:
+
+Sprawdzała ona obecność rozszerzenia w nazwie pliku (nazwa rozszerzenia powinna być oddzielona od nazwy pliku kropką)
+Jeśli nazwa pliku nie zawiera rozszerzenia, aby zwracała nowy podciąg zawierający nazwę pliku bez zmian
+W przeciwnym razie zwracała podciąg z nazwą pliku, ale bez rozszerzenia
+
+    </p>
+    <ul>
+        <li>Zadeklarowano funkcję getFileName(file)</li>
+        <li>Wywołanie funkcji getFileName("styles.css") zwraca "styles"</li>
+        <li>Wywołanie funkcji getFileName("app.js") zwraca "app"</li>
+        <li>Wywołanie funkcji getFileName("app") zwraca "app"</li>
+        <li>Wywołanie funkcji getFileName("index.js") zwraca "index"</li>
+        <li>Wywołanie funkcji getFileName("index.html") zwraca "index"</li>
+        <li>Wywołanie funkcji getFileName("index.css") zwraca "index"</li>
+        <li>Wywołanie funkcji getFileName("index") zwraca "index"</li>
+    </ul>
+    <script>
+        function getFileName(file) {
+            if (file.indexOf(".") === -1) {
+             return file
+             }
+            let indexOfDot = file.indexOf(".") 
+             return file.slice(0, indexOfDot)
+            }
+            // this function is logical and clear but can be better if we would use ternary operator like this 
+
+        function getFileNameT(file) {
+            const index = file.lastIndex(".");
+            return index === -1 ? file : file.slice(0, index);
+        }
+    </script>
+</body>

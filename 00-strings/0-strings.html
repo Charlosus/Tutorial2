@@ -1,0 +1,46 @@
+<title> Types of String</title>
+<script class="String and concatination">
+
+    const hello         ="Hello World"
+    const hello1        ='Hello World'
+    const hello2        =`Hello World`
+
+    const first = "Hello"
+    const second = "world"
+
+    console.log(first + second)                  // "Helloworld"
+    console.log(first + " " + second + "!")      // "Hello world!"
+</script>
+
+<script class="Grawis or backtick">
+
+    const name = "Kuba"
+    const temp = 21
+
+    const message = `Hello there ${name}. How was your day? Today temperature is ${temp} degrees.`
+
+    console.log(message);
+
+</script>
+
+<script class="Methods for String">
+
+    const password = "Admin"
+
+    const isRequiredLength = password.length >= 6       // this using propety .lenght to set password at least 6 characters
+
+    console.log({ isRequiredLength }) // resault is false because "Admin" is shorter then 6 characters
+</script>
+
+<script class="Using lenght to find index of characters">
+
+    const sentence = "Artur ma kota i chuj"
+
+    const firstLetter = sentence[0];
+
+    const lastIndex = sentence.length - 1;  // what is last index
+    const lastCharacter = sentence[lastIndex]
+
+    console.log(lastCharacter);                  //  j
+    
+</script>

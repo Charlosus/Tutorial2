@@ -1,0 +1,193 @@
+<title> Operations</title>
+<script class="If statmant">
+
+        // const password = "admin123";
+
+        // if (password === "admin123") {
+        //     console.log("You are logged in!");
+        // }
+        
+        // const CORRECT_PASSWORD = "admin123"
+        // const isPasswordCorrect = (password === CORRECT_PASSWORD);
+
+        // if (isPasswordCorrect) {
+        //     console.log("You are logged in!")
+        // }
+</script>
+
+<script class="Using boolian as condition in if statmant">
+
+    // // const isAdmin = true;
+
+    // // if (isAdmin == true) {
+    // //     console.log("You can manage other users")
+    // // }
+
+    // // if (isAdmin === true) {
+    // //     console.log("You can manage other users")  //preferable solution
+    // // }
+
+    // // if (isAdmin) (
+    // //     console.log("You can manage other users") // also give us massage because this in if statmant will continued with this line of code
+    // )
+</script>
+
+<script class="What if FALSE">
+
+    // const isPremium = false;
+
+    // if (!isPremium) {
+    //     console.log("You can skip as many times you want")
+    // } else {
+    //     console.log("You are only allowed to 5 song per hour")
+    //     console.log("Upgrade to premium to get unlimited skips")
+    // }
+
+</script>
+
+<script class="Using if in function">
+
+    // function buyBeer(age) {
+    //     if (age >= 18) {
+    //         return "Beer";
+    //     } else {
+    //         return "No beer"
+    //     }
+    // }
+</script>
+
+<script class="Erasing {} in if statmant">
+
+    // function doSomething(condition, anotherCondition, thirdCondition) {
+    //     if (condition) 
+    //         console.log("Codition satisfied");
+    //         console.log("Doin something anyway");
+
+    //     if (anotherCondition) 
+    //         console.log("condition satisfied");
+    //         console.log("Doin something anyways");
+
+    //     if (thirdCondition) console.log("condition satisfied");   // if you wouldnt use {} condition will counting only for first statemant in function
+    //         console.log("Doin something anyways");
+    // }
+    // doSomething(true);
+    // doSomething(false);
+
+</script>
+
+<script class="Buying beer with if with one line">
+
+    
+// function buyBeer(age) {
+//         if (age >= 18) return "Beer";
+//         else return "No beer"
+// }
+// function buyBeer(age) {
+//         if (age >= 18) return "Beer";
+//         return "No beer";               //There is no requaiermant for else those fn will act the same 
+// }
+
+// Lets ad a second condition for americans 
+
+// function buyBeer0(age, isAmerican) {
+
+//     if (age >= 21 && isAmerican) return "Beer";
+//     if (age <= 18 && isAmerican) return "No Beer Kiddo";
+//     if (age >= 18 && !isAmerican) return "Beer";
+//     return "No Beer for you smolone";
+// }
+
+// But its easer to decompose those two conditions 
+
+// function buyBeer1(age, isAmerican) {
+//     if (isAmerican) { 
+//         if (age >= 21) return "Beer";
+//         return "No beer";}
+//     if (age >= 18) return "Beer";
+//     return "No Beer";
+//     }
+
+// console.log(buyBeer0(18, true)) 
+// console.log(buyBeer1(18, true)) 
+// console.log(buyBeer0(18, false)) 
+// console.log(buyBeer1(18, false)) 
+// console.log(buyBeer0(40, true)) 
+// console.log(buyBeer1(40, true)) 
+</script>
+
+<script class="Progresive use of IF">
+
+    // const points = 50;
+    // let rating = "Failed...";  
+
+    // if (points>= 90) {
+    //     rating = "Eggcelent!";
+    // } else if (points >= 70) {
+    //     rating = "Well done!";
+    // }   else if (points >= 50) {
+    //     rating = "Passed.";
+    // } else {
+    //     rating = "Failed...";
+    // }
+
+    // console.log(`Achieved ${points} points. ${rating}`)
+</script>
+
+<script class="Progresive use if in fn">
+
+    // function rateStudent(score) {
+    //     let rating = ""    
+    //     if (score >= 90) {
+    //         rating = "Excelent";
+    //     } else if (score >= 70) {
+    //         rating = "Well done!";
+    //     } else if (score >= 50) {
+    //         rating = "Passed";
+    //     } else rating = "Failed...";
+    //     return rating;
+    // }
+
+   
+    //     // const studentPoints = 99;
+
+    //     const studentRating = rateStudent(studentPoints);
+    // console.log(`Achieved ${studentPoints} points. ${studentRating}`)
+
+</script>
+
+<script class="Better simpler">
+
+    // function betterRateStudent(score) {
+    //     if (score >= 90) {
+    //         return "Excelent!";
+    //     } else if (score >= 70) {
+    //         return "Well done!";
+    //     } else if (score >= 50) {
+    //         return "Passed.";
+    //     } else {
+    //         return "Failed..."
+    //     }
+    // }
+    // const studentsPoints = 99;
+    // const betterStudentRating = betterRateStudent(studentsPoints);
+
+    // console.log(`Achieved ${studentsPoints} points. ${betterStudentRating}`)
+    // And this function can be even simpler 
+
+    function evenBetterRateStudent(score) {
+        // if (score >= 90) return "Excelent";
+        // else if (score >=70) return "Well done";
+        // else if (score >=50) return "Passed";
+        // else return "Failed...";             // This can be even easier
+
+        if (score >= 90) return "Excelent";
+        if (score >=70) return "Well done";
+        if (score >=50) return "Passed";
+        return "Failed...";
+    }
+
+    const myStudentPoints = 90;
+    const betterStudentRating = evenBetterRateStudent(myStudentPoints);
+
+    console.log(`Achieved ${myStudentPoints} points. ${betterStudentRating}`)
+</script>

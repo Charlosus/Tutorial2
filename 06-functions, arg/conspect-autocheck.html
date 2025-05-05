@@ -1,0 +1,353 @@
+<title>Autocheck from conspect</title>
+<body>
+    
+<p class="1 Slice">
+    Zmodyfikuj kod tak, aby zmienne zawierały częściowe kopie oryginalnej tablicy fruits.
+
+</p>
+
+<ul class="1">
+  <li>  firstTwoEls - tablica składająca się z dwóch pierwszych elementów</li>
+   <li> nonExtremeEls - tablica składająca się ze wszystkich elementów z wyjątkiem pierwszego i ostatniego</li>
+   <li> lastThreeEls - tablica składająca się z trzech ostatnich elementów</li>
+</ul> 
+
+<script class="1">
+
+    // const fruits = ['apple', 'plum', 'pear', 'orange', 'banana'];
+
+    // const firstTwoEls = fruits.slice(0, 2);
+    // const nonExtremeEls = fruits.slice(1, -1);
+    // const lastThreeEls = fruits.slice(-3);
+</script>
+
+<p class="2-concat">
+    Zadeklaruj zmienną allClients i zmodyfikuj kod tak, aby jej wartość była odwołaniem do tablicy składającej się ze
+     wszystkich elementów tablic oldClients i newClients. Najpierw powinny
+      być elementy z tablicy oldClients, a następnie z tablicy newClients.
+</p>
+
+<ul class="2">
+    <li>Zadeklarowano zmienną oldClients</li>
+    <li>Wartością zmiennej oldClients jest tablica ["Mango", "Ajax", "Poly", "Kiwi"]</li>
+    <li>Zadeklarowano zmienną newClients</li>
+    <li>Wartością zmiennej newClients jest tablica ["Peach", "Houston"]</li>
+    <li>Zadeklarowano zmienną allClients</li>
+    <li>Wartością zmiennej allClients jest tablica ["Mango", "Ajax", "Poly", "Kiwi", "Peach", "Houston"]</li>
+    <li>Po zastosowaniu metody concat z prawidłowymi argumentami zmiennej allClients przypisywana jest tablica</li>
+</ul>
+
+<script class="2">
+    // const oldClients = ["Mango", "Ajax", "Poly", "Kiwi"];
+    // const newClients = ["Peach", "Houston"];
+
+    // const allClients = oldClients.concat(newClients);
+</script>
+
+<p class="3 Slice with indexOf">
+    Funkcja getSlice(array, value) przyjmuje dwa parametry:
+
+array - tablica dowolnych elementów
+value - wartość elementu tablicy do wyszukania
+Uzupełnij kod funkcji getSlice(array, value) tak, aby wyszukiwała wartość
+ value w tablicy array i zwracała:
+
+pustą tablicę, jeśli nie ma elementu z wartością value w array
+podtablicę zaczynającą się od początku array i aż do elementu z wartością
+ value włącznie, jeśli taki element znajduje
+ się w array
+</p>
+
+<ul class="3">
+    <li>Zadeklarowano funkcję getSlice(array, value)</li>
+    <li>Wywołanie getSlice(["Mango", "Poly", "Ajax"], "Poly") zwraca ["Mango", 
+        "Poly"]
+    </li>
+    <li>Wywołanie getSlice(["Mango", "Poly", "Ajax"], "Ajax") zwraca ["Mango", "Poly", 
+        "Ajax"]</li>
+    <li>Wywołanie getSlice(["Mango", "Poly", "Ajax"], "Mango") zwraca ["Mango"]</li>
+    <li>Wywołanie getSlice(["Mango", "Poly", "Ajax"], "Jacob") zwraca []</li>
+    <li>Wywołanie getSlice(["Mango", "Poly", "Ajax"], "Casey") zwraca []</li>
+</ul>
+<script class="3">
+    
+//     function getSlice(array, value) {
+//   let indexOfValue = array.indexOf(value)
+//   console.log(indexOfValue)
+//   if (indexOfValue >= 0) {
+//     return array.slice(0, indexOfValue + 1);
+//   } return array.slice(0, 0);
+// }
+
+// With ternery operator
+
+// function getSlice(array, value) {
+//   const index = array.indexOf(value);
+//   return array.slice(0, index >= 0 ? index +1 : 0 );
+// }
+// console.log(getSlice(["Mango", "Poly", "Ajax"], "Poly"))
+</script>
+
+<p class="4 Push">
+    Funkcja createArrayOfNumbers(min, max) przyjmuje dwa parametry:
+
+min - liczba całkowita, od której rozpoczynają się obliczenia
+max - liczba całkowita, do której włącznie będą wykonywane obliczenia
+Uzupełnij kod funkcji createArrayOfNumbers(min, max) tak, aby zwracała
+ ona tablicę wszystkich liczb całkowitych od min do max włącznie.
+</p>
+
+<ul class="4">
+    <li>Zadeklarowano funkcję createArrayOfNumbers(min, max)</li>
+    <li>Wywołanie funkcji createArrayOfNumbers(1, 3) zwraca [1, 2, 3]</li>
+    <li>Wywołanie funkcji createArrayOfNumbers(14, 17) zwraca [14, 15, 16, 17]</li>
+    <li>Wywołanie funkcji createArrayOfNumbers(29, 34) zwraca [29, 30, 31, 32, 33, 34]</li>
+    <li>Wywołanie funkcji createArrayOfNumbers() z losowymi wartościami min i max zwraca poprawną tablicę</li>
+    <li>W pętli for użyto metody push</li>
+</ul>
+
+<script class="4">
+
+//     function createArrayOfNumbers(min, max) {
+//   const array = []
+//   for (let i = min; i <= max; i++){
+//     array.push(i) 
+//   } return array
+// }
+
+// console.log(createArrayOfNumbers(1, 3));
+// console.log(createArrayOfNumbers(14, 17))
+
+</script>
+
+<script class="Iteration example">
+//     const planets = ["Earth", "Mars", "Venus"];
+
+// for (let i = 0; i < planets.length; i += 1) {
+//   console.log(planets[i]);
+// }
+
+</script>
+
+<p class="5 Iteration total price">
+    Funkcja calculateTotalPrice(order) przyjmuje jeden parametr order 
+    - tablicę liczb. Uzupełnij funkcję tak, aby zwracała całkowitą sumę
+     elementów z tablicy order.
+</p>
+
+<ul class="5">
+    <li>Zadeklarowano funkcję calculateTotalPrice(order)</li>
+    <li>Wywołanie funkcji calculateTotalPrice([12, 85, 37, 4]) zwraca 138</li>
+    <li>Wywołanie funkcji calculateTotalPrice([164, 48, 291]) zwraca 503</li>
+    <li>Wywołanie funkcji calculateTotalPrice([412, 371, 94, 63, 176]) zwraca 1116</li>
+    <li>Wywołanie funkcji calculateTotalPrice() z losową liczbą zwraca poprawną wartość</li>
+</ul>
+
+<script class="5">
+
+// function calculateTotalPrice(order) {
+//     let total = 0
+//     for ( i = 0; i < order.length; i++){
+//        console.log(order[i]);
+//         total += order[i];
+//     } return total
+// }
+// console.log(calculateTotalPrice([12, 85, 37, 4]));
+// console.log(calculateTotalPrice([412, 371, 94, 63, 176]))
+
+</script>
+
+<p class="6 Array form even nubers">
+    Funkcja getEvenNumbers(start, end) ma dwa parametry start i end, które
+     są liczbami całkowitymi. Uzupełnij kod funkcji tak, aby zwracała ona
+      tablicę wszystkich liczb parzystych od start do end. Jeśli nie ma 
+      liczb parzystych, tablica musi być pusta. Liczba parzysta to liczba,
+       która jest podzielna przez 2 bez reszty (10 % 2 == 0). Użyj pętli 
+       for.
+</p>
+
+<ul class="6">
+    <li>Funkcja getEvenNumbers(start, end) ma dwa parametry start i end, które są liczbami całkowitymi. Uzupełnij kod funkcji tak, aby zwracała ona tablicę wszystkich liczb parzystych od start do end. Jeśli nie ma liczb parzystych, tablica musi być pusta. Liczba parzysta to liczba, która jest podzielna przez 2 bez reszty (10 % 2 == 0). Użyj pętli for.</li>
+    <li>Wywołanie funkcji getEvenNumbers(2, 5) zwraca [2, 4]</li>
+    <li>Wywołanie funkcji getEvenNumbers(2, 5) zwraca [2, 4]</li>
+    <li>Wywołanie funkcji getEvenNumbers(6, 12) zwraca [6, 8, 10, 12]</li>
+    <li>Wywołanie funkcji getEvenNumbers(8, 8) zwraca [8]</li>
+    <li>Wywołanie funkcji getEvenNumbers(7, 7) zwraca []</li>
+    <li>Wywołanie funkcji getEvenNumbers() z losowymi wartościami start i end zwraca poprawną tablicę</li>
+</ul>
+
+<script class="6">
+
+// function getEvenNumbers(start, end) {
+//   const array = []
+//   for (let i = start; i <= end; i++) {
+//     if (i % 2 === 0) {
+//       array.push(i)
+//     } 
+// }return array;
+// } 
+
+// console.log(getEvenNumbers(2, 5))
+// console.log(getEvenNumbers(6, 12))
+// console.log(getEvenNumbers(8, 8))
+// console.log(getEvenNumbers())
+
+// // this can be solved faster 
+// // iteration with +2
+
+// function getEvenNumbersI2(start, end) {
+//    const array = []
+//     if (start % 2 !== 0) {
+//         start++
+//     }
+//     for (let i = start; i <= end; i += 2) {
+//         array.push(i);
+//     }
+//     return array
+// }
+
+// console.log(getEvenNumbersI2(2, 5))
+// console.log(getEvenNumbersI2(6, 12))
+// console.log(getEvenNumbersI2(8, 8))
+// console.log(getEvenNumbersI2())
+</script>
+
+<p class="7 Includes">
+    Funkcja checkStorage(storage, item) przyjmuje dwa parametry:
+
+storage - tablica ciągów znaków opisujących dostępne produkty w magazynie
+item - ciąg znaków z nazwą produktu, który chcesz sprawdzić
+Uzupełnij kod funkcji tak, aby sprawdzała, czy taki element znajduje się
+ w tablicy storage i zwracała:
+
+ciąg ""<"item> is available to order!", gdzie item to nazwa przedmiotu,
+     jeśli przedmiot został znaleziony
+ciąg "Sorry! We are out of stock!", jeśli tego produktu nie ma w tablicy
+Spraw, aby wielkość liter w nazwie produktu nie miała znaczenia, tj. na
+ przykład "plum" i "pLuM" powinny zostać znalezione w tablicy ["apple",
+  "plum", "pear"].
+</p>
+
+<ul class="7">
+    <li>Zadeklarowano funkcję checkStorage(storage, item)</li>
+    <li>Wywołanie checkStorage(["apple", "plum", "pear"], "plum") zwraca
+         "plum is available to order!"
+    </li>
+    <li>
+        Wywołanie checkStorage(["apple", "plum", "pear"], "pLuM") zwraca
+         "plum is available to order!"
+    </li>
+    <li>
+        Wywołanie checkStorage(["apple", "plum", "pear"], "pear") zwraca
+         "pear is available to order!"
+    </li>
+    <li>
+        Wywołanie checkStorage(["apple", "plum", "pear"], "pEAr") zwraca 
+        "pear is available to order!"
+    </li>
+    <li>Wywołanie checkStorage(["apple", "plum", "pear"], "orange") zwraca
+         "Sorry! We are out of stock!"
+    </li>
+    <li>
+        Wywołanie checkStorage(["apple", "plum", "pear"], "carrot") zwraca
+         "Sorry! We are out of stock!"
+    </li>
+</ul>
+
+<script class="7">
+// function checkStorage(storage, item) {
+//     if (storage.includes(item) === true) {
+//         return `${item} is available to order!`
+//     } return "Sorry we are out of stock!"
+// }
+
+// console.log(checkStorage(["apple", "plum", "pear"], "plum"))
+// console.log(checkStorage(["apple", "plum", "pear"], "orange"))
+// // Ternery operator
+// function checkStorage(storage, item) {
+//   let itemNorm = item.toLowerCase()
+//   return storage.includes(itemNorm) ? `${itemNorm} is available to order!`
+//     : "Sorry! We are out of stock!"
+// }
+// console.log(checkStorageTernery(["apple", "plum", "pear"], "pLum"))
+// console.log(checkStorageTernery(["apple", "plum", "pear"], "orange"))
+</script>
+
+<p class="8 reversed array ">
+    Funkcja createReversedArray() może przyjmować dowolną liczbę
+     argumentów. Zmodyfikuj kod funkcji tak, aby zwracała tablicę
+      wszystkich argumentów, ale powinny one być w odwrotnej kolejności
+       w tablicy. Oznacza to, że gdy wywołasz
+        createReversedArray(1, 2, 3), funkcja powinna zwrócić tablicę 
+        [3, 2, 1]. Użyj pętli lub metody tablicowej toReversed(), 
+        która jest stosowana do tablicy i jako wynik zwraca nową 
+        tablicę z elementami w odwrotnej kolejności.
+</p>
+
+<ul class="8">
+    <li>Zadeklarowano funkcję createReversedArray()</li>
+    <li>Wywołanie funkcji createReversedArray(12, 85, 37, 4) zwraca [4, 37, 85, 12]</li>
+    <li>Wywołanie funkcji createReversedArray(164, 48, 291) zwraca [291, 48, 164]</li>
+    <li>Wywołanie funkcji createReversedArray(412, 371, 94, 63, 176) zwraca [176, 63, 94, 371, 412]</li>
+    <li>Wywołanie funkcji createReversedArray() zwraca []</li>
+</ul>
+
+<script class="8">
+//     function createReversedArray() {
+//   const args = Array.from(arguments)
+//   return args.toReversed()
+// }
+
+// // this can be done also by loop
+// // function createReversedArray() {
+// //     const args = Array.from(arguments);
+// //     const reversed = [];
+// //     for ( i = args.length - 1; i >= 0; i --) {
+// //         reversed.push(args[i])
+// //     } return reversed;
+// }
+// console.log(createReversedArray(12, 85, 37, 4))
+// console.log(createReversedArray(164, 48, 291))
+// console.log(createReversedArray(412, 371, 94, 63, 176))
+// console.log(createReversedArray())
+</script>
+
+<p class="9 Default value">
+    Funkcja calculateTax(amount, taxRate) deklaruje dwa parametry:
+
+amount - liczba, kwota, od której chcesz obliczyć podatek. Wymagany
+ parametr.taxRate - liczba, stawka podatkowa. Parametr opcjonalny. 
+ Domyślną wartością jest 0.2.Uzupełnij kod funkcji tak, aby 
+ zwracała kwotę podatku, czyli wynik mnożenia kwoty przez stawkę podatku.
+</p>
+
+<ul class="9">
+    <li>Zadeklarowano funkcję calculateTax(amount, taxRate)</li>
+    <li>Zadeklarowano funkcję calculateTax(amount, taxRate)</li>
+    <li>Wywołanie funkcji calculateTax(200, 0.1) zwraca 20</li>
+    <li>Wywołanie funkcji calculateTax(100, 0.2) zwraca 20</li>
+    <li>Wywołanie funkcji calculateTax(200, 0.2) zwraca 40</li>
+    <li>Wywołanie funkcji calculateTax(100, 0.3) zwraca 30</li>
+    <li>Wywołanie funkcji calculateTax(200, 0.3) zwraca 60</li>
+    <li>Wywołanie funkcji calculateTax(100) zwraca 20</li>
+    <li>Wywołanie funkcji calculateTax(200) zwraca 40</li>
+</ul>
+
+<script class="9">
+
+function calculateTax(amount, taxRate = 0.2) {
+  return amount*taxRate
+}
+
+console.log(calculateTax(100, 0.1))
+console.log(calculateTax(200, 0.1))
+console.log(calculateTax(100, 0.2))
+console.log(calculateTax(200, 0.2))
+console.log(calculateTax(100, 0.3))
+console.log(calculateTax(200, 0.3))
+console.log(calculateTax(100))
+console.log(calculateTax(200))
+
+
+</script>
+</body>

@@ -1,0 +1,155 @@
+<title> Switch </title>
+
+<script class="Terbary Operator">
+
+    // const score = 51;
+
+    // let pass;
+
+    // if (score >= 50) {
+    //     pass = true;
+    // } else {
+    //     pass = false;
+    // }
+</script>
+
+<script>
+
+    // const = score 51;
+
+    // const pass = score >= 50;
+
+</script>
+
+<script class="This is not good check next script">  
+
+    // const isRed = true;
+
+    // let color = "some defoult color";
+
+    // if (isRed) {
+    //     color = "red";
+    // }
+
+</script>
+
+<script class="Using ternary operator">
+
+    const isBlue = true;
+
+    const myColor = (isBlue === true) ? "Im blue" : "I am other color";
+
+    const ourColor = isBlue
+        ? "Blueeee"
+        : "foo bar baz and other gizmos :D"
+
+    console.log ({ myColor, ourColor })
+</script>
+
+<script class="Ternary operator with numbers">
+
+    // const age = 20;
+
+    // console.log(age >= 18 ? "I can vote" : "I cant't vote")
+
+    // // That can be writen like this, now its realy easy to that this is like if else operaton
+
+    //     age >= 18
+    //     ? console.log("I can vote")
+    //     : console.log("I cant vote");
+
+    const a = 42;
+    const b = 57;
+
+    const min = a <= b ? a : b;
+
+    const max = b >= a ? b : a;
+
+    console.log({ min, max })
+
+    // this can be used to make function 
+
+    function getMin(x, y) {
+        return x <= y ? x : y;
+    }
+
+    console.log(getMin(a, b))
+    console.log(getMin(b, a))
+</script>
+
+<script class="Switch">
+
+    // function betterGetRating(score) {
+
+    //     let rating = "Failed...";
+
+    //     switch(score) {
+    //         case 5:
+    //             rating = "Excelent!";
+    //             break;
+    //         case 4:
+    //             rating = "Well done!"
+    //             break;
+    //         default: rating = "Failed..."
+    //     }
+        
+    //     return rating;
+    // }
+
+    // const ourScore = 2;
+
+    // console.log(`Rating: ${betterGetRating(ourScore)}`);
+
+</script>
+
+<script class="Example with admin">
+    
+//     const name = "Admin"
+
+//     switch (name) {
+//         case "Adam":
+//             console.log("Hello Adam!");
+//             break;
+//         case "Beth":
+//             console.log("Hello Beth");
+//             break;
+//         case "Admin":
+//             console.log("WELCOME OUR DEAR ADMINISTRATOR!")    
+//     }
+
+//     function betterGetRating(score) {
+
+//     switch(score) {
+//      case 5:
+//         return "Excelent!";
+//        case 4:
+//         return "Well done!"
+//           default: return "Failed..."
+// }
+
+//         return rating;
+// }
+
+// const ourScore = 2;
+
+// console.log(`Rating: ${betterGetRating(ourScore)}`);
+
+</script>
+
+<script class="Logical operators revisited">
+
+    // const a = null && true; // null //już po polsku bo mi się nie chce, 
+    // // ramka logiczna przy przypisywaniu wartości sprawdza czy obie wartośći są prawdziwe
+    // // 
+    // const x = null || true; // true 
+    // const x2 = null || false; // false
+
+    // const b = "false" && 0; // 0
+    // const b2 = "false" || 0; // "false"
+
+    // const c = "Adam" && "Beth"; // "Beth"
+    // const c2 = "Adam" || "Beth"; // "Adam"
+
+    // const z = "Adam" ? "Adam" : null; // "Adam"
+    // const z = "" ? "Adam" : null; //  "null"
+</script>

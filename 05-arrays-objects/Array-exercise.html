@@ -1,0 +1,41 @@
+<title>Arrayes practice</title>
+<body>
+    <p>
+        Usługa grawerowania biżuterii potrzebuje funkcji, która będzie automatycznie obliczać cenę grawerowania w zależności od liczby słów i ceny za słowo. </p>
+    <p>Zadeklarowano funkcję calculateEngravingPrice(message, pricePerWord). Ta funkcja przyjmuje jako pierwszy parametr ciąg słów oddzielonych tylko spacjami
+         (parametr message), a jako drugi parametr liczbę zawierającą cenę grawerowania za słowo (parametr pricePerWord).
+    </p>
+    <p>Uzupełnij treść funkcji tak, aby zwracała całkowity koszt wygrawerowania wszystkich słów w ciągu.</p>
+   <p>
+    Zadeklarowano funkcję calculateEngravingPrice(message, pricePerWord)
+Wywołanie calculateEngravingPrice("JavaScript is in my blood", 10) zwraca 50
+Wywołanie calculateEngravingPrice("JavaScript is in my blood", 20) zwraca 100
+Wywołanie calculateEngravingPrice("Web-development is creative work", 40) zwraca 160
+Wywołanie calculateEngravingPrice("Web-development is creative work", 20) zwraca 80
+   </p>
+   <script class="Calculating using by words">
+    // function calculateEngravingPrice(message, pricePerWord) {
+    //  //let messageToArray = message.split(" ");
+    // //  console.log(messageToArray)
+    // //  return messageToArray.length * pricePerWord
+    //  return  message.split(" ").length * pricePerWord
+    // }
+    
+    // console.log(calculateEngravingPrice('Java Script is wird wery complex', 10))
+   </script>
+   <p>
+    Funkcja getLength(array) oczekuje jednego parametru array - tablicy dowolnych wartości. Uzupełnij kod funkcji tak, aby konwertowała tablicę na ciąg znakó
+    w bez separatorów i zwracała liczbę znaków w wynikowym ciągu.
+   </p>
+   <p>
+    Zadeklarowano funkcję getLength(array)
+    Wywołanie getLength(["Mango", "hurries", "to", "the", "train"]) zwraca 22
+    Wywołanie getLength(["M", "a", "n", "g", "o"]) zwraca 5
+    Wywołanie getLength(["top", "picks", "for", "you"]) zwraca 14
+   </p>
+   <script class="Joning and couting primitives">
+    function getLength(array) {
+        return array.join("").length
+    }
+   </script>
+</body>

@@ -1,0 +1,138 @@
+<title> Arrays</title>
+<script class="Multiple value of the same group">
+
+    // const fruit1 = "mango";
+    // const fruit2 = "strawberry";
+    // const fruit3 =  "bannana";
+
+    // console.log(fruit1);
+    // console.log(fruit2);
+    // console.log(fruit3);
+
+    // // We can do it in one variable declaration
+
+    // const fruits = [fruit1, fruit2, fruit3];
+
+    // console.log(fruits)
+
+</script>
+
+<script class="Grouping values">
+
+    // // const fruit1 = "mango";
+    // // const fruit2 = "strawberry";
+    // // const fruit3 =  "bannana";
+
+    // // // Array grouping values
+
+    // // const fruits = [fruit1, fruit2, fruit3];
+    // // const fruits = ["mango", "strawberry", "banana", "kiwi"]
+    // console.log(fruits);
+
+</script>
+
+<script class="Mixed values">
+
+    // const foo_bar_baz = ["foo", 0, true, null, undefined, []];
+
+    // console.log(foo_bar_baz);
+
+</script>
+
+<script class="Indexing elements">
+
+    // const students = [
+    //     "Adam",     //  first element =  index 0
+    //     "Beth",     //  second element - index 1
+    //     "Cecil",    //  Third elemnt -   index 2
+    //     "Dorothy",  //  Fourth element - index 3
+    //     //trailing coma,
+    // ];
+
+    // console.log("First element: "   +students[0]);
+    // console.log("Second elements: " +students[1]);
+    // console.log("Third element: "   +students[2]);
+    // console.log("Fourth element: "  +students[3]);
+    
+    // // // Reversed display
+
+    // console.log("Fourth element: "  +students[3]);
+    // console.log("Third element: "   +students[2]);
+    // console.log("Second elements: " +students[1]);
+    // console.log("First element: "   +students[0]);
+
+
+    // console.log(students[42]); // trying to get element out of array range // undefind
+
+</script>
+
+<script class="Indexing task">
+    
+    // const nums = [1,2,3,4];
+
+    // console.log( nums[4] );     // output will be undefind because we 
+    //     // are logging element with 4rth index which in non existing
+
+</script>
+
+<script class="Reassigning array elements">
+
+    // const flowers = ["rose", "dandelion", "tulip"];
+    // console.log(flowers);
+
+    // flowers[2] = "orchid";
+    // console.log(flowers);
+
+</script>
+
+ <script class="Inserting new elements - bad index empty values">
+
+    // const flowers = ["rose", "dandelion", "orchid" ];
+    // console.log(flowers, flowers.length);
+
+    // flowers[flowers.length] = "poppy";
+    // console.log(flowers, flowers.length)
+
+    // flowers[flowers.length] = "lilly";
+    // console.log(flowers, flowers.length)
+
+ </script>
+
+ <script class="Adding element">
+
+// const flowers = ["rose", "dandelion", "orchid" ];
+
+// flowers.push("poppy");
+// console.log(flowers)
+
+// flowers.push("poppy", "lilly");
+// console.log(flowers)
+
+ </script>
+
+ <script class="Looping over array elements">
+
+    const fruits = ['appel', 'orange', 'grapes', 'pear', 'banana', 'lemon'];
+
+    for (let i = 0; i < fruits.length; i++) {
+        console.log( fruits[i] )
+    }
+
+ </script>
+
+ <script class="Display array element based on user input index">
+
+    function runPrizeLottery(prizes) {
+        const userInput = prompt("LOTTERY! Pleas provide a number of your prize");
+        const index = parseInt(userInput, 10);
+
+        if (index < 0 || index >= prizes.length) return "Nothing";
+        return prizes[index];
+    }
+
+    const rewards = ["Golden Ticket", "Baloon", "Kebab"];
+    console.log("First lottery result: " + runPrizeLottery(rewards));
+
+    const plushies = ["Teddy Bear", "Plushy Rabbit", "Capybara", "Uncles Pedro duck"];
+    console.log("Second lottery result: " + runPrizeLottery(plushies))
+ </script>

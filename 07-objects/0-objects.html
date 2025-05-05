@@ -1,0 +1,139 @@
+<title>Objects</title>
+
+<script id="Multiple values for common entities">
+
+    // const userName = "Maciek";
+    // const age = 42;
+    // const hobbies = ["Coding", "Cooking"];
+    // const gpa = 5.2;
+
+    // const user = [
+    //     "Maciek",
+    //     42,
+    //     ["Coding", "Cooking"],
+    //     5.2,
+    // ];
+
+    // const name = user[0];
+    // const secondHobby = user[2][1];
+    // console.log({ name, secondHobby });
+
+    // const users = [
+    //     [
+    //         "Maciek",
+    //         42,
+    //         ["Coding", "Cooking"];
+    //         4.2,
+    //     ],
+    //     [
+    //         "Adam",
+    //         36,
+    //         ["Sports", "Running"],
+    //         4.1,
+    //     ]
+    // ]
+
+    // const secondUserFirstHobby = users[1][2][1]; // wtf
+    // console.log({ secondUserFirstHobby })
+
+    // WHATT HELL IS THIS THIS BAD
+</script>
+
+<script id="Object for gouping values - Key Va;ue pairs">
+
+    // Object literall
+    // const user = {
+    //     name: "Maciek",
+    //     age: 42,
+    //     hobbies: ["Coding", "Cooking"],
+    //     gpa: 4.2,
+    // };
+
+    // console.log( user.name, user.hobbies[1] );
+
+</script>
+
+<script id="Array of Objects">
+
+    // const users = [
+    //     {
+    //         name: "Maciek",
+    //         age: 42,
+    //         hobbies: ["Coding", "Cooking"],
+    //         gpa: 4.2,
+    //     },
+    //     {
+    //         name: "Adam",
+    //         age: 44,
+    //         hobbies: ["Running", "Dancing"],
+    //         gpa: 5.7,
+    //     },
+    // ]
+    // console.log ( users[1].hobbies[1] )
+
+</script>
+
+<script id="Nested objects and computed property assessor">
+
+    const students = {
+        name: "Maciek",
+        age: 42,
+        hobbies: ["Coding", "Cooking"],
+        gpa: 6.0,
+        grades: {
+            "math": 6,
+            sport: 5,
+            ["physics"]: 4,
+            chemistry: 3,
+        },
+    };
+
+    console.log( student.grades.phisics );
+    console.log( student.grades["chemistry"] )
+
+    const key = "sport";
+
+    console.log( student.grades[key] );
+    console.log( student.grades["non_existing_key"] );
+
+    const someProperty = "Hello";
+    const anotherField = "There";
+
+    const obj = {
+        someProperty,
+        anotherField,
+    }
+
+
+</script>
+
+<script id="Modyfing objects">
+
+    const player = {
+        username: "Micheal",
+        level: 100,
+        friends: ["Artur", "Thomy"],
+        status: "hello there",
+    };
+
+    // player = {          // This would not happen js will call an error in  
+    //     x: "D"          // in console you can assigne another object
+    // }                   // to already existed one 
+
+    // but you can easly change object property 
+
+    player.username = "MichealNY42"
+
+    player.level++;
+
+    player.friends.push("Grace")
+    
+    player.rating = 5;
+    
+    console.log( player );
+
+    delete player.status;   //You can delete property but this is antypatern
+                            //Coding nono
+    console.log(player); 
+
+</script>

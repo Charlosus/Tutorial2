@@ -1,0 +1,216 @@
+<title>Metodes for string </title>
+<body>
+<script>
+    // Methodes are builded in functions that are used to manipulate items in code with out changing code
+    const string = "I am string!"
+
+    console.log(string.toUpperCase())   // selfexplainatory transfer string too uppercase
+    console.log(string)
+
+</script>
+<p>
+    Funkcja normalizeInput(input, to) deklaruje dwa parametry:
+
+input - ciąg znaków, który powinien mieć określoną wielkość liter
+to - ciąg z dwiema możliwymi wartościami: "upper" lub "lower", wskazującymi, jakimi literami powinna być napisana wartość input
+Uzupełnij kod funkcji tak, aby:
+
+Jeśli wartością parametru to jest ciąg upper, funkcja zwracała kopię ciągu input, ale zapisaną wielkimi literami
+W przeciwnym razie zwracała kopię ciągu input małymi literami
+
+Zadeklarowano funkcję normalizeInput(input, to)
+Wywołanie funkcji normalizeInput("This ISN'T SpaM", "lower") zwraca "this isn't spam"
+Wywołanie funkcji normalizeInput("This ISN'T SpaM", "upper") zwraca "THIS ISN'T SPAM"
+Wywołanie funkcji normalizeInput("Big SALE", "lower") zwraca "big sale"
+Wywołanie funkcji normalizeInput("Big SALE", "upper") zwraca "BIG SALE"
+Wywołanie funkcji normalizeInput("Stay Awhile and Listen", "lower") zwraca "stay awhile and listen"
+Wywołanie funkcji normalizeInput("Stay Awhile and Listen", "upper") zwraca "STAY AWHILE AND LISTEN"
+</p>
+<script class="Function to lower/upper case">
+// try to make it diffritly
+function normalizeInput(input, to) {
+      if (to === "upper") {
+        return input.toUpperCase()
+      } if (to === "lower") {
+        return input.toLowerCase()
+      }
+}
+
+</script>
+
+<script class=".includes()">
+
+    // includes checks if string have substring inside and return boolean true or false
+
+    const string1 = "I will fuck your mum"
+
+    console.log(string1.includes("fuck"))   // true
+    console.log(string1.includes("kiss"))   // false
+
+    const message = "Please buy our stuff!";
+const hasSpam = message.includes("buy");
+
+if (hasSpam) {
+  console.log("Warning: This message contains forbidden words.");
+} else {
+  console.log("You can safely open this message.");
+}
+
+function isFirstNameInFullName(fullName, firstName) {
+  return fullName.toUpperCase().includes(firstName.toUpperCase());
+}
+
+function checkForName(fullName, firstName) {
+  let fullNameNormalized = fullName.toLowerCase();
+  let firstNameNormalized = firstName.toLowerCase();
+  return fullNameNormalized.includes(firstNameNormalized)
+}
+
+console.log(checkForName("Jason Neis", "jAsoN"))
+</script>
+
+<p>
+    Funkcja checkFileExtension(fileName, ext) przyjmuje dwa parametry:
+
+fileName - ciąg znaków przechowujący nazwę pliku z rozszerzeniem, na przykład styles.css, hello.js itp.
+ext - ciąg znaków przechowujący rozszerzenie, na przykład .css, .js itp.
+Uzupełnij kod funkcji tak, aby:
+
+Jeśli nazwa pliku fileName kończy się rozszerzeniem podanym w parametrze ext, funkcja zwracała ciąg znaków "File extension matches"
+W przeciwnym razie zwracała ciąg znaków "File extension does not match"
+Zadeklarowano funkcję checkFileExtension(fullname, name)
+Wywołanie funkcji checkFileExtension("styles.css", ".css") zwraca "File extension matches"
+Wywołanie funkcji checkFileExtension("styles.css", ".js") zwraca "File extension does not match"
+Wywołanie funkcji checkFileExtension("app.js", ".js") zwraca "File extension matches"
+Wywołanie funkcji checkFileExtension("app.js", ".html") zwraca "File extension does not match"
+Wywołanie funkcji checkFileExtension("index.html", ".html") zwraca "File extension matches"
+Wywołanie funkcji checkFileExtension("index.html", ".css") zwraca "File extension does not match"
+Wywołanie funkcji checkFileExtension("index.html", ".js") zwraca "File extension does not match"
+</p>
+
+<script class="Checking how .endsWith works">
+
+    function checkFileExtension(fileName, ext) {
+  if (fileName.endsWith(ext)) {
+    return "File extension matches";
+  } else return "File extension does not match"
+}
+
+</script>
+
+<script class="counting with while">
+    
+    function calculateTotal(number) {
+  let total = 0
+  let i = 1
+  while (i <= number) {
+    total += number;
+    i++;
+  }
+  return total
+}
+
+function calculateTotal2(number) {
+  let total = 0;
+  let i = 1;
+
+  while (i <= number) {
+    total += i;
+    i++;
+  }
+
+  return total;
+}
+
+console.log(calculateTotal(3))
+console.log(calculateTotal2(3))
+
+</script>
+
+<script class="Using .length to check how long is massege">
+    const msg = "Hello"
+
+    console.log(`Message value: "${msg}"`);
+    console.log(`Message length: ${msg.length}`);
+    console.log( `Message first character: ${msg[0]}`);
+    console.log(`Message last character: ${msg[msg.length - 1]}`)
+
+</script>
+<script class="Normalizing string with .toLowerCase() and .toUpperCase()">
+
+    const message1 = "HeLLo";
+
+    function isHello(text) {
+        return text.toLowerCase() === "hello";
+        // return text.toUpperCase() === "HELLo";
+        // return text.toUpperCase() === hello.toUpperCase();
+    }
+
+    if (isHello(message1)) {
+        console.log("Messages are matching!")
+    } else {
+        console.log("Messages are not matching :C");
+    }
+
+    const output = isHello(message1)
+     ? "Messages are matching!"
+     : "Messages are not matching :c";
+
+     console.log(output);
+
+
+</script>
+<script class=".slice() and .trim()">
+
+    function getLettersOnly(text, from, to) {
+        // let result = text.slice(from, to ); // cut only sellected word with index number
+        // result = result.trim() // 
+        // return result  // How ever this could be written in one line 
+        return text.slice(from, to).trim();
+    }
+
+    console.log(getLettersOnly("Hello World", 5, 11));
+</script>
+<script class="Useg of .includes to check if email is valid">
+
+    function isValidEmail(email) {
+        // return email.includes("@")
+        // return email.includes("@") && email.includes(".");
+        return email.includes("@")
+         && email.includes(".") 
+         && !email.startsWith("@")
+         && !email.endsWith("@");
+    }
+
+    function checkEmail(email) {
+        console.log(
+            `Email "${email}" is ${isValidEmail(email) ? "valid" : "invalid"}`
+        );
+    }
+
+    checkEmail("someone@test.com")
+    checkEmail("some.one@testcom")
+    checkEmail("someone@testcom")
+    checkEmail("someonetest.com")
+    checkEmail("@.");
+    checkEmail(".@")
+
+</script>
+<script class="Is email from valid domain ">
+
+    function isEmailFromAllowedDomain(email, domain) {
+        return email.endsWith(domain);
+    }
+
+    function checkEmailAgain(email, domain) {
+        console.log(`Email "${email}" is from ${isEmailFromAllowedDomain(email, domain) ? "valid" : "invalid"} domain`)
+    }
+
+    checkEmailAgain("someone@test.com", ".com")
+    checkEmailAgain("someone@test.com", ".pl")
+    checkEmailAgain("someone@test.com", ".de")
+    checkEmailAgain("someone@test.com", ".ie")
+    checkEmailAgain("someone@test.com", ".ts");
+    checkEmailAgain("someone@test.com", ".eu")
+</script>
+</body>

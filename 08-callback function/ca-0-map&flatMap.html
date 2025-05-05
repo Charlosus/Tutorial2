@@ -1,0 +1,316 @@
+<title>Autocheck from conspect</title>
+<script src="./arrays.js"></script>
+
+<p id="1. refactoring to arrow function ">
+    Zastąp deklarację funkcji filterArray() i callback dla metody forEach() funkcjami strzałkowymi.
+
+Zadeklarowana została zmienna filterArray
+Zmiennej filterArray przypisana została funkcja strzałkowa z parametrami (numbers, value)
+Do iteracji po tablicy numbers używana jest metoda forEach
+Callback dla metody forEach jest funkcją strzałkową
+Wywołanie funkcji filterArray([1, 2, 3, 4, 5], 3) zwraca [4, 5]
+Wywołanie funkcji filterArray([1, 2, 3, 4, 5], 4) zwraca [5]
+Wywołanie funkcji filterArray([1, 2, 3, 4, 5], 5) zwraca []
+Wywołanie funkcji filterArray([12, 24, 8, 41, 76], 38) zwraca [41, 76]
+Wywołanie funkcji filterArray([12, 24, 8, 41, 76], 20) zwraca [24, 41, 76]
+Wywołanie funkcji z losowymi, ale poprawnymi argumentami zwraca poprawną wartość
+
+function filterArray(numbers, value) {
+    const filteredNumbers = [];
+  
+    numbers.forEach(function (number) {
+      if (number > value) {
+        filteredNumbers.push(number);
+      }
+    });
+  
+    return filteredNumbers;
+  }
+  
+</p>
+
+<script id="1">
+// const filterArray = (numbers, value) => {
+//   const filteredNumbers = [];
+
+//   numbers.forEach((number) => {
+//     if (number > value) {
+//       filteredNumbers.push(number);
+//     }
+//   });
+
+//   return filteredNumbers;
+// }
+// console.log(filterArray([1, 2, 3, 4, 5], 3))
+// console.log(filterArray([1, 2, 3, 4, 5], 4))
+// console.log(filterArray([1, 2, 3, 4, 5], 5))
+// console.log(filterArray([12, 24, 8, 41, 76], 38))
+// console.log(filterArray([12, 24, 8, 41, 76], 20))
+
+</script>
+
+<p id="2. Implementing pure function">
+
+    Funkcja changeEven(numbers, value) przyjmuje tablicę liczb numbers i aktualizuje każdy element, którego wartością jest liczba parzysta, dodając do niego wartość parametru value, który jest dokładnie liczbą.
+
+Dokonaj refaktoryzacji funkcji, aby została czysta — nie zmieniała tablicy liczb numbers, ale tworzyła, wypełniała i zwracała nową tablicę ze zaktualizowanymi wartościami.
+
+Zadeklarowana została funkcja changeEven(numbers, value)
+Funkcja changeEven nie zmienia wartości parametru numbers
+Wywołanie changeEven([1, 2, 3, 4, 5], 10) zwraca nową tablicę [1, 12, 3, 14, 5]
+Wywołanie changeEven([2, 8, 3, 7, 4, 6], 10) zwraca nową tablicę [12, 18, 3, 7, 14, 16]
+Wywołanie changeEven([17, 24, 68, 31, 42], 100) zwraca nową tablicę [17, 124, 168, 31, 142]
+Wywołanie changeEven([44, 13, 81, 92, 36, 54], 100) zwraca nową tablicę [144, 13, 81, 192, 136, 154]
+Wywołanie funkcji z losowymi, ale poprawnymi argumentami zwraca poprawną wartość
+
+function changeEven(numbers, value) {
+    for (let i = 0; i "lower then" numbers.length; i += 1) {
+      if (numbers[i] % 2 === 0) {
+        numbers[i] = numbers[i] + value;
+      }
+    }
+  }
+  
+</p>
+
+<script id="2">
+
+// function changeEven(numbers, value) {
+//     let result = [];
+//     numbers.forEach((number) => {
+//         (number % 2 === 0) 
+//         ? result.push(number + value) 
+//         : result.push(number)
+
+//     //    if (number % 2 === 0) {
+//     //   number = number + value;
+//     //   console.log(number)
+//     //   result.push(number);
+//     //      } else {
+//     //         result.push(number)
+//     //      }
+//        } 
+//       )
+//       return result
+// }
+
+// // console.log(changeEven([1, 2, 3, 4, 5], 10))
+// // console.log(changeEven([2, 8, 3, 7, 4, 6], 10))
+// // console.log(changeEven([17, 24, 68, 31, 42], 100))
+// // console.log(changeEven([44, 13, 81, 92, 36, 54], 100))
+
+
+// const  changeEvenForOf = (numbers, value) => {
+    
+//     // With for of 
+//     // let result = [];
+//     // for (const number of numbers) {
+//     //     if (number % 2 === 0) {
+//     //         result.push(number + value)
+//     //     }  else {result.push(number)}
+//     // }
+//     // return result
+// //=====================================================
+//     // // ternary operator
+//     // let result = [];
+//     // numbers.forEach((number) => {
+//     //     (number % 2 === 0) 
+//     //     ? result.push(number + value) 
+//     //     : result.push(number)
+//     //    } 
+//     //   )
+//     //   return result
+// //=======================================================
+// // Easiest and fasted with method map 
+//    return numbers.map(number => number % 2 === 0 ? number + value : number); // must be return 
+    
+// }
+// console.log(changeEvenForOf([1, 2, 3, 4, 5], 10))
+// console.log(changeEvenForOf([2, 8, 3, 7, 4, 6], 10))
+// console.log(changeEvenForOf([17, 24, 68, 31, 42], 100))
+// console.log(changeEvenForOf([44, 13, 81, 92, 36, 54], 100))
+</script>
+
+<p id="3 planets toUpperCase with map">
+===============================================================================================================
+Tablica planets zawiera nazwy planet. Dopełnij kod tak, aby zmienna planetsLengths zawierała tablicę składającą się z długości nazw każdej planety w tablicy planets. Należy użyć metody map().
+
+Zadeklarowana została zmienna planets
+Wartością zmiennej planets jest tablica ["Earth", "Mars", "Venus", "Jupiter"]
+Zadeklarowana została zmienna planetsLengths
+Wartością zmiennej planetsLengths jest tablica [5, 4, 5, 7]
+Do iteracji po tablicy używana jest metoda map()
+================================================================================================================
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+
+const planetsLengths = planets;
+</p>
+
+<script id="3">
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+// // .map
+// const planetsLengths = planets.map(planet => planet.length);
+
+// console.log(planetsLengths)
+// // For each 
+// const planetsLengthsForEach = [];
+// planets.forEach(planet => {
+//     planetsLengthsForEach.push(planet.length)
+// })
+// console.log(planetsLengthsForEach)
+</script>
+
+<p id="4 - map of books">
+==================================================================================================================
+
+Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwości title, author, rating. Używając metody map(), spraw, aby zmienna titles zawierała tablicę tytułów wszystkich książek (właściwość title) z tablicy books.
+
+Zadeklarowana została zmienna books
+Wartością zmiennej books jest tablica
+Zadeklarowana została zmienna titles
+Wartością zmiennej titles jest tablica ["The Last Kingdom", "Beside Still Waters", "The Dream of a Ridiculous Man", "Redder Than Blood", "Enemy of God"]
+Do iteracji po tablicy books używana jest metoda map() jako czysta funkcja
+==================================================================================================================
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
+
+const titles = books;
+
+</p>
+
+<script id="4">
+//     const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     rating: 8.38,
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     rating: 8.51,
+//   },
+//   {
+//     title: "The Dream of a Ridiculous Man",
+//     author: "Fyodor Dostoevsky",
+//     rating: 7.75,
+//   },
+//   { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+//   { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+// ];
+
+// const titles = books.map(book => book.title);
+
+// //here we can do destructiorization // bit over the top for me 
+// const titlesDes = books.map(({ title }) => title);
+
+// console.log(titles)
+// console.log(titlesDes)
+
+</script>
+
+<p id="5 flatmap of genres">
+=========================================================================================================
+
+Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwość genres, której wartością jest tablica gatunków. Używając metody flatMap(), spraw by zmienna genres zawierała tablicę gatunków wszystkich książek (właściwość genres) z tablicy books.
+
+Zadeklarowana została zmienna books
+Wartością zmiennej books jest tablica obiektów
+Zadeklarowana została zmienna genres
+Wartością zmiennej genres jest tablica ["adventure", "history", "fiction", "horror", "mysticism"]
+Do iteracji po tablicy books używana jest metoda flatMap()
+=========================================================================================================
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    genres: ["adventure", "history"],
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    genres: ["fiction"],
+  },
+  {
+    title: "Redder Than Blood",
+    author: "Tanith Lee",
+    genres: ["horror", "mysticism"],
+  },
+];
+
+const genres = books;
+
+</p>
+
+<script id="5">
+//     const books = [
+//   {
+//     title: "The Last Kingdom",
+//     author: "Bernard Cornwell",
+//     genres: ["adventure", "history"],
+//   },
+//   {
+//     title: "Beside Still Waters",
+//     author: "Robert Sheckley",
+//     genres: ["fiction"],
+//   },
+//   {
+//     title: "Redder Than Blood",
+//     author: "Tanith Lee",
+//     genres: ["horror", "mysticism"],
+//   },
+// ];
+
+// const genres = books.flatMap(book => book.genres);
+
+// const genresDes = books.flatMap(({genres})=> genres);
+
+// console.log(genres)
+// console.log(genresDes)
+
+
+</script>
+
+<p id="6 users">
+======================================================================================================
+    Tę tablicę obiektów będziemy przekazywać do parametru users podczas wywoływania funkcji z zadania.
+
+    w arrays.js
+
+    Dopełnij funkcję strzałkową getUserEmails(users) tak, aby zwracała tablicę adresów email użytkowników (właściwość email) z tablicy obiektów w parametrze users.
+
+Zadeklarowana została zmienna getUserEmails
+Zmienna getUserEmails ma przypisaną funkcję strzałkową z parametrem (users)
+Do iteracji po parametrze users używana jest metoda map()
+Wywołanie funkcji z określoną tablicą użytkowników zwraca tablicę ["moorehensley@indexia.com", "sharlenebush@tubesys.com", "rossvazquez@xinware.com", "elmahead@omatom.com", "careybarr@nurali.com", "blackburndotson@furnigeer.com", "shereeanthony@kog.com"]
+=================================================================================================
+const getUserEmails = (users) => {};
+</p>
+
+<script id="6">
+    const getUserEmails = (users) => { 
+        
+       return users.map(user => user.email)
+      
+    };
+
+    console.log(getUserEmails(users))
+</script>

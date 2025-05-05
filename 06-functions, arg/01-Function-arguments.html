@@ -1,0 +1,88 @@
+<title>Function Arguments</title>
+
+<script class="Definition">
+
+    // function something() {
+    //     console.log(arguments);
+    // }
+
+    // function functionName(...arg) {
+    //     console.log(args);
+    // }
+    // something();                // Arguments(0)
+    // something(1, 2, 3);         // Arguments(3)
+
+    // // [].concat([1], [2], [3, 3])
+</script>
+
+<script class="Iteration with arguments">
+
+    // function iterateOverArguments() {
+    //     for (let i=0; i<arguments.length; i++ ) [
+    //         console.log( arguments[i] )
+    //     ]
+    // }
+    // iterateOverArguments();
+    // iterateOverArguments(1, 2, 3)
+</script>
+
+<script>
+
+    // function iterateOverArguments() {
+    //     for (const arg of arguments) {
+    //         console.log( arg );
+    //     }
+    // }
+
+    // iterateOverArguments();
+    // iterateOverArguments(1, 2, 3);
+
+    // function makeArray() {
+    //     const arr = [];
+
+    //     for(const arg of arguments) {
+    //         arr.push(arg);
+    //     }
+
+    //     return arr;
+    // }
+    // const nums = makeArray(1, 2, 3, 4, 5,);
+    // console.log(nums, nums.join("_"))
+</script>
+
+<script>
+
+    // function returnArgs() {
+    //     return arguments;
+    // }
+    // function returnArgsArray() {
+    //     return Array.from(arguments)
+    // }
+
+    // // console.log( returnArgs() );
+    // // console.log( returnArgs(1, 2, 3) );
+    // // console.log( returnArgs("a", "b", "c").toReversed().join("_") ); // this will give error
+    // // // because this is no an array 
+
+    // console.log( returnArgsArray() );
+    // console.log( returnArgsArray(1, 2, 3,));
+    // console.log( returnArgsArray("a", "b", "c").toReversed().join(" ") )
+</script>
+
+<script>
+//     function sum(...items) {
+//         let sum = 0;
+
+//         for (const item of items) {
+//             sum += item;
+//         }
+//     return sum
+// }
+
+// function sum(...items) {
+//     return items.reduce((acc, item) => acc + item, 0);
+// }
+
+const sum = (...items) => items.reduce((acc, item) => acc + item, 0)
+console.log( sum(1, 2, 3, 4, 5, 6,));
+</script>

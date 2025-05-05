@@ -1,0 +1,40 @@
+<title> Methods working on strings</title>
+<script>
+
+    x = "Ala ma kota i 2 psa"
+    // cosnole.log(x.at(0)); // A
+    // cosnole.log(x.chatAt(0)); // A
+    // cosnole.log(x.charcodeAt(0)); // 65
+    // console.log(x.concat(" i chomika")); // Ala ma kota i psa i chomika
+    // console.log(x.concat(" i chomika", " i chomika")); // Ala ma kota i psa i chomika i chomika
+    // console.log(x.startsWith("Ala")); // true
+    // console.log(x.endsWith("Ala")); // false
+    // console.log(x.includes("Ala")); // true
+    // console.log(x.indexOf("Ala")); // 0
+    // console.log(x.lastIndexOf("Ala")); // 0
+    // console.log(x.match(/\d/g)); // [ '2' ]
+    // console.log(x.padEnd(20, "x")); // Ala ma kota i 2 psa xxxxxxx
+    // console.log(x.padStart(20, "x")); // xxxxxxxxxAla ma kota i 2 psa
+    // console.log("x".repeat(10)); // xxxxxxxxxx
+    // console.log(x.replace("Ala", "Kuba")); // Kuba ma kota i 2 psa
+    // console.log(x.replace("kot", "pies")); // Ala ma pies i 2 psa
+    // console.log(x.replaceAll("kot", "pies")); // Ala ma pies i 2 psa
+    // console.log(x.replace("2 ", "")); // Ala ma kota i psa
+    console.log(x.slice("kot", "pies")) // Ala ma kota i 2 psa
+    console.log(x.slice(2)) // ma kota i 2 psa
+    console.log(x.slice(2, 5)) // ma k
+    console.log(x) // Ala ma kota i 2 psa
+    console.log(x.slice(-2, -1)) // s
+    console.log(x.slice(-6, -1)) // psa
+    console.log(x.split(" ")) // [ 'Ala', 'ma', 'kota', 'i', '2', 'psa' ]
+    console.log(x.split("2")) // [ 'Ala ma kota i ', ' psa' ]
+    // there is a itresting method that could help us cut "px" from "50px" to "50"
+    console.log("50px".split("px")[0]) // 50
+    console.log(x.tolowerCase()) // ala ma kota i 2 psa
+    console.log(x.toupperCase()) // ALA MA KOTA I 2 PSA
+
+    console.log("a" + " abc ".trim() + " b") // a abc b
+    console.log("a" + " abc ".trimStart() + " b") // a abc b
+    console.log("a" + " abc ".trimEnd() + " b") // a  abc b
+
+</script>

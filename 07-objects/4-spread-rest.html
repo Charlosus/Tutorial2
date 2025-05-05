@@ -1,0 +1,248 @@
+<title> Spread Rest operator</title>
+
+<script id="Limited function arguments">
+
+    function sum(a, b) {
+        return a + b;
+    }
+
+    console.log( sum(2, 3) );
+
+    console.log( sum(2, 3, 7) );        // this would return 5 because it dont know what to do with arg "c"
+</script>
+
+<script id="Rest operator - function argument">
+
+
+    // function log(...remainingArguments) {
+    //     console.log(typeof remainingArguments, remainingArguments);
+    // }
+
+    // log();
+    // log(1);
+    // log(1, 2, 3);
+    // log("a", "b", "c");
+</script>
+
+<script id="Rest operator with function arguments">
+
+    // function sum(...nums) {
+    //     let sum = 0;
+
+    //     for (const num of nums) {
+    //         sum += num;
+    //     }
+    //     return sum;
+    // }
+
+    // console.log( sum(2, 3) );
+    // console.log( sum(2, 3, 7, 5,) );
+    // console.log( sum(2, 5, 7, 9, 11, 1, 2, 5, 4) )
+</script>
+
+<script>
+
+    // // function logTwoOrMoreItems(first, ...item, second){ // this would not work ...item should be last
+    // function logTwoOrMoreItems(first, second, ...items) {
+    //     console.log(first, second, items);
+    // }
+
+    // logTwoOrMoreItems(1, 2 ,5 ,5 ,6 ,8 ,8);
+</script>
+
+<script>
+
+    // function filterEmailsByDomain(domain, ...emails) {
+    //     const filteredEmails = [];
+
+    //     for (const email of emails) {
+    //         if(email.endsWith(domain)) {
+    //             filteredEmails.push(email);
+    //         }
+    //     }
+    //     return filteredEmails
+    // }
+
+    // // const filteredPl = filterEmailsByDomain(".pl", "abc@x.com", "xyz@x.com", "xd@x.pl");
+    // //   console.log(filteredPl);                      // ^ ^ this might be problematic we could try to 
+    //                                                 // give this elements like this \/
+//    const emails = ["abc@x.com", "xyz@x.com", "xd@x.pl"];
+//    const filteredPl = filterEmailsByDomain(".pl", emails); //but it would not work 
+
+//    // whats needed is spread operator like this 
+
+//    const filteredPl = filterEmailsByDomain(".pl", ...emails); // now we get resault we wanted 
+
+    
+    
+
+  
+</script>
+
+<script id="Spread array in to singular item as function arguments">
+
+    // const numbers = [5, 4, 8, 9, 1];
+
+    // const minA = Math.min(5, 4, 8, 9, 1);
+    // // const minB = Math.min(numbers);
+
+    // // console.log({ minA, minB })         // minA: 1, minB: NaN 
+    // const minB = Math.min(...numbers);      // adding ... will help with that 
+    // console.log({ minA, minB })   
+    // // Spread
+
+    // console.log(numbers);               // (5) [5, 4, 8, 9, 1]
+    // console.log([5, 4, 8, 9, 1]);       //(5) [5, 4, 8, 9, 1]
+    // console.log(...numbers);            //5 4 8 9 1    // using this methode we will get seperated values 
+    //                                                     // not an array like in previeos trys 
+
+    // function rnd() {
+    //     return Math.ceil(Math.random() * 100);  // generates numbers 1 - 100
+    // };
+
+    // function getExtremeScores(scores) {
+    //     return {
+    //         best: Math.max(...scores),
+    //         worst: Math.min(...scores),
+    //     }
+    // }
+
+    // const scores = [rnd(), rnd(), rnd(), rnd(), rnd(), rnd(), rnd(),]
+    // console.log("Scores: ",scores);
+
+    // const extremes = getExtremeScores(scores);
+    // console.log('Extremes:', extremes)
+
+</script>
+
+<script id="Copy array using spread">
+
+    // const numbersA = [1, 2, 3, 4, 5];
+    // const numbersB = [...numbersA];
+
+    // console.log(numbersA);
+    // console.log(numbersB);
+
+    // numbersA.push(6);
+    // numbersA.reverse();
+
+    // console.log("A", numbersA);
+    // console.log("B", numbersB);
+
+    // // numbersB.push(42);
+    // //numbersB.reverse();
+
+    // // console.log("A", numbersA);
+    // // console.log("B", numbersB)
+
+</script>
+
+<script id="Concat/Join arrays using spread">
+
+    // const a = [1, 2, 3];
+    // const b = [4, 5, 6];
+    // const c = [7, 8, 6];
+
+    // const z = a.concat(b, c);
+    // const abc = [...a, ...b, ...c];
+
+    // console.log([...a, ...a, ...b, ...c]);
+
+</script>
+
+<script id="">
+
+    // // get top/bot student {name, grade}
+    // const firstGroupScores = [64, 42, 93];
+    // const secondGroupScores = [89, 14, 51, 26];
+    // const thirdGroupScores = [29, 47, 18, 97, 81];
+    
+    // const allScores = [...firstGroupScores, ...secondGroupScores, ...thirdGroupScores];
+    // const bestScores = Math.max(...allScores);
+    // const worstScores = Math.min(...allScores);
+
+    // console.log(
+    //     allScores,
+    //     bestScores,
+    //     worstScores,
+    // )
+</script>
+
+<script id="Spread objects - copying properties and values">
+
+    // const studentA = {
+    //     name: "Adam",
+    //     grade: 5,
+    // };
+
+    // const studentB = {...studentA};
+    // console.log({ studentA, studentB });
+
+    // studentB.name = "Beth";
+    // console.log({ studentA, studentB })
+</script>
+
+<script id="Join objects key:values">
+
+    // const shoppingListA = {
+    //     "water": 1,
+    //     "grapes": 2,
+    // };
+
+    // const shoppingListB = {
+    //     "beer": 4,
+    //     "snacks": 2,
+    // }
+
+    // const shoppingList = {
+    //     ...shoppingListA,
+    //     ...shoppingListB,
+    // }
+
+    // console.log({ shoppingList })       // {water: 1, grapes: 2, beer: 4, snacks: 2}
+    
+    
+</script>
+
+<script id="Overriding values in spreaded object">
+
+//     const adam = {
+//         name: "Adam",
+//         grade: 5,
+//     };
+
+// //     const beth = {
+// //         name: "Beth",
+// //         ...adam,
+// //    };
+
+//    console.log({ adam, beth }); // if we copy object by spread after declaring its values, if original values
+//                                 // would had same key they would overright propeties we set them 
+
+//    const beth = {
+//     ...adam,
+//     name: "Beth";
+//    };
+
+//    console.log({ adam, beth }) // to avoid it first copy object then give it desireable name
+</script>
+
+<script id="Overriding values in spreaded objects - Config examples">
+
+    const defaultOptions = {
+        language: "English",
+        maxPlayers: 1337,
+    }
+
+    const ourOptions = {
+        ...defaultOptions,
+        language: "Polish",
+   }
+
+   function loadConfig(options = defaultOptions) {
+        console.log(`Server language set to ${options.language}`);
+        console.log(`Max players on the server is: ${options.maxPlayers}`);
+   }
+
+   loadConfig(ourOptions)
+</script>

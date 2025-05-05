@@ -1,0 +1,526 @@
+<title>Autocheck exercie form conspect</title>
+<p id="1"> 
+    Dodaj kilka nowych właściwości do obiektu apartment:
+
+    area - powierzchnia w metrach kwadratowych, liczba 60;
+    rooms - liczba pokoi, liczba 3;
+    location - lokalizacja apartamentu, obiekt z następującymi zagnieżdżonymi właściwościami;
+    country - kraj, ciąg "Jamaica";
+    city - miasto, ciąg "Kingston".
+    Zwróć uwagę: jeśli spróbujesz dodać właściwości country i city do właściwości location, która nie została jeszcze utworzona, otrzymasz błąd. Najpierw zainicjuj location jako pusty obiekt, a następnie dodawaj do niego właściwości.
+    
+    Zadeklarowano zmienną apartment
+    Wartością zmiennej apartment jest obiekt
+    Wartością zagnieżdżonej właściwości area jest liczba 60
+    Wartością zagnieżdżonej właściwości rooms jest liczba 3
+    Wartością zagnieżdżonej właściwości location jest obiekt
+    Wartością zagnieżdżonej właściwości location.country jest ciąg "Jamaica"
+    Wartością zagnieżdżonej właściwości location.city jest ciąg znaków "Kingston"
+</p>
+<script id="1">
+//     const apartment = {
+//   imgUrl: "https://via.placeholder.com/640x480",
+//   descr: "Spacious apartment in the city center",
+//   rating: 4.7,
+//   price: 5000,
+//   tags: ["premium", "promoted", "top", "trusted"],
+//   owner: {
+//     name: "Henry Sibola",
+//     phone: "982-126-1588",
+//     email: "henry.carter@aptmail.com",
+//   },
+// };
+// apartment.area = 60;
+// apartment.rooms = 3;
+// apartment.location = {
+//   country: "Jamaica",
+//   city: "Kingston"
+// }
+</script>
+
+<p id="2 - Shorthand properties">
+    Uzupełnij kod deklaracji obiektu tak, aby zawierał właściwości name, price, image i tags z wartościami ze zmiennych o tych samych nazwach. Pamiętaj, aby używać składni skróconej.
+
+Zadeklarowano zmienną product
+Wartością zmiennej product jest obiekt
+Wartością zagnieżdżonej właściwości name jest ciąg "Repair Droid"
+Wartością zagnieżdżonej właściwości price jest liczba 2500
+Wartością zagnieżdżonej właściwości image jest ciąg znaków "https://via.placeholder.com/640x480"
+Wartością zagnieżdżonej właściwości tags jest tablica ["on sale", "trending", "best buy"]
+</p>
+
+<script id="2 - Shorthand properties">
+//     const name = "Repair Droid";
+// const price = 2500;
+// const image = "https://via.placeholder.com/640x480";
+// const tags = ["on sale", "trending", "best buy"];
+
+// const product = {
+//   name,
+//   price,
+//   image,
+//   tags,
+// };
+
+</script>
+
+<p id="3 - Computed properties">
+    Używając składni właściwości obliczeniowych, uzupełnij kod deklarujący obiekt credentials tak, aby w rezultacie posiadał on dwie właściwości: email i password, których klucze przechowywane są w zmiennych emailInputName i passwordInputName.
+
+Wartością właściwości email powinien być ciąg "henry.carter@aptmail.com", a wartością właściwości password powinien być ciąg "jqueryismyjam".
+
+Zadeklarowano zmienną credentials
+Wartością zmiennej credentials jest obiekt
+Obiekt credentials zawiera właściwość email
+Wartością zagnieżdżonej właściwości email jest ciąg "henry.carter@aptmail.com"
+Obiekt credentials zawiera właściwość password
+Wartością zagnieżdżonej właściwości password jest ciąg "jqueryismyjam"
+Użyto składni obliczanych właściwości
+</p>
+
+<script id="3 Computed properties">
+//     const emailInputName = "email";
+// const passwordInputName = "password";
+
+// const credentials = {
+//   [emailInputName]: "henry.carter@aptmail.com",
+//   [passwordInputName]: "jqueryismyjam"
+// };
+</script>
+
+<p id="4 - Pushing keys and values with for in loop">
+    const book = {
+        title: "Ostatnie Królestwo",
+        author: "Bernard Cornwell",
+        genres: ["proza historyczna", "przygoda"],
+        rating: 8.38,
+      };
+      
+      for (const key in book) {
+        console.log(key); // Klucz
+        console.log(book[key]);  // Wartość właściwości o takim kluczu
+      }
+
+      Przejdź przez obiekt apartment używając pętli for...in i zapisz wszystkie jego klucze do tablicy keys, a wszystkie wartości jego właściwości do tablicy values.
+
+      Zadeklarowano zmienną apartment
+      Wartością zmiennej apartment jest obiekt
+      Zadeklarowano zmienną keys
+      Wartością zmiennej keys jest tablica ["descr", "rating", "price"]
+      Zadeklarowano zmienną values
+      Wartością właściwości values jest tablica ["Spacious apartment in the city center", 4, 2153]
+      Użyto pętli for...in
+</p>
+
+<script id="4 - Pushing keys and values with for in loop">
+
+// const apartment = {
+//   descr: "Spacious apartment in the city center",
+//   rating: 4,
+//   price: 2153,
+// };
+
+// const keys = [];
+// const values = [];
+
+// for (const key in apartment) {
+//   keys.push(key)
+//   values.push(apartment[key])
+// }
+
+// this can done also with for of loop and object.keys
+
+// const apartment = {
+//   descr: "Spacious apartment in the city center",
+//   rating: 4,
+//   price: 2153,
+// };
+
+// const keys = [];
+// const values = [];
+
+// for (const key of Object.keys(apartment)) {
+//   keys.push(key);
+//   values.push(apartment[key]);
+// }
+</script>
+
+<p id="5 - Object.keys">
+    const book = {
+        author: "Bernard Cornwell",
+        genres: ["proza historyczna", "przygoda"],
+        rating: 8.38,
+      };
+      const keys = Object.keys(book);
+      
+      for (const key of keys) {
+        console.log(key); // Klucz
+        console.log(book[key]); // Wartość właściwości
+      }
+
+Przejdź przez obiekt apartment używając metody Object.keys() i pętli for...of. Zapisz do zmiennej keys tablicę kluczy właściwości obiektu apartment i dodaj do tablicy values wszystkie wartości jego właściwości.
+
+Zadeklarowano zmienną apartment.
+Wartością zmiennej apartment jest obiekt.
+Zadeklarowano zmienną keys.
+Wartością zmiennej keys jest tablica ["descr", "rating", "price"].
+Wartość zmiennej keys uzyskano przy użyciu metody Object.keys().
+Zadeklarowano zmienną values.
+Wartością zmiennej values jest tablica ["Spacious apartment in the city center", 4, 2153].
+Wartość zmiennej values jest uzyskana za pomocą pętli for...of.
+</p>
+
+<script id="5 - Object.keys">
+//     const apartment = {
+//   descr: "Spacious apartment in the city center",
+//   rating: 4,
+//   price: 2153,
+// };
+// const values = [];
+// const keys = Object.keys(apartment);
+
+// for (const key of keys) {
+//   values.push(apartment[key])
+// }
+</script>
+
+<p id="6 - object.keys refactorization">
+    Przeprowadź refaktoryzację funkcji countProps(object), zastępując przeszukiwanie kluczy za pomocą pętli for...in metodą Object.keys(), aby uzyskać tablicę właściwości. Funkcja powinna zwrócić liczbę właściwości w obiekcie object.
+
+Zadeklarowano funkcję countProps(object)
+Wywołanie countProps({}) zwraca 0
+Wywołanie countProps({ name: "Mango", age: 2 }) zwraca 2
+Wywołanie countProps({ mail: "poly@mail.com", isOnline: true, score: 500 }) zwraca 3
+Funkcja używa metody Object.keys()
+
+function countProps(object) {
+    let propCount = 0;
+  
+    for (const key in object) {
+      if (object.hasOwnProperty(key)) {
+        propCount += 1;
+      }
+    }
+  
+    return propCount;
+  }
+</p>
+
+<script id="6 - object.keys refactorization">
+
+    // in these exercie all this code is not nessesery all we need to do is 
+    // by using object.keys to get array of oobject keys and then using length got get array length
+
+//     function countProps(object) {
+//   return Object.keys(object).length
+// }
+</script>
+
+<p id="Addition values and object.values()">
+    Funkcja countTotalSalary(salaries) przyjmuje obiekt wynagrodzenia (salaries) jako parametr. Każda właściwość obiektu salaries jest kluczem zawierającym nazwisko pracownika, a wartością jest odpowiadające mu wynagrodzenie.
+
+Uzupełnij kod funkcji countTotalSalary(salaries) tak, aby zwracała ona całkowitą kwotę wynagrodzeń wszystkich pracowników.
+
+Wskazówki:
+
+Zainicjuj zmienną totalSalary z wartością 0, która będzie odpowiedzialna za całkowitą kwotę wynagrodzeń wszystkich pracowników
+Użyj metody Object.values(), aby pobrać wartości (wynagrodzenia) z obiektu salaries
+Przejdź przez wartości za pomocą pętli i dodaj każdą wartość do zmiennej totalSalary.
+Zwróć totalSalary jako wynik
+Zadeklarowano funkcję countTotalSalary(salaries)
+Wywołanie countTotalSalary({}) zwraca 0
+Wywołanie countTotalSalary({ mango: 100, poly: 150, alfred: 80 }) zwraca 330
+Wywołanie countTotalSalary({ kiwi: 200, poly: 50, ajax: 150 }) zwraca 400
+</p>
+
+<script id="Addition values and object.values()">
+
+// function countTotalSalary(salaries) {
+//   let totalSalary = 0;
+//   for (const values of Object.values(salaries)) {
+//     totalSalary += values;
+//   }
+//   return totalSalary
+// }
+// const salaries = {
+//     Adam: 5000,
+//     Cecil: 1000,
+// }
+// console.log
+// console.log(countTotalSalary(salaries))
+</script>
+
+<p id="Returning array of values with propName   !!!!!! dalej tego nie rozumiem   ">
+  Napisz funkcję getAllPropValues(propName), która przyjmuje jeden parametr propName - nazwę (klucz) właściwości. Funkcja powinna zwrócić tablicę wszystkich wartości właściwości o tej nazwie z każdego obiektu w tablicy products. Jeśli obiekty nie mają właściwości o tej nazwie, funkcja powinna zwrócić pustą tablicę.
+
+Zadeklarowano funkcję getAllPropValues(propName)
+Wywołanie getAllPropValues("name") zwraca ["Radar", "Scanner", "Droid", "Grip"]
+Wywołanie getAllPropValues("quantity") zwraca [4, 3, 7, 9]
+Wywołanie getAllPropValues("price") zwraca [1300, 2700, 400, 1200]
+Wywołanie getAllPropValues("category") zwraca []
+</p>
+<script id="Returning array of values with propName">
+
+// function getAllPropValues(propName) {
+//   const products = [
+//     { name: "Radar", price: 1300, quantity: 4 },
+//     { name: "Scanner", price: 2700, quantity: 3 },
+//     { name: "Droid", price: 400, quantity: 7 },
+//     { name: "Grip", price: 1200, quantity: 9 },
+//   ];
+//   let array = [];
+
+//   for (const product of products) {
+//     if ( product[propName] !== undefined) {
+//       array.push(product[propName])
+//     }
+//   }
+//   return array
+// }
+// console.log(getAllPropValues("name"))
+// console.log(getAllPropValues("price"))
+// console.log(getAllPropValues("quantity"))
+</script>
+
+<p id="Multiplaying propperty value with them self">
+  Funkcja calculateTotalPrice(productName) przyjmuje jeden parametr productName - nazwę produktu. Funkcja zawiera tablicę obiektów products z takimi właściwościami jak name - nazwa produktu, price - cena i quantity - ilość.
+
+Uzupełnij kod funkcji tak, aby zwracała ona całkowity koszt (cena * ilość) produktu o tej nazwie z tablicy products.
+
+Jeśli nie ma produktu o tej nazwie, funkcja powinna zwrócić ciąg "Product <productName> not found!", gdzie <productName> jest nazwą produktu.
+
+Zadeklarowano funkcję calculateTotalPrice(productName)
+Wywołanie calculateTotalPrice("Blaster") zwraca "Product Blaster not found!"
+Wywołanie calculateTotalPrice("Radar") zwraca 5200
+Wywołanie calculateTotalPrice("Droid") zwraca 2800
+Wywołanie calculateTotalPrice("Grip") zwraca 10800
+Wywołanie calculateTotalPrice("Scanner") zwraca 8100
+</p>
+
+<script id="Multiplaying propperty value with them self">
+
+// function calculateTotalPrice(productName) {
+//   const products = [
+//     { name: "Radar", price: 1300, quantity: 4 },
+//     { name: "Scanner", price: 2700, quantity: 3 },
+//     { name: "Droid", price: 400, quantity: 7 },
+//     { name: "Grip", price: 1200, quantity: 9 },
+//   ];
+//   for (const product of products) {
+//     if (product.name === productName) {
+//     return product.price * product.quantity
+//   } 
+//   }return `Product ${productName} not found!`;
+// }
+
+// console.log(calculateTotalPrice("Radar"))
+// console.log(calculateTotalPrice("Blaster"))
+// console.log(calculateTotalPrice("Droid"))
+</script>
+
+<p id="10 - declaration object with two methods">
+  Skontaktowała się z nami właścicielka sklepu z miksturami "U starej żaby" i zamówiła aplikację do zarządzania zapasami. Aplikacja musi dodawać, usuwać, wyszukiwać i aktualizować mikstury.
+
+Zadeklaruj obiekt atTheOldToad z następującymi właściwościami:
+
+potions — tablica, w której przechowywane będą mikstury. Niech na razie będzie pusta
+getPotions() — metoda zwracająca ciąg "List of all available potions"
+addPotion(potionName) — metoda zwracająca ciąg znaków "Adding <potionName>", gdzie potionName jest wartością parametru potionName
+Zadeklarowano zmienną atTheOldToad
+Wartością zmiennej atTheOldToad jest obiekt
+Wartością właściwości potions jest tablica []
+Wartością właściwości getPotions jest metoda obiektu
+Wywołanie metody atTheOldToad.getPotions() zwraca ciąg "List of all available potions"
+Wartością właściwości addPotion jest metoda obiektu
+Wywołanie metody atTheOldToad.addPotion("Invisibility") zwraca ciąg "Adding Invisibility"
+Wywołanie metody atTheOldToad.addPotion("Power potion") zwraca ciąg "Adding Power potion"
+</p>
+
+<script id="10 - declaration object with two methods">
+//   const atTheOldToad = {
+//   potions: [],
+//   getPotions() {
+//     return "List of all available potions"
+//   },
+//   addPotion(potionName){
+//     return `Adding ${potionName}`
+//   },
+// }
+// console.log(atTheOldToad.getPotions())
+// console.log(atTheOldToad.addPotion("Invisibility"))
+// console.log(atTheOldToad.addPotion("Power potion"))
+</script>
+
+<p id="11 - Adding this. to object method">
+  Obiekt atTheOldToad ma następujące właściwości:
+
+potions — tablica ciągów znaków z nazwami mikstur
+getPotions() — metoda zwracająca ciąg "List of all available potions"
+Zmień kod metody obiektu getPotions() tak, aby zwracała wartość właściwości potions
+
+Zadeklarowano zmienną atTheOldToad
+Wartością zmiennej atTheOldToad jest obiekt
+Wartością właściwości potions jest tablica ["Speed potion", "Stone skin"]
+Wartością właściwości getPotions jest metoda obiektu
+Wywołanie metody atTheOldToad.getPotions() zwraca aktualną wartość właściwości potions
+</p>
+
+<script id="11">
+//   const atTheOldToad = {
+//   potions: ["Speed potion", "Stone skin"],
+//   getPotions() {
+//     return this.potions;
+//   },
+// };
+// console.log(atTheOldToad.getPotions())
+</script>
+
+<p id="12 - Adding this. and push to object method">
+  Obiekt atTheOldToad ma następujące właściwości:
+
+potions — tablica ciągów znaków z nazwami mikstur
+getPotions() — metoda zwracająca wartość właściwości potions
+addPotion() — metoda, która przyjmuje jako parametr ciąg znaków z nazwą mikstury potionName
+Zmień kod metody addPotion(potionName) tak, aby dodawała miksturę potionName na koniec tablicy we właściwości potions.
+
+Zadeklarowano zmienną atTheOldToad
+Wartością zmiennej atTheOldToad jest obiekt
+Wartością właściwości potions jest tablica ["Speed potion", "Stone skin"]
+Wartością właściwości getPotions jest metoda obiektu
+Wartością właściwości addPotion jest metoda obiektu
+Wywołanie metody atTheOldToad.getPotions() zwraca aktualną wartość właściwości potions
+Po wywołaniu metody atTheOldToad.addPotion("Invisibility") właściwość potions będzie zawierać tablicę ["Speed potion", "Stone skin", "Invisibility"]
+Po wywołaniu metody atTheOldToad.addPotion("Power potion") właściwość potions będzie zawierać tablicę ["Speed potion", "Stone skin", "Invisibility", "Power potion"]
+</p>
+
+<script id="12 - Adding this. and push to object method">
+//   const atTheOldToad = {
+//   potions: ["Speed potion", "Stone skin"],
+//   getPotions() {
+//     return this.potions;
+//   },
+//   addPotion(potionName) {
+//     this.potions.push(potionName);
+//     return this.getPotions();
+//   },
+// };
+
+// console.log(atTheOldToad.getPotions());
+// console.log(atTheOldToad.addPotion("Invisibility"))
+// console.log(atTheOldToad.getPotions());
+// console.log(atTheOldToad.addPotion("Power potion"))
+// console.log(atTheOldToad.getPotions());
+// </script>
+
+<p id="13 Summing values of objects values in array">
+  Klientka chce, aby każda mikstura była reprezentowana nie tylko przez nazwę, ale także przez cenę. Dlatego teraz właściwość potions będzie przechowywać tablicę obiektów z właściwościami name i price.
+
+Obiekt atTheOldToad ma następujące właściwości:
+
+potions — tablica ciągów znaków z nazwami mikstur
+getPotions() — metoda zwracająca wartość właściwości potions
+addPotion() — metoda, która przyjmuje parametr obiektu nowej mikstury newPotion i dodaje go na koniec tablicy we właściwości potions.
+Dodaj metodę getTotalPrice(), która powinna zwracać całkowitą cenę wszystkich mikstur z właściwości potions.
+
+Zadeklarowano zmienną atTheOldToad
+Wartością zmiennej atTheOldToad jest obiekt
+Wartością właściwości atTheOldToad.getPotions jest metoda obiektu
+Wywołanie metody atTheOldToad.getPotions() zwraca aktualną wartość właściwości potions
+Wartością właściwości atTheOldToad.addPotion jest metoda obiektu.
+Po wywołaniu metody atTheOldToad.addPotion({ name: "Invisibility", price: 620 }) ostatnim elementem w tablicy potions będzie ten obiekt
+Po wywołaniu metody atTheOldToad.addPotion({ name: "Power potion", price: 270 }) ostatnim elementem w tablicy potions będzie ten obiekt
+Wartością właściwości atTheOldToad.getTotalPrice jest metoda obiektu
+Wywołanie metody atTheOldToad.getTotalPrice() zwraca całkowity koszt wszystkich mikstur z właściwości potions
+</p>
+
+<script id="13 -  Summing values of objects values in array">
+
+// const atTheOldToad = {
+//   potions: [
+//     { name: "Speed potion", price: 460 },
+//     { name: "Stone skin", price: 520 },
+//   ],
+//   getPotions() {
+//     return this.potions;
+//   },
+//   addPotion(newPotion) {
+//     this.potions.push(newPotion);
+//   },
+//   getTotalPrice() {
+//     let totalPrice = 0;
+//     for (const potion of this.potions) {
+//       totalPrice += potion.price;
+//     } return totalPrice
+//   },
+// };
+
+// console.log( atTheOldToad.addPotion({ name: "Invisibility", price: 620 }))
+// console.log(atTheOldToad.addPotion({ name: "Power potion", price: 270 }))
+// console.log(atTheOldToad.getTotalPrice())
+
+
+</script>
+
+<p id="14 - declare object method changing object property value">
+  Obiekt atTheOldToad ma następujące właściwości:
+
+potions — tablica obiektów mikstur
+getPotions() — metoda zwracająca wartość właściwości potions
+updatePotionName() — metoda, która przyjmuje dwa parametry ciągów oldName i newName
+Uzupełnij metodę updatePotionName(oldName, newName) tak, aby aktualizowała nazwę mikstury z oldName na newName w tablicy mikstur we właściwości potions.
+
+Zadeklarowano zmienną atTheOldToad
+Wartością zmiennej atTheOldToad jest obiekt
+Wartością właściwości atTheOldToad.potions jest tablica
+Wartością właściwości atTheOldToad.updatePotionName jest metoda obiektu
+Po pierwszym wywołaniu metody atTheOldToad.updatePotionName("Stone skin", "Invisibility") właściwość potions będzie zawierać tablicę [{ name: "Speed potion", price: 460 }, { name: "Invisibility", price: 520 } ]
+Po drugim wywołaniu metody atTheOldToad.updatePotionName("Speed potion", "Polymorth") właściwość potions będzie zawierać tablicę [{ name: "Polymorth", price: 460 }, { name: "Invisibility", price: 520 } ]
+</p>
+
+<script id="14">
+//   const atTheOldToad = {
+//   potions: [
+//     { name: "Speed potion", price: 460 },
+//     { name: "Stone skin", price: 520 },
+//   ],
+//   getPotions() {
+//     return this.potions;
+//   },
+//   updatePotionName(oldName, newName) {
+//     for (const potion of this.potions) {
+//       if (potion.name === oldName) {
+//         potion.name = newName;
+//         console.log(this.potions)
+//       }
+//     }
+//   },
+// };
+
+// console.log(atTheOldToad.updatePotionName("Stone skin", "Invisibility"))
+</script>
+
+<p id="15 Using arg">
+  Używając składni parametru resztkowego, uzupełnij kod funkcji add() tak, aby akceptowała dowolną liczbę argumentów do parametru args i zwracała ich sumę.
+
+Zadeklarowano funkcję add
+Funkcja add deklaruje parametr args
+Do zbierania argumentów do zmiennej args w sygnaturze funkcji używana jest następująca składnia parametrów resztkowych:
+Wywołanie add(15, 27) zwraca 42
+Wywołanie add(12, 4, 11, 48) zwraca 75
+Wywołanie add(32, 6, 13, 19, 8) zwraca 78
+</p>
+
+<script id="15">
+
+// function add(...args) {
+//   console.log(...args);
+//   let sum = 0
+//   console.log(args)
+//   for (let i=0; i < args.length; i++ ) {
+//     sum += args[i];
+//   }  return sum
+
+//  }
+// console.log(add(50, 60, 70, 5, 9, 10, 50))
+</script>
+

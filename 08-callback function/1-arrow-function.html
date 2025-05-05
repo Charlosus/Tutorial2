@@ -1,0 +1,191 @@
+<title>Arrow function</title>
+
+<script>
+
+    // // function sum(a, b) {
+    // //     return a + b;
+    // // }
+
+    // const sum = (a, b) => {
+    //     return a + b;
+    // }
+
+    // console.log( sum(2, 3))
+
+</script>
+
+<script id="Manny ways to write down function">
+
+    // function add(a, b) {
+    //     return a + b;
+    // }
+    // const add = (a, b) => {
+    //     return a + b;
+    // };
+    // const add = (a, b) => {
+    //     return a + b;
+    // };
+    // const add = (a, b) => a + b;    // arrow function do not need key word return thay return atomaticly // 
+    //                                 // its called implicit return
+    // console.log(add(2, 3));
+    
+    // const makeArray = (a, b) => [a, b];
+
+    // console.log( makeArray(2, 3));
+</script>
+
+<script id="Creating Object with arrow function">
+  
+
+
+    // const creatUser = (name, age) => {      // this will function normally with expliced return 
+    //     return { name, age };               // but what would happen if we would try to use impliced return
+    // }
+
+    // const user = creatUser("Adam", 42 )
+    // console.log(user);
+    
+    // const creatUserImpliced = (name, age) => {name, age} // Here our console will return undefined 
+    
+    //  const user1 = creatUserImpliced("Adam", 42 )  
+    //  console.log(user1)                                 // Its happening because {} is inpreted like 
+    //                                                     // a body of a function not an object we want to recive
+
+    // to receved Objcet with arrow function and impliced return all we had to do is to use ()
+
+    // const creatUserImplicedWorking = (name, age) => ({ name, age })
+
+    // const user2 = creatUserImplicedWorking("Adam", 42)
+    // console.log(user2)
+</script>
+
+<script id="Refactoring greet function with arrow function">
+
+    // function greet(name) {
+    //     console.log(`Hello ${name}`);
+    // }
+
+    // const greet1 = (name) => {
+    //     console.log(`Hello ${name}`);
+    // };
+
+    // const greet2 = (name) => console.log(`Hello ${name}`);
+
+    // const greet3 = name => console.log(`Hello ${name}`)      // if funtion has only one argument () in name can 
+    //                                                          // be omited
+    // greet("Bella");                                          // all this will work the same and return
+    // greet1("Bella");                                         // the same string "Hello Bella"
+    // greet2("Bella");
+    // greet3("Bella");
+</script>
+
+<script id="Arrow function /out any arguments">
+
+    // function log() {
+    //     console.log("Something");
+    // }
+
+    // const log1 = () => console.log("Something"); // no argument function need to have () after declaration
+
+    // log();          // output of those two logs will be identical
+    // log1();
+</script>
+
+<script id="rest operator & arrow function">
+
+    // function getArgs() {            // here desired result with array
+    //     console.log(arguments);
+    // }
+
+    // // const getArgsArrow = () => console.log(arguments);      // Here we will have a problem 
+    // //                                                         // arguments do not exist inside arrow function
+
+    // const getArgsRest = (...args) => console.log(args);        // to recive arguments we need to use rest operator
+
+    // getArgs(1, 2, 3,56,10)      // here desired result with array
+    // // getArgsArrow(1, 2, 3,56,10) // this will cause an error // arguments is not defined 
+    // getArgsRest(1, 2, 3,56,10)
+</script>
+
+<script id=".forEach method / arrow function">
+
+    // const numbers = [3, 2, 1];
+
+    // // here we want only argument from .forEach
+
+    // numbers.forEach(function(num) {console.log(num);});     // this line and one belowe will return same results
+    // numbers.forEach((num) => console.log(num));
+
+    // //desired resault can be also obtain by declaring const with body of arrow function 
+    
+    // const logNum = (num) => console.log(num);   // now we can pass our variable to the .forEach method
+
+    // numbers.forEach(logNNum);                   // and recive the same reauslt like in lines 116 and 117
+
+
+    // numbers.forEach(console.log)                // returns argument, index and whole array
+</script>
+
+<script id="Object / arrow function and key word this">
+
+    const obj = {
+        funcA: function() {         // we will recive console log of obj
+            console.log(this);      
+        },
+        funcB: () => {
+            console.log(this);      // but here this will refer to WINDOW global not to wanted object
+        }
+    };
+
+    const obj2 = {
+        name: "Obj_name",
+        funcA: function() {         // "Obj_name"
+            console.log(this.name);      
+        },
+        funcB: () => {
+            console.log(this.name);      // Empty string because window dont have name 
+        }
+    };
+
+    // obj.funcA();
+    // obj.funcB();    
+
+    // .bind we can connect function with object so this will affect refer to object not to global scope window
+
+    function logName() {
+        console.log(this.name);     // at the moment this function was declare in whindow so
+    }                                //  this refers to window
+    
+    
+    // logName(); // window
+    const logObjName = logName.bind(obj2);
+    logObjName();
+   
+</script>
+
+<script id="IIFE - immediately invoke function expression">
+
+    // function doSomething() {                    // Here our function will only process after we sue it 
+    //     console.log("Procesing some jobs.");
+    //     console.log("Procesing some jobs..");
+    //     console.log("Procesing some jobs...");
+    //     console.log("Jobs done");
+    // }
+
+    // doSomething()                              // after this expresieon 
+
+    // if we want our function to process immidietly we need to ad ()
+
+    (function something() {                    // Now funtion will proceed as soon as we open page   
+        console.log("Procesing some jobs.");
+        console.log("Procesing some jobs..");
+        console.log("Procesing some jobs...");
+        console.log("Jobs done");
+    })();
+
+    // immediet invoke can also be as an arrow function 
+
+    (() => {
+        console.log("Immediet arrow function" )
+    })();
+</script>

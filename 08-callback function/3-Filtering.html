@@ -1,0 +1,144 @@
+<title>Filter - array</title>
+
+<script id="What we was doing to this point to get certain values">
+
+    // const numbers =[51, -3, 27, 21, -68, 42, -37];
+
+    // const getEven = (arr) => {
+    //     const evens =[];
+
+    //     numbers.forEach(number => {
+    //         if (number % 2 === 0) {
+    //             evens.push(number);
+    //         }
+    //     });
+    //     return evens
+    // };
+
+    // const evens = getEven(numbers);
+    // console.log(evens)
+
+</script>
+
+<script id="Example from previus in one line">
+
+    // const numbers = [51, -3, 27, 21, -68, 42, -37];
+
+    // const evens = numbers.filter(number => number % 2 === 0);
+
+    // console.log(evens);
+    // console.log(numbers);
+
+    // // // it dont have to be in one line we can define our condition when numbers are even as an arrow function
+
+    // // const isEven = (number) => number % 2 === 0; 
+
+    // // // then we can use it / filter in two wayes also with arrow function 
+
+    // // const isEven = numbers.filter(num => isEven(num))
+
+    // // // or directly in filter condition 
+
+    // // const isEven = numbers.filter(isEven);
+
+</script>
+
+<script id="More examples for filter">
+
+const numbers = [51, -3, 27, 21, -68, 42, -37];
+
+const isEven = (number) => number%2 === 0;
+const isOdd = (number) => number%2 !== 0;
+const isPositive = (number) => number >= 0;
+const isNegative = (number) => number < 0;
+
+const evens = numbers.filter(isEven)
+const odds = numbers.filter(isOdd)              // this dont even have to be declared what we need to do 
+// const odds = number.filter(x => !isEven(x))  // if we get numbers that are not even we will get odds
+const positives = numbers.filter(isPositive)
+const negatives = numbers.filter(isNegative)
+
+// console.log(evens)
+// console.log(odds)
+// console.log(positives)
+// console.log(negatives)
+
+// heres where its get crazy we can put our functions in array []
+
+const conditions = [isEven, isOdd, isPositive, isNegative];
+
+// then add to this array numbers and function will automaticly sort numbers what will ocure, 
+
+conditions.forEach(conditions => console.log(numbers.filter(conditions))) // console log will return sorted
+ ;                                                                        // numbers
+
+// here we can sort numbers and creat an array for them with using map method 
+const filtered = conditions.map(c => numbers.filter(c));
+console.log(filtered)
+
+// but output will be array of arryas to receved just for arrays we can use spread operator 
+
+console.log(...filtered)
+
+
+
+</script>
+
+<script id="Filter on strings">
+
+    // const names = ["Adam", 'Beth', "Cecil", 'Dorothy', 'Edmund'];
+
+    // const namesWithE = names.filter(name => name.toLowerCase().includes("e"));
+    // console.log(namesWithE);
+</script>
+
+<script id=".filter & .map on object">
+
+    const players = [
+        { name: "Adam",         level:42,      role: "Warrior" },
+        { name: "Beth",         level:1,       role: "Warrior" },
+        { name: "Cecil",        level:7,       role: "Mage" },
+        { name: "Dorothy",      level:74,      role: "Tank" },
+        { name: "Faith",        level:69,      role: "Paladin" },
+        { name: "Greg",         level:21,      role: "Archer" },
+        { name: "Henry",        level:56,      role: "Mage" },
+        { name: "Edmund",       level:99,      role: "Paladin" },
+    ];
+    // Lets filter players that are at least 50 lvl here we declare condition
+    const aboveLevel50 = players.filter(player => player.level >= 50);
+    console.log("Level 50+", aboveLevel50.map(p => p.name)) // we use map to creat array with only names by arrow function
+    console.log("Level 50+", aboveLevel50.map(dupa => dupa.name)) // p & dupa are just const names they can anything 
+
+    const onlyWarriors = players.filter(player => player.role === "Warrior");
+    console.log("Warriors as objects", onlyWarriors) // if we do something like this we will get whole objects 
+    console.log("Warriors names: ", onlyWarriors.map(p => p.name)); // now output will be only names 
+    
+    const onlyPaladins = players.filter(player => player.role === "Paladin");
+    console.log("Paladins objects ", onlyPaladins)
+    console.log("Paladins names: ", onlyPaladins.map(p => p.name));
+
+    // names are totaly up to you 
+
+    const xss = [3,2,1];
+    const yss = [1,2,3];
+
+    const xyy = xss.map(x => yss.map(y => x * y));
+    console.log(xyy) 
+
+    // for contrast we same can be done with for but is way longer
+
+    const xs = [3, 2, 1];
+    const ys = [1, 2, 3];
+
+    const xy = [];
+
+    for (let i = 0; i < xs.length; i++) {
+        const row = []; // jedna linia wynikowa
+        for (let j = 0; j < ys.length; j++) {
+        row.push(xs[i] * ys[j]);
+          }
+       xy.push(row);
+    }
+
+    console.log(xy);
+</script>

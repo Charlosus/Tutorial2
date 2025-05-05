@@ -1,0 +1,70 @@
+<title> Variables </title>
+
+<script> 
+
+    a = 1
+    var b = 2
+    //moder way
+    let c = 3
+    const d = 4
+
+    console.log(a, b, c, d);
+
+</script>
+
+<script>
+
+        let name = "Otis";
+
+        console.log("Hello " + name)
+
+        name = "Ruby"
+
+        console.log("Hello " + name)
+
+        name = 1337
+
+        console.log("Hello " + name)
+
+</script>
+
+<script class="Objects">
+    const student = {
+        name: "Adam",
+        age: 42 
+    };
+    console.log(student)
+
+    student.age = 21
+
+    console.log({student})
+</script>
+
+<script class="Calling-a-variable-befor-its-declaration">
+    //console.log(year); //calling a var or let before its declaration will cause error uncom this line to see it
+
+    let year = 2020;
+    console.log(year)
+    year = 2024
+    console.log(year)
+</script>
+
+<script class="Naming">
+    const studentName = "Camel"; // camelCase
+    console.log(studentName)
+
+    const StudentName = "Pascal"; // PascalCase
+    console.log(StudentName)
+
+    const student_name = "snake"; // I am snake_case
+    console.log(student_name)
+
+    const cssClass = "kebab-case"; // unofficial kebab-case 
+    console.log(cssClass)
+
+    const _some_coolVariable42$ = !true // U are free to name variables however you want but it need to be clear to understant for you and other fellow developers
+    console.log(_some_coolVariable42$)
+
+    const VERY_IMPORTANT_VAR = "I am so funking IMPORTANT" // Crucia variables are named in this way to underline important role
+    console.log(VERY_IMPORTANT_VAR)
+</script>

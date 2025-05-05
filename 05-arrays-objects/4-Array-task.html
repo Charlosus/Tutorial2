@@ -1,0 +1,107 @@
+<title> Array tasks</title>
+<body>
+<script class="Reverse string using array methodes and for loop with index">
+
+    // const text = "Welcome!"
+    // function reverseText(str) {
+    //     // const letters = str.split('');
+    //     // console.log(letters);
+
+    //     // const reversedArray = letters.toReversed();
+    //     // console.log(reversedArray);
+
+    //     // const reversedText = reversedArray.join("") 
+    //     // console.log(reversedText);
+    //     // return reversedText
+
+    //     return str.split("").toReversed().join("")
+    // }
+
+    // //Arrow function //
+
+    // const reverseString = (str) => str.split("").toReversed().join("")
+
+    // // For loop //
+
+    // function reverseTextWithLoop(str) {
+    //     let reversed = "";
+
+    //     //// for (let i=str.length-1; i >= 0; i--){
+    //     ////     const letter = str[i];
+
+    //     ////     reversed = reversed + letter;
+    //     //// }
+    //     for (const letter of str.split("").toReversed()){
+    //         reversed += letter;
+    //     }
+
+    //     return reversed;
+    // }
+    // // console.log("Is matching: ", reverseText(text) === "!emocleW");
+    // // console.log("Is matching: ", reverseText("abc") === "cba");
+    // // console.log("Is matching: ", reverseText("321127") === "721123");
+
+    // console.log("Is matching: ", reverseTextWithLoop(text) === "!emocleW");
+    // console.log("Is matching: ", reverseTextWithLoop("abc") === "cba");
+    // console.log("Is matching: ", reverseTextWithLoop("321127") === "721123");
+</script>
+
+<script class="Function - find min and max number in array of numbers">
+
+    const numbers = [2, 17, 94, 1, 23, 37];
+
+    function getMin(nums) {
+       
+        let min = nums[0]
+        // let min = Infinity;
+
+        for (const num of nums) {
+            if (num < min) {
+                min = num;
+            }
+        }
+        
+        return min;
+    }
+
+    function getMax(nums) {
+
+        let max = -Infinity;
+
+        for (const num of nums) {
+            if (num > max) {
+                max = num
+            }
+        } 
+        return max
+    }
+
+    // Unit test
+    console.log("Is matching; ", getMin(numbers) === 1);
+    console.log("Is matching; ", getMax(numbers) === 94)
+
+</script>
+<p class="1">
+    Funkcja getLastElementMeta(array) przyjmuje jeden parametr array
+     - tablicę dowolnych wartości. Uzupełnij kod funkcji tak, aby 
+     zwracała ona nową tablicę składającą się z dwóch elementów:
+
+     pierwszy element - to indeks ostatniego elementu w tablicy array
+
+     drugi element to wartość ostatniego elementu w tablicy array
+</p>
+<script class="1">
+
+// function getLastElementMeta(array) {
+//   return [array.length - 1, array[array.length - 1]]
+// }
+
+function getLastElementMeta(array) {
+    return [array.length - 1, array.at(-1)];
+}
+
+console.log(getLastElementMeta(["Apple", "Pear", "Lemon"]))
+console.log(getLastElementMeta(["Apple", "Lemon", "Pear"]))
+console.log(getLastElementMeta(["Pear", "Lemon", "Apple"]))
+</script>
+</body>

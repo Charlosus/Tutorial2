@@ -1,0 +1,156 @@
+<title>Object iteration</title>
+
+<script>
+
+    // const book = {
+    //     title: "Dune",
+    //     author: "Frank Herbert",
+    //     descr: "I like sand",
+    //     releaseDate: new Date(1965),
+    //     rating: 4,
+    //     numberOfPages: 1337,
+    //     category: "SciFi",
+    //     comments: [
+    //         {username: "Adam", comment: "Cool story bro", commentedAt: new Date(2000)},
+    //         {username: "Beth", comment: "I dod not like it", commentedAt: new Date(2000)},
+    //         {username: "Cecil", comment: "Much sand", commentedAt: new Date(2000)},
+    //     ] 
+    // };
+
+    // for (const key in book) {
+    //     console.log( key );
+    // }
+</script>
+
+<script>
+
+    // const book = {
+    //     title: "Dune",
+    //     author: "Frank Herbert",
+    //     descr: "I like sand",
+    //     releaseDate: new Date(1965),
+    //     rating: 4,
+    //     numberOfPages: 1337,
+    //     category: "SciFi",
+    //     comments: [
+    //         {username: "Adam", comment: "Cool story bro", commentedAt: new Date(2000)},
+    //         {username: "Beth", comment: "I dod not like it", commentedAt: new Date(2000)},
+    //         {username: "Cecil", comment: "Much sand", commentedAt: new Date(2000)},
+    //     ] 
+    // };
+
+    // // for (x of book) {    // this will cause an error 
+    // //     console.log(x)   // x is not an object properti so its not iterable                     //
+    // // }
+
+    // // to do something like tis we need to use Object.keys() on our book
+
+    // for (const x of Object.keys(book)) {        // This will iterate objects keys
+    //     console.log(x);                         // Thanks to object.keys
+    // }
+</script>
+
+<script>
+
+// const library = [
+//         {
+//         title: "Dune",
+//         author: "Frank Herbert",
+//         descr: "I like sand",
+//         releaseDate: new Date(1965),
+//         rating: 4,
+//         numberOfPages: 1337,
+//         category: "SciFi",
+//         comments: [
+//             {username: "Adam", comment: "Cool story bro", commentedAt: new Date(2019, 0)},
+//             {username: "Beth", comment: "I dod not like it", commentedAt: new Date(2005, 0)},
+//             {username: "Cecil", comment: "Much sand", commentedAt: new Date(2011, 0)},
+//         ] 
+//           },
+//         {
+//         title: "Lord of the rings",
+//         author: "Tolkien",
+//         descr: "Isengard",
+//         releaseDate: new Date(1970),
+//         rating: 10,
+//         numberOfPages: 2356,
+//         category: "Fantazy",
+//         comments: [
+//             {username: "Adam", comment: "Cool story bro", commentedAt: new Date(2024, 0)},
+//             {username: "Beth", comment: "I dod not like it", commentedAt: new Date(1996, 0)},
+//             {username: "Cecil", comment: "Much sand", commentedAt: new Date(2015, 0)},
+//         ] 
+//          },
+//         {
+//         title: "Harry Potter",
+//         author: "Rowling",
+//         descr: "Yer awizard harry",
+//         releaseDate: new Date(1995),
+//         rating: 5,
+//         numberOfPages: 1337,
+//         category: "Wizardry",
+//         comments: [
+//             {username: "Adam", comment: "Cool story bro", commentedAt: new Date(2020, )},
+//             {username: "Beth", comment: "I dod not like it", commentedAt: new Date(2010, )},
+//             {username: "Cecil", comment: "Much sand", commentedAt: new Date(2001, 0)},
+//         ] 
+//          },
+// ];
+//  const commantsDate = [];
+// for (const book of library) {
+//    console.log({ book });
+
+//     for (const comment of book.comments) {
+//         commantsDate.push(comment.commentedAt);
+//     }
+// }
+
+// console.log(commantsDate.toSorted(function (a, b){
+//     return a.getFullYear() - b.getFullYear();
+// }))
+</script>
+
+<script> 
+
+    // const playerOne = {
+    //     username: 'One',
+    //     level: 12,
+    // };
+
+    // function levelUp(player) {          // This function MUTATED our object
+    //     player.level++;                 //which is antipatern this it is non 
+    // };                                  //no advised to change object with function
+    //                                     //this may lead to unexpeted changes in code
+
+    // console.log(playerOne);
+
+    // levelUp(playerOne);
+
+    // console.log(playerOne);
+
+</script>
+
+<script>
+
+    // function greetPlayer(player) {
+    // //     console.log(`Siema ${playerOne.username}`)
+    // // }
+
+    // function greetPlayer({ username }) {         // This practice is called
+    //     console.log(`Siema ${username}`)         // oject destructurization
+    // }                                            // by adding {} in function 
+                                                    // will seak property username
+    // playerOne = {                                // in any object that maybe 
+    //     username: 'Eniu',                        // passed to function 
+    //     level: 12,
+    // };
+
+    // playerTwo = {
+    //     username: 'Stefan',
+    //     level: 12,
+    // };
+
+    // greetPlayer(playerOne)
+
+    // greetPlayer(playerTwo)
+</script>

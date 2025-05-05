@@ -1,0 +1,139 @@
+<title>Callbacks</title>
+
+<script id="Funkcje wywołania zwrotnego "> 
+
+
+    // function prepareMessage(name) {
+    //         return `Hello there ${name}`;
+    // }
+
+    // // console.log(prepareMessage("General Kenobi"))  // Hello there General Kenobi
+    // // console.log("Hello there General Kenobi")      // Hello there General Kenobi thay are lie the same 
+
+    // console.log(prepareMessage)                       // ƒ prepareMessage(name) {
+    //                                                     //     return `Hello there ${name}`;
+    //                                                     //  }
+
+</script>
+
+<script id="composition of functions">
+
+    // function smsSender(message) {
+    //     console.log(`Sending SMS: "${message}"`);
+    // }
+    // function emailSender(message) {
+    //     console.log(`Sending Email: "${message}"`);
+    // }
+
+    // function sendMessage(name, sender) {
+    //     const msg = `Welcome ${name}`;
+    //     sender(msg);
+    // }
+
+    // here we created function that delegate sending some massagem, how is not important we just need massage
+    // and we daclare way of sending with out knowing the message, this is very elastic way to determen functions 
+
+    // if we wanted to decler the same easier with out callback 
+
+    // function sendEmail(name) {
+    //     const msg = `Welcome ${name}`;
+
+    //     console.log(`Sending Email: "${msg}"`);
+
+    // };
+
+    // function sendSms(name) {
+    //     const msg = `Welcome ${name}`;
+
+    //     console.log(`Sending SMS: "${msg}"`)
+    // }
+
+    // ^ ^ as you can see we needlessly had to declare message 
+
+    // function sendMessage(name, sender = emailSender) {    // if function would we declered with out using sender
+    // const msg = `Welcom ${name}`;                         // console will display an error to avoid that 
+    // sender(msg);                                          //good practice would be declaring default seting for function
+    // }
+
+    // sendMessage("Kuba", smsSender);
+    // sendMessage("Kuba", emailSender);
+    // sendMessage("Kuba")
+</script>
+
+<script id="Custom in line function ">
+
+    // function sendMessage(name, sender) {
+    //     const msg = `Welcome ${name}`;
+    //     sender(msg);
+    // }
+
+    // sendMessage(
+    //     // name
+    //     "Kuba", 
+    //     // sender
+    //     function customInLineSender(msg) {
+    //     console.log(`Faxing da msg: ${msg}`);
+    // });
+
+    // sendMessage("Kuba", function customInLineSender(msg) {
+    //     console.log(`Faxing da msg: ${msg}`);
+    // });
+
+    // sendMessage("Kuba", function(message) {     // Naming courier/sender is non requierd we can decleard 
+    //     console.log(message);                   // our function namelessly
+    // }) 
+</script>
+
+<script id="Iteration">
+    // const users = ["Adam", "Beth", "Cecil" ];
+
+    // for (let i=0; i<users.length; i++) {
+    //     console.log(`[${i}] Hi ${users[i]}`);
+    // }
+
+    // // users.forEach(function callback(user, i, array) {
+    // //     console.log(`[${i}] Hi ${users[i]}`);
+    // // });
+
+    // // users.forEach(function(user, i){
+    // //     console.log(`[${i}] Hi ${users[i]}`);
+    // // });
+
+    // function greetUser(name){
+    //     console.log("Hello " + name);
+    // }
+    // users.forEach(greetUser);
+
+    // users.forEach(console.log)      // name, index, whole array
+
+    // users.forEach(function(a, b){ console.log(b) })     // 0 1 2 //this will display only index
+</script>
+
+<script id="Breaking or stoping function for each">
+
+    const numbers = [5, 4, 3, 2, 1];
+
+    // numbers.forEach(function(num) {
+    //     if (num === 3 ) {
+    //         // continue;           // x wont work illigal statemant
+    //         // break;              // X also would not work, illigal statemant
+
+    //         return num;            // X this would give back: 5 4 2 1 // return stop function only for iteration 
+    //     }                          // where num = 3 and wont display 3 but iteration would continue 
+    //     console.log(num)
+    // })
+
+    let stop = false;
+    numbers.forEach(function(num) {
+        if (num === 3) {
+            stop = true;
+        }
+        if (num === 1) {
+            stop = false
+        }
+        if (stop) {
+            return
+        }
+        console.log(num)
+    })
+</script>

@@ -1,0 +1,180 @@
+<title> Functions</title>
+
+<script class="Basics of Functions">
+
+    // function declaration
+    function add(x, y) {
+        return x + y;
+    }
+
+    // function expression
+    const add2 = function (x, y) {
+        return x + y;
+    };
+
+    // arrow function
+    const add3 = (x, y) => x + y;
+
+    console.log(add(1, 2)); // 3
+    console.log(add2(1, 2)); // 3
+    console.log(add3(1, 2)); // 3
+
+    // args
+
+    function greetUser(user) {
+        console.log(`Hello ${user}!`);
+        // console.log("Hello " + user + "!"); // Hello Kuba! this same 
+       }
+
+    greetUser("Kuba"); // Hello Kuba!
+    greetUser("Ala"); // Hello Ala!
+    greetUser("Dorothy"); // Hello Dorothy!
+    greetUser("Thomas"); // Hello Thomas!
+
+    greetUser("Kuba", "Ala"); // Hello Kuba! Because the second argument is ignored
+    greetUser("Kuba", "Ala", "Dorothy"); // Hello Kuba! Because the second and third arguments are ignored
+
+    function greetUserWithMessege(user, message) {
+        console.log(`Hello ${user}! ${message}`);
+    }
+    greetUserWithMessege("Kuba", "Hello!"); // Hello Kuba! Hello!
+    greetUserWithMessege("Ala", "Have a nice day!"); // Hello Ala! Have a nice day!
+    greetUserWithMessege("Dorothy", "Have a nice day!"); // Hello Dorothy! Have a nice day!
+    greetUserWithMessege("Thomas", "Have a nice day!"); // Hello Thomas! Have a nice day!
+</script>
+
+<script class="return keyword">
+    function add(x, y) {
+        return x + y;
+    }
+
+    console.log(add(1, 2)); // 3
+    console.log(add(1, 2, 3)); // 3 because the third argument is ignored
+    console.log(add(1)); // NaN because the second argument is undefined
+    console.log(add()); // NaN because both arguments are undefined
+
+    function addWithDefault(x, y = 0) {
+        return x + y;
+    }
+
+    console.log(addWithDefault(1, 2)); // 3
+    console.log(addWithDefault(1)); // 1 because the second argument is 0
+    console.log(addWithDefault()); // NaN because both arguments are undefined
+
+</script>
+<script class="global scobe available in functions">
+    // global scope
+    let x = 10;
+    let y = 20;
+
+    function add(x, y) {
+        return x + y; // x and y are local variables
+    }
+
+    console.log(add(1, 2)); // 3
+    console.log(add(x, y)); // 30 because x and y are global variables
+    console.log(x); // 10 -->
+
+
+</script>
+
+<script class="Exrcises">
+    // We have given values of width, padding and border with px in strings.
+    // What we want to do is write a function that will cut "px" from the string and return the number. 
+    // and then calculate result multiplying padding and border by 2 and adding it to the width.
+    // The function should look like this:
+//     function getElementWidth(width, padding, border) {
+//         // cut "px" from the string and return the number
+//         // calculate result multiplying padding and border by 2 and adding it to the width.
+//         // return the result
+//         // example: getElementWidth("50px", "10px", "5px") should return 80
+//         //lets start with cuting px from the string
+// //              const w = width.replace("px", ""), // 50
+// //                      p = padding.replace("px", ""), // 10   
+// //                 b = border.replace("px", ""); // 5
+// //              // now we can calculate the result
+// //              let result = parseInt(w) + parseInt(p) * 2 + parseInt(b) * 2; // 80
+// //              return result; // 80
+// // }
+// //     console.log(getElementWidth("50px", "10px", "5px")); // 80
+// //     console.log(getElementWidth("100px", "20px", "10px")); // 160
+
+// // //     // Seconst variant
+
+//     function getElementWidth1(width, padding, border) {
+//         const a = width.replace("px", ""),
+//             b = padding.split("px") [0],
+//             c = border.slice(0, border.length -2); // This would cut last two characters from string 
+        
+//         console.log(a, b, c);
+
+//         return Number(a) + (Number(b) * 2) + (Number(c) * 2)    
+//     }
+//     console.log(getElementWidth1("50px", "60px", "10px"))
+
+//     function getElementWidthValidation(width, padding, border) {
+//     // Helper function to parse a value (can be number or string with/without "px")
+//     function parseValue(value) {
+//         if (typeof value === "number") return value; // If it's a number, return as is
+//         if (typeof value === "string") {
+//             return parseFloat(value.replace("px", "")); // Remove "px" and convert to number
+//         }
+//         return 0; // Default to 0 if value is invalid
+//     }
+
+//     const w = parseValue(width);    // Parse width value
+//     const p = parseValue(padding);  // Parse padding value
+//     const b = parseValue(border);   // Parse border value
+
+//     // Total width = width + 2 * padding + 2 * border
+//     return w + (p * 2) + (b * 2);
+// }
+
+// console.log(getElementWidthValidation("50px", "60px", "10px")); // 190
+// console.log(getElementWidthValidation(50, 60, 10));             // 190
+// console.log(getElementWidthValidation("50", "60", "10"));       // 190
+
+// // You can also use low complex function and use it as 3 funtion 
+
+// function removePx(str) {
+//     return str.replace("px", "")
+// }
+
+// function getPixelValue(pixels) {
+//     return Number(removePx(pixels))
+// }
+// function getElementWidthAlt(width, padding, border) {
+//     const a1 = getPixelValue(width)
+//     const b1 = getPixelValue(padding)
+//     const c1 = getPixelValue(border)
+
+//     return a1 + (b1 * 2) + (c1 * 2)
+// }
+// console.log(getElementWidthAlt("50px", "60px", "10px")); // 190
+// // console.log(getElementWidthAlt(50, 60, 10));             // 190
+// console.log(getElementWidthAlt("50", "60", "10"));       // 190
+
+</script>
+ <script class="Easiest solution is THE BEST"> 
+
+ function getElementWidth(width, padding, border) {
+        return (parseInt(width) + (parseInt(padding) * 2) + (parseInt(padding) * 2) + "px")
+
+ }
+
+ console.log(getElementWidth("50px", "20px", "10px"))
+ console.log(getElementWidth("50", "20px", "10px"))
+ console.log(getElementWidth("50px", "20", "10"))
+
+ //with parseInt you dont need any validator or turning string to number it does it in one step OMG amazing
+</script>
+
+<script class="Task to do later ">
+
+//modulo, template literal `${}`, pad 
+    function formatTime(miliseconds) {
+
+    }
+
+console.log(formatTime(121000)); //02:01 (mm:ss)
+</script>
