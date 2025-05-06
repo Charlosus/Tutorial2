@@ -1,0 +1,124 @@
+<title>This context</title>
+<script id="This context">
+
+    // console.log("\nWithout context...");
+
+    // const user = {
+    //     fullname: "Benedict Cucumber",
+    //     logName() {
+    //         console.log(user.fullname);
+    //     }
+    // }
+
+    // user.logName();
+
+    // // Copy
+    // const anotherUser = {
+    //     ...user,
+    //     fullName: "Benedict Cumberbah",
+    // };
+
+    // anotherUser.logName();
+
+    // console.log("\nWith context")
+
+    // const contextualUser = {
+    //     fullName: "Benedict Cucuber",
+    //     logName() {
+    //         console.log((this.fullName));
+    //     }
+    // };
+
+    // contextualUser.logName()
+
+    // // Copy 
+    // const anotherContextualUser = {
+    //     ...contextualUser,
+    //     fullName: "Benedict Cumberbah"
+    // }
+
+    // anotherContextualUser.logName()
+</script>
+
+<script id="use strict">
+    // // 'use strict';
+
+    // function logAge() {
+    //     console.log(this.age)
+    // }
+    
+    // const student = { name: "Matt", age: 42 };
+    // logAge(student);    
+    // // logAge(); // undefined 
+    // //we can add context thanks to .call method 
+    // logAge.call(student) // here we assigne student to function logAge so this will refer to stodent 
+    // //we can also pass just an object with wanted value 
+    // logAge.call({ age: 21 });
+    // //Whai if we left that empty 
+    // logAge.call({}) // method returns undefined because its refers to object with out wanted value 
+
+    
+
+    // function printMessage(msg, messageCost = 1337) {
+    //     console.log(`Message to ${this.name}: ${msg} (Cost: ${messageCost} $)`);
+    // }
+
+    // printMessage("Hello there");
+    // printMessage.call(student, "Hello there");
+    // printMessage.call(student, "Hello There", 123);
+
+    // const args = ["Hello there", 123];
+    // printMessage.call(student, ...args)
+</script>
+
+<script id=".apply method">
+
+    function logAge() {
+        console.log(this.age)
+    };
+
+    logAge();
+
+    const student = {name: "Matt", age: 42}
+    logAge.apply(student);
+
+    function printMessage(msg, messageCost = 1337) {
+        console.log(`Message to ${this.name}: ${msg} (Cost: ${messageCost} $)`);
+    }
+
+    // Apply will need array of arguments after declaring context 
+    printMessage("Hello there");
+    printMessage.apply(student, ["Hello there"]);
+    printMessage.apply(student, ["Hello There", 123]);
+
+    const args = ["Hello there", 123];
+    printMessage.apply(student, args)    
+</script>
+
+<script>
+
+    const player = {
+        username: "Pedro",
+        logUserName() {
+            console.log(this.username);
+        }
+    }
+
+    player.logUserName();
+
+    const player2 = {
+        username: "Not Pedro",
+        logUserName: player.logUserName
+    }
+    player2.logUserName();
+
+    //if we would try to take out logUserName function from object player
+    const logPedro = player.logUserName; 
+    //and try to use it
+    logPedro()  // undefined 
+    // function has lost its context and this refers to global window not to player
+
+    //what we can do to avoid that is to use .bind which will connect function permanetly
+    const logNotPedro = player.logUserName.bind(player2);
+    logNotPedro();
+</script>

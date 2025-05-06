@@ -1,0 +1,103 @@
+<title>Prototypes & Prototypal Inheritance</title>
+
+<!--
+ // proto prototype, hasOwnProperty
+ //Object.creat
+ //new method to prototype
+ //function constructor
+  -->
+
+  <script>
+
+    // const obj = { age: 42 };
+
+    // console.log( obj ); 
+    // console.log( obj.__proto__ ) // object has own prototype that was designe and build in js 
+
+    // const logOwnProperties = (label, someObject) => {       // here we created function that 
+    //     for (const propertyName in someObject) {            // iteratets all property names in object
+    //         if(someObject.hasOwnProperty(propertyName)) {   // and if object have own property 
+    //             console.log(label, propertyName)            // (not inhertet form its prototype)
+    //         }                                               // function will return log with label and its property
+    //     }
+    // }
+
+    // logOwnProperties('obj', obj)
+
+    // const obj2= Object.create(obj);       // method Object creat let us produce new object based on other 
+    // console.log('Obj2: ', obj2);          // and new object obj2 will inherit first object as its prototype 
+    // console.log(obj2.__proto__);          // if we use comand proto to see object prototype 
+    // ;                                     // we will see the first object { age: 42 }
+    // console.log(obj2.__proto__.__proto__) // to see the primal object prototype we need to use proto x2
+
+    // console.log(obj2.age)                 // if we would log age console will give back 42 as in obj
+
+    // logOwnProperties("obj2", obj2)        // however if would use check own property we will get empty console
+    // ;                                     // because age was inherited from obj and is not own propety of obj2
+
+  </script>
+
+  <script id="function with object CONSTRUCTOR">
+
+
+    // function Player(username, level) {
+    //     this.username = username;
+    //     this.level = level;
+        
+    //     this.fight = function(oponent) {
+    //         if(oponent.level > this.level) console.log("Lost");
+    //         else console.log('Won');
+    //     }
+    // } 
+
+    // // /\ /\ /\ this is the same like this \/ \/ \/
+
+    // // function creatPlayer() {
+    // //     return {};
+    // // }
+
+    // const p1 = new Player("Maciek", 42);
+    // const p2 = new Player("Artur", 100);
+    // const p3 = new Player("Sławomir", 10);
+
+    // p1.fight(p2);
+    // p1.fight(p3)
+
+    // in later we will learn how to use class here is just befor taste
+
+    // class Player {
+    //     constructor(username, level) {
+    //         this.username = username;
+    //         this.level = level;
+    //     }
+    //     // if we would like we could add that oponent should be of type Player (has own property of"level")
+    //     fight(oponent) {
+    //         if (oponent.level === undefined) throw new Error ("Oponent is not of type Player")
+
+    //         if(oponent.level > this.level) console.log("Lost");
+    //         else console.log('Won');
+    //     }
+    //     }
+    // const p1 = new Player("Maciek", 42);
+    // const p2 = new Player("Artur", 100);
+    // const p3 = new Player("Sławomir", 10);
+
+    // p1.fight(p2);
+    // p1.fight(p3);
+
+    // const p4 = Object.assign(Player.prototype, {            // Other method to creat object its .assign
+    //     sayHi() {console.log(`Hi, I am ${this.username}`)}  // we can also ad function to it 
+    // })
+
+    // console.log(p4);    // p4 will have its onw sayHi and fight from Player class
+    // p4.sayHi();         // but if we would try to call function console log will return 'Hi, I am undefined'
+
+    // p4.username = "Adam"// we can also se that changing name will ocure after lane that it was declared
+    // console.log(p4);    // only here changes will ocure 
+    // p4.sayHi()          // not in previous calls
+
+    // // ok but what if would try to pass not adequate objcet to function fight
+
+    // p2.fight({ noLevel: 1}) // player have won but we dont want something like this we coud add an error
+    // ;                       // after adding change to fight function we will get Uncaught Error: Oponent is not of type Player
+  </script>
