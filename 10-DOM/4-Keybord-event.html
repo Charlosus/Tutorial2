@@ -1,0 +1,32 @@
+<title>Keybord Event</title>
+
+<script id="console.log whole event - lots of data 0_o">
+  
+//   document.addEventListener("keydown", (event) => {
+//         console.log("Key pressed", event);
+//     });
+
+//     document.addEventListener("keyup", (event) => {
+//         console.log("Key released", event)
+//     });
+
+</script>
+
+<script id="destruturizing key events">
+
+    document.addEventListener("keydown", ({ key, code}) => {
+        console.log({ key, code });
+    });
+
+    document.addEventListener("keydown", ({ ctrlKey, altKey, shiftKey, metaKey }) => {
+        console.log({ ctrlKey, altKey, shiftKey, metaKey });
+    });
+
+    document.addEventListener("keydown", ({ctrlKey, key}) => {
+        if (ctrlKey && key.toLowerCase() === "s") {
+            alert("Project Saved!");
+        }
+    });
+
+
+</script>

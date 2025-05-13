@@ -1,0 +1,1737 @@
+JavaScript w przeglądarce internetowej
+JavaScript w przeglądarce internetowej
+Gdy JavaScript jest wykonywany w przeglądarce, ma dodatkową funkcjonalność 
+do pracy z kartą. Funkcjonalność ta składa się z następujących modułów: 
+ECMAScript, DOM, BOM.ECMAScript (skrót ES) to standard opisujący język
+ programowania JavaScript. Ten standard definiuje składnię i semantykę
+  języka, a także zestaw wbudowanych obiektów i funkcji do pracy z danymi,
+   tekstem, datami i innymi aspektami programowania. ECMAScript dostarcza
+    podstawową strukturę języka, na której opiera się JavaScript. Różne 
+    wersje JavaScript są implementowane przez różne wersje standardu 
+    ECMAScript. Na przykład ES5, ES6 (lub ES2015), ES2016, ES2017 itd.
+     to różne wersje ECMAScript, wprowadzające nowe funkcje i ulepszenia do języka.
+
+Model Obiektowy Dokumentu (Document Object Model) - to niezależny interfejs 
+do pracy z dokumentem HTML. Ten model zawiera zestaw właściwości i metod
+ umożliwiających wyszukiwanie, tworzenie i usuwanie elementów, reagowanie
+  na działania użytkownika i wiele innych, czyli łączy stronę z językiem programowania.
+
+DOM to reprezentacja dokumentu HTML. Wygląda jak struktura drzewiasta, w 
+której każdy węzeł to obiekt JavaScript z własnościami i metodami, stanowiący 
+część dokumentu HTML. Każdy element w dokumencie, cały dokument jako całość, 
+nagłówek, linki, akapity - to wszystko są częścią DOM tego dokumentu, więc
+ wszystko to może być modyfikowane za pomocą kodu JavaScript.
+
+Model Obiektowy Przeglądarki (Browser Object Model) - to niezależny 
+od języka interfejs do pracy z przeglądarką. Zawiera zestaw właściwości
+ i metod umożliwiających dostęp do różnych funkcji przeglądarki. Dzięki
+  BOM można uzyskiwać dostęp do rozmiarów okna przeglądarki, przewijać 
+  stronę, czytać adres URL, pracować z historią nawigacji, miejscem lokalizacji itp.
+
+Dokument HTML i DOM
+
+Zgodnie z modelem DOM, każda znacznik tworzy oddzielny węzeł elementu
+ (element node), a każdy fragment tekstu wewnątrz elementu to węzeł tekstu (text node).
+
+Dokument HTML to hierarchiczne drzewo, w którym każdy element
+ (z wyjątkiem korzenia) jest zagnieżdżony w jednym elemencie nadrzędnym.
+  Na schemacie widzimy, że element html znajduje się wewnątrz document.
+   Zatem document jest rodzicem dla html. Podobnie html jest rodzicem dla 
+   [head](<http://head.nf>) i body. W przypadku document nie ma elementu nadrzędnego, 
+   ponieważ document to element korzenia. Poprzez zagnieżdżoną strukturę tagów 
+   i elementów tekstowych tworzone jest hierarchiczne drzewo.
+
+Jak składa się drzewo DOM?
+
+Aby wyświetlić dokument HTML, przeglądarka najpierw przekształca go na 
+format, który może zrozumieć - DOM. Interpreter przeglądarki posiada 
+specjalny fragment kodu - parser HTML, który jest używany do przekształcania HTML w DOM.
+
+W HTML zagnieżdżenie określa relacje rodzic-dziecko między elementami.
+ W DOM obiekty są powiązane w strukturze drzewa danych, rejestrując te relacje.
+
+Przeglądarka buduje DOM stopniowo, gdy tylko zaczynają napływać pierwsze 
+fragmenty kodu, zaczyna analizować HTML, dodając węzły do struktury drzewa.
+
+Po zbudowaniu drzewa DOM można znaleźć w nim element za pomocą JavaScript.
+ Ponieważ każdy element ma interfejs z wieloma właściwościami i metodami, 
+ można wykonać na nim niezbędne działania.
+
+Czym jest element główny w drzewie DOM?
+
+window
+document #
+html
+body
+Wynik
+
+Masz całkowitą rację!
+
+Struktura Drzewa DOM
+Do wizualizacji drzewa dokumentu HTML używany jest serwis generatora drzewa DOM:
+https://software.hixie.ch/utilities/js/live-dom-viewer/
+
+Kopiujemy kod HTML do okna z góry
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document title</title>
+  </head>
+  <body>
+    <h1>Page title</h1>
+    <ul>
+      <li><a href="#">Link 1</a></li>
+      <li><a href="#">Link 2</a></li>
+    </ul>
+  </body>
+</html>
+
+W oknie poniżej pojawi się hierarchiczna struktura
+W tym drzewie wyróżniamy dwa rodzaje węzłów.
+
+Węzły elementów (element node) tworzą się za pomocą tagów, zazwyczaj jeden 
+element jest zagnieżdżony w drugim. Struktura drzewa jest tworzona wyłącznie przez nie.
+Węzły tekstowe (text node) tworzą się poprzez tekst wewnątrz elementów. Węzeł
+ tekstowy zawiera tylko ciąg tekstowy i nie może mieć elementów potomnych,
+  zawsze jest na najniższym poziomie hierarchii. Spacje i znaki nowego wiersza
+   również są węzłami tekstowymi. Dlatego na schemacie węzłów tekstowych jest
+    więcej niż węzłów elementów. Jeśli usuniemy wszelkie odstępy i znaki nowego 
+    wiersza między węzłami elementów (tagami), to schemat będzie wyglądać bardziej
+     standardowo.
+
+Istnieją jednak wyjątki od tej reguły:
+
+Spacje przed sekcją head są ignorowane.
+Dowolna treść po body nie tworzy elementu, zamiast tego przeglądarka przenosi 
+go na koniec sekcji 'body'.
+
+Nawigacja w DOM
+
+
+
+DOM dostarcza szeroki zakres możliwości do pracy z elementem i jego zawartością. 
+Jednak aby skorzystać z tych możliwości, najpierw trzeba uzyskać odniesienie do 
+niego, na przykład za pomocą metody document.querySelector().
+
+
+
+Elementy w drzewie DOM mają hierarchiczne relacje między sobą. Do opisu tych relacji
+ używane są terminy: przodek (ancestor), potomek (descendant), rodzic (parent),
+  dziecko (child) i sąsiad (sibling).
+
+
+
+Najwyższy element nazywa się korzeniem (root node).
+Każdy element, z wyjątkiem korzenia, ma tylko jednego rodzica.
+Element może mieć dowolną liczbę dzieci.
+Sąsiadami są elementy mające wspólnego rodzica.
+Dzieci (potomki) to elementy bezpośrednio zawarte w bieżącym elemencie 
+(elementy pierwszego poziomu zagnieżdżenia).
+Potomkowie to wszystkie elementy znajdujące się w bieżącym elemencie, wraz
+ z ich dziećmi, dziećmi ich dzieci itd. Innymi słowy, to całe drzewo.
+
+
+Na poniższym schemacie <ul> to rodzic. Trzy elementy <li> to dzieci dla <ul> 
+i sąsiedzi między sobą. Podobnie elementy <span>, <a>, <p> sąsiedzą ze sobą.
+ Wszystkie one są dziećmi <li> i potomkami <ul>.
+
+
+
+
+
+
+Aby nawigować po tej hierarchii, elementy posiadają następujące właściwości:
+
+elem.parentNode — zawiera odnośnik do nadrzędnego węzła-elementu węzła elem
+
+elem.childNodes — zawiera pseudotablicę, w której zebrane są wszystkie dziecięce
+ węzły-elementy i węzły tekstowe węzła elem
+
+elem.children — zawiera pseudotablicę, w której zebrane są wszystkie dziecięce
+ węzły-elementy węzła elem, czyli te odpowiadające tagom
+
+elem.firstChild — zawiera odnośnik do pierwszego dziecięcego węzła 
+(węzeł-element lub węzeł tekstowy) węzła elem
+
+elem.firstElementChild — zawiera odnośnik do pierwszego dziecięcego węzła-elementu 
+wewnątrz elem, czyli tego odpowiadającego tagowi
+
+elem.lastChild — zawiera odnośnik do ostatniego dziecięcego węzła (węzeł-element
+ lub węzeł tekstowy) węzła elem
+
+elem.lastElementChild — zawiera odnośnik do ostatniego dziecięcego węzła-elementu 
+wewnątrz elem, czyli tego odpowiadającego tagowi
+
+elem.previousSibling — zawiera odnośnik do poprzedniego sąsiedniego węzła
+ względem elementu `elem**, a może to być zarówno element, jak i węzeł tekstowy
+
+elem.previousElementSibling — zawiera odnośnik do poprzedniego sąsiedniego
+ węzła-elementu względem elementu `elem**, czyli tego odpowiadającego tagowi
+
+elem.nextSibling — zawiera odnośnik do następnego sąsiedniego węzła względem
+ elementu `elem**, a może to być zarówno element, jak i węzeł tekstowy
+
+elem.nextElementSibling — zawiera odnośnik do następnego sąsiedniego węzła-elementu 
+względem elementu `elem**, czyli tego odpowiadającego tagowi
+
+
+Wszystkie te właściwości są w istocie strukturą drzewa DOM. Warto je znać, aby 
+zrozumieć DOM. Pytania dotyczące tych właściwości mogą również pojawić się podczas 
+rozmowy kwalifikacyjnej.
+Jednak w praktyce są one rzadko używane, ponieważ zagnieżdżenie elementów i ich 
+liczba może dynamicznie się zmieniać. Sprawia to, że kod korzystający z tych właściwości
+ staje się niewiarygodny.
+
+Właściwości i atrybuty
+Dostęp do właściwości
+
+
+
+Podczas budowy drzewa DOM, niektóre standardowe atrybuty HTML stają się właściwościami 
+elementów, czyli właściwościami obiektów DOM.
+
+Rozważmy przykład:
+
+
+
+Jeśli w HTML mamy znacznik odnośnika,
+<a class="link" href="<https://goit.global>">GoIT</a>;
+
+
+to w kodzie JavaScript możemy odczytać wartość jego atrybutu href,
+ uzyskując odniesienie do elementu, czyli obiektu, przy użyciu querySelector, 
+ i odwołując się do jego właściwości href
+
+
+const link = document.querySelector(".link");
+console.log(link.href); // "<https://goit.global>"
+
+
+
+
+Wartości atrybutów można zmieniać, przypisując im nową wartość bezpośrednio 
+z kodu JavaScript, a podczas wykonywania skryptu wartość w HTML, czyli w drzewie
+ DOM, zostanie zmieniona.
+
+
+
+const link = document.querySelector(".link");
+console.log(link.href); // "<https://goit.global>"
+link.href = "[<https://neo.goit.global>](<https://neo.goit.global/>)";
+console.log(link.href); // "[<https://neo.goit.global>](<https://neo.goit.global/>)"
+
+
+
+
+W prawdziwym przykładzie pracujemy z obrazem i zmieniamy wartości jego atrybutów 
+src i alt, aby podczas działania skryptu podmienić obraz i jego opis.
+
+Codepen https://codepen.io/goit-academy/pen/poeLbbd
+html:
+<img class="image" src="https://picsum.photos/id/9/320/240" alt="A laptop" width="300" />
+css:
+body {
+  margin: 8px;
+}
+js:
+
+const image = document.querySelector(".image");
+console.log(image.src); // https://picsum.photos/id/9/320/240
+console.log(image.alt); // A laptop
+
+image.src = "https://picsum.photos/id/13/640/480";
+image.alt = "River bank";
+
+Właściwość textContent
+
+
+
+Właściwość textContent zwraca całą tekstową zawartość wewnątrz elementu
+ (zarówno tekstu w samym elemencie, jak i w zagnieżdżonych elementach).
+
+
+
+<p class="text">Nazwa użytkownika: <span class=”sub-text”>Mango</span></p>
+
+
+
+
+Aby uzyskać tekstową zawartość elementu, jak zawsze, uzyskujemy odniesienie
+ do elementu i odwołujemy się do właściwości poprzez kropkę.
+
+
+
+const el = document.querySelector(".text")
+const nested = document.querySelector(".sub-text")
+
+console.log(el.textContent); // "Nazwa użytkownika: Mango"
+console.log(nested.textContent); // "Mango"
+
+
+
+
+Właściwość textContent można zarówno odczytywać, jak
+ i zmieniać. Niezależnie od tego, co zostanie przypisane
+  do textContent, dane zawsze zostaną zapisane jako tekst.
+
+
+
+const el = document.querySelector(".text")
+console.log(el.textContent); // "Nazwa użytkownika: Mango"
+el.textContent = "Nazwa użytkownika: Poly";
+
+
+
+
+W rzeczywistym przykładzie zmieniamy tytuł artykułu.
+html
+<article class="article">
+  <h2 class="article-title">Welcome to Hawaii!</h2>
+  <p class="article-text">Lorem ipsum dolor sit amet consectetur 
+  adipisicing elit. Provident quaerat nemo veritatis quasi eius eum aliquid,
+   nobis dolore nisi, magnam eaque iusto, necessitatibus atque laborum quam 
+   tempora ducimus dicta ipsam.</p>
+</article>
+css:
+body {
+  margin: 24px;
+}
+js:
+const textEl = document.querySelector(".article-text");
+console.log(textEl.textContent): // text is side p.article-text 
+
+const titleEl =
+document.querySelector(".article-title");
+titleEl.textContent = `Welcome to Bahamas!`;
+
+Właściwość classList
+
+
+
+Aby odczytać, dodać, usunąć lub sprawdzić obecność klasy CSS w elemencie 
+za pomocą kodu JavaScript, w właściwości classList przechowywany jest obiekt 
+z metodami do pracy z klasami CSS elementu.
+
+
+
+<a class="link is-active" href="<https://goit.global>">GoIT</a>
+
+
+
+
+Właściwość classList to specjalny typ obiektu, podobny do tablicy. 
+Zauważ, że jest podobny, ale nie jest natywną tablicą JavaScript, którą 
+wcześniej poznaliśmy. Przechowuje pełną listę klas elementu DOM, właściwość
+ length i właściwość value.
+
+Właściwość value zawiera dokładną wartość atrybutu class.
+Właściwość length — ilość klas w elemencie.
+
+
+Ale same value i length prawie się nie używają, ponieważ istnieją specjalne 
+metody do operacji na klasach (dodawanie, usuwanie itp.).
+
+Właściwość classList
+
+Aby odczytać, dodać, usunąć lub sprawdzić obecność klasy CSS w elemencie za 
+pomocą kodu JavaScript, w właściwości classList przechowywany jest obiekt z 
+metodami do pracy z klasami CSS elementu.
+
+<a class="link is-active" href="<https://goit.global>">GoIT</a>
+
+Właściwość classList to specjalny typ obiektu, podobny do tablicy. Zauważ,
+ że jest podobny, ale nie jest natywną tablicą JavaScript, którą wcześniej poznaliśmy.
+  Przechowuje pełną listę klas elementu DOM, właściwość length i właściwość value.
+
+Właściwość value zawiera dokładną wartość atrybutu class.
+Właściwość length — ilość klas w elemencie.
+
+Ale same value i length prawie się nie używają, ponieważ istnieją specjalne metody 
+do operacji na klasach (dodawanie, usuwanie itp.).
+
+const link=document.querySelector(".link");
+console.log(link.classList)
+
+Metoda classList.contains(className)
+
+
+
+Metoda classList.contains(className) oczekuje argumentu w postaci ciągu znaków z 
+nazwą klasy i zwraca true lub false w zależności od obecności klasy className w elemencie.
+
+
+
+Zauważ, że className przekazujemy jako ciąg znaków bez kropki (bez selektora klasy).
+
+
+
+const hasActiveClass = link.classList.contains("is-active"); // true
+const hasTitleClass = link.classList.contains("title"); // false
+
+
+
+
+Metoda classList.add(className)
+
+
+
+Metoda classList.add(className) oczekuje argumentu w postaci ciągu znaków z nazwą
+ klasy i dodaje klasę className do listy klas elementu.
+
+
+
+link.classList.add("special");
+console.log(link.classList);
+// ["link", "is-active", "special", length: 3, value: "link is-active special"]
+
+
+
+Można dodawać więcej niż jedną klasę, podając kilka argumentów rozdzielonych przecinkiem.
+
+
+Metoda classList.remove(className)
+
+
+
+Metoda classList.remove(className) oczekuje argumentu w postaci ciągu znaków z
+ nazwą klasy i usuwa klasę className z listy klas elementu.
+
+
+
+link.classList.remove("is-active");
+console.log(link.classList);
+// ["link", "special", length: 2, value: "link special"]
+
+
+
+Jeśli spróbujesz usunąć klasę, której nie ma na elemencie, nie spowoduje to błędu.
+ Po prostu nic się nie usunie.
+
+
+Metoda classList.toggle(className)
+
+
+
+Metoda classList.toggle(className) działa jak przełącznik:
+
+jeśli klasy className nie ma, dodaje ją na koniec listy klas,
+i odwrotnie, jeśli klasa className jest obecna — usuwa ją.
+link.classList.toggle("is-active");
+console.log(link.classList);
+// ["link", "special", "is-active", length: 3, value: "link special is-active"]
+
+
+
+Metoda classList.replace(oldClassName, newClassName)
+
+
+
+Metoda classList.replace(oldClassName, newClassName) oczekuje 2 argumentów w
+ postaci ciągów znaków (pierwszy — stara nazwa klasy, drugi — nowa nazwa klasy) i
+  zamienia istniejącą klasę oldClassName na podaną newClassName.
+
+
+
+link.classList.replace("special", "regular");
+console.log(link.classList);
+// ["link", "regular", "is-active", length: 3, value: "link regular is-active"]
+
+
+
+Jeśli spróbujesz zastąpić klasę, której nie ma na elemencie, nie spowoduje to błędu.
+ Po prostu nic się nie zmieni.
+
+
+Zapoznaj się z rzeczywistym przykładem działania z klasami elementu.
+
+Jak można dodać nową klasę do listy klas elementu element?
+
+element.addClass("nowa-klasa")
+element.classList.add("nowa-klasa")
+element.updateClass("nowa-klasa")
+Result
+
+Świetnie!
+
+Właściwość style
+
+
+
+Właściwość style jest używana do odczytywania i modyfikowania stylów inline z elementów DOM.
+
+
+
+Zwraca ona obiekt, który jest instancją interfejsu CSSStyleDeclaration i zawiera tylko 
+listę wszystkich stylów inline elementu, a nie cały CSS.
+
+
+
+Podczas zapisywania właściwości, są one zapisywane w notacji camelCase, zamiast używania 
+myślników, które są zazwyczaj używane w CSS, czyli background-color staje się backgroundColor.
+
+
+
+const button = document.querySelector(".btn");
+
+button.style.backgroundColor = "teal";
+button.style.fontSize = "24px";
+button.style.textAlign = "center";
+
+console.log(button.style); // obiekt stylów inline
+
+
+
+
+W praktyce stylizacja elementów zazwyczaj jest wykonywana poprzez dodawanie klas CSS.
+
+
+
+Właściwość style jest używana do dodawania dowolnych dynamicznych stylów, na przykład, 
+jeśli link do obrazu tła nie jest znany z góry i jest otrzymywany z backendu.
+
+Dostęp do atrybutów
+
+
+
+Elementy DOM odpowiadają tagom HTML, które zawierają tekstowe atrybuty.
+
+Dostęp do atrybutów odbywa się za pomocą standardowych metod. Te metody operują na wartości
+ znajdującej się w HTML.
+
+
+
+<img class="image" src="<https://picsum.photos/id/15/320/240>" alt="Rocks and waterfall" width="300" />
+
+
+
+
+Metoda element.hasAttribute(nameAttribute)
+
+
+
+Metoda element.hasAttribute(nameAttribute) przyjmuje jeden argument — string nameAttribute, 
+zawierający nazwę atrybutu do sprawdzenia, i zwraca wynik sprawdzenia jego obecności na elemencie 
+element — true lub false.
+
+
+
+const image = document.querySelector(".image");
+console.log(image.hasAttribute("src")); // true
+console.log(image.hasAttribute("href")); // false
+
+
+
+Metoda element.getAttribute(nameAttribute)
+
+
+
+Metoda element.getAttribute(nameAttribute) przyjmuje jeden argument — string nameAttribute z nazwą 
+atrybutu i zwraca wartość tego atrybutu dla wskazanego elementu HTML element. Jeśli atrybut nie zostanie
+znaleziony, metoda zwraca null.
+
+
+
+console.log(image.getAttribute("alt")); // "Rocks and waterfall"
+
+
+
+Metoda element.setAttribute(nameAttribute, value)
+
+
+
+Metoda element.setAttribute(nameAttribute, value) przyjmuje dwa argumenty: string nameAttribute z 
+nazwą atrybutu do ustawienia lub zmiany oraz value z wartością, którą ten atrybut powinien przyjąć.
+ Metoda ustawia lub zmienia wartość określonego atrybutu dla wskazanego elementu HTML element.
+
+image.setAttribute("alt", "Amazing nature");
+console.log(image.getAttribute("alt")); // Amazing nature
+
+
+
+Metoda element.removeAttribute(nameAttribute)
+
+
+
+Metoda element.removeAttribute(nameAttribute) przyjmuje jeden argument — string nameAttribute z 
+nazwą atrybutu, który ma zostać usunięty z wskazanego elementu HTML element — i usuwa go. Jeśli
+ określony atrybut nie istnieje na elemencie, metoda nie generuje błędów i nie robi nic.
+
+
+
+image.removeAttribute("alt");
+console.log(image.hasAttribute("alt")); // false
+
+
+
+Dostęp do lub zmiana wartości niektórych atrybutów elementa można uzyskać bezpośrednio, odwołując 
+się do nich jako do właściwości obiektu DOM. To będzie mniej kosztowne pod względem ilości kodu.
+
+
+Natomiast usuwanie lub sprawdzanie obecności będzie wygodniejsze, używając odpowiednich metod.
+
+
+
+W praktycznym przykładzie pracujemy z obrazem i jego atrybutami.
+
+Кtóra metoda sprawdza obecność określonego atrybutu w elemencie?
+
+hasAttribute
+getAttribute
+setAttribute x
+removeAttribute
+Result
+
+Świetnie!
+
+Która metoda pozwala ustawić wartość określonego atrybutu na elemencie?
+
+hasAttribute x
+getAttribute
+setAttribute
+removeAttribute
+Result
+
+Świetnie!
+Własne atrybuty
+
+
+
+Specyfikacja HTML określa wyczerpującą listę atrybutów, które możemy dodawać do różnych tagów (elementów DOM) w celu zachowania poprawności znaczników, ale czasami ta lista może być niewystarczająca. Zdarzają się sytuacje, gdy chcemy przechować pewne informacje na elemencie, na przykład określić rodzaj działania przycisku, aby później móc uzyskać do niego dostęp w określonym momencie. W takich przypadkach przychodzą z pomocą własne data-atrybuty.
+
+
+
+Własne atrybuty pozwalają dodać do tagu dowolny atrybut i uzyskać jego wartość w JavaScript.
+
+
+
+<button type="button" data-action="save">Zapisz tekst</button>
+<button type="button" data-action="close">Zamknij edytor</button>
+
+
+
+
+
+Pobieranie wartości
+
+
+
+Aby pobrać wartość data-atrybuta, używana jest właściwość dataset, po której następuje kropka, a następnie nazwa atrybuta bez data-. Innymi słowy, data- jest odrzucane, a pozostała część nazwy jest zapisywana jako nazwa właściwości obiektu.
+
+
+
+const saveBtn = document.querySelector('button[data-action="save"]');
+console.log(saveBtn.dataset.action); // "save"
+
+const closeBtn = document.querySelector('button[data-action="close"]');
+console.log(closeBtn.dataset.action); // "close"
+
+
+
+Zmiana wartości
+
+
+
+Zmienić wartość istniejącego data-atrybuta lub dodać nowy można tak samo, jak każdą inną właściwość obiektu w JavaScript. Aby to zrobić, należy uzyskać dostęp do elementu DOM, a następnie zmienić/ustawić wartość właściwości w obiekcie dataset.
+
+// Zmieniamy wartość data-action dla przycisku saveBtn
+saveBtn.dataset.action = "update";
+
+// Dodajemy nowy data-atrybut data-role
+saveBtn.dataset.role = "admin";
+
+// Sprawdzamy nowe wartości
+console.log(saveBtn.dataset.action); // "update"
+console.log(saveBtn.dataset.role); // "admin"
+
+
+
+
+
+Teraz atrybut data-action dla saveBtn ma wartość "update" zamiast "save".
+
+Usuwanie atrybutu
+
+
+
+Do usunięcia data-atrybuta używany jest operator delete:
+
+// Usuwamy data-atrybut data-action
+delete saveBtn.dataset.action;
+
+// Sprawdzamy usunięcie
+console.log(saveBtn.dataset.action); // undefined
+
+
+
+Data-atrybuty często są używane z kebab-case, gdzie słowa są oddzielone myślnikami.
+ Gdy trzeba uzyskać dostęp do tych data-atrybutów za pomocą właściwości dataset, atrybut
+  w kebab-case są przekształcane na camelCase. Innymi słowy, myślniki są usuwane, a każda
+   litera po myślniku staje się wielką literą. Na przykład, data-user-role w JavaScript
+    staje się userRole:
+
+
+
+const userBlock= document.querySelector('div[data-user-role="admin"]');
+
+// Dodanie nowego atrybutu data-user-status
+element.dataset.userStatus = "online";
+
+console.log(element.dataset.userRole); // "admin"
+console.log(element.dataset.userStatus); // "online"
+
+Tworzenie i usuwanie elementów
+Tworzenie elementów
+
+
+
+API DOM (Document Object Model Application Programming Interface) posiada szeroki zakres funkcji. Za jego pomocą można:
+
+wybierać lub modyfikować istniejące elementy,
+usuwać elementy,
+tworzyć nowe elementy i dodawać je do dokumentu.
+
+
+Przyjrzyjmy się, jak utworzyć nowy element:
+
+document.createElement(tagName)
+
+
+
+tworzy element o nazwie tagName i zwraca odnośnik do jego obiektu jako wynik swojego wykonania.
+tagName to ciąg znaków określający typ tworzonego elementu.
+Element jest tworzony w pamięci; w DOM jeszcze go nie ma.
+const heading = document.createElement("h1");
+
+
+
+Po utworzeniu elementu heading otrzymujemy odnośnik do jego obiektu w pamięci. Od tego momentu można odwoływać się do właściwości tego obiektu i je modyfikować, zanim wstawimy ten element do DOM.
+
+
+
+const heading = document.createElement("h1");
+headding.classList.add("title");
+heading.textContent = "This is a heading";
+console.log(heading); // <h1 class="title">This is a heading</h1>
+
+const image = document.createElement("img");
+image.src = "<https://picsum.photos/id/11/320/240>";
+image.alt = "Nature";
+console.log(image); // <img src="<https://picsum.photos/id/11/320/240>" alt="Nature" />
+
+
+Podczas tworzenia nowego elementu <div> za pomocą document.createElement(), jaka nazwa elementu będzie przekazywana jako argument?
+
+"paragraph"
+"div"
+"p"
+"text"
+Result
+
+Świetnie!
+
+Dodawanie elementów
+
+
+
+Aby utworzony element pojawił się na stronie, trzeba go dodać do już istniejącego elementu w
+ drzewie DOM. Zakładając, że dodajemy do pewnego elementu elem, istnieją następujące metody:
+
+elem.append(el1, el2, ...) — dodaje jeden lub kilka elementów po wszystkich dzieciach elementu elem.
+elem.prepend(el1, el2, ...) — dodaje jeden lub kilka elementów przed wszystkimi dziećmi elementu elem.
+elem.after(el1, el2, ...) — dodaje jeden lub kilka elementów po elemencie elem.
+elem.before(el1, el2, ...) — dodaje jeden lub kilka elementów przed elementem elem.
+
+
+Wszystkie te metody przyjmują el jako elementy lub ciągi tekstowe, w dowolnej kombinacji i
+ilości. Ciągi tekstowe są dodawane jako węzły tekstowe.
+
+https://codepen.io/goit-academy/pen/WNpzoZQ
+
+<h1>Usernames</h1>
+<ul class="usernames">
+<li>Mango</li>
+</ul>
+
+css 
+
+body {
+margin: 24px;
+paddingL 0 15px;
+}
+
+.usernames li {
+padding: 8px;
+border: 2px dashed tomato;
+text-transform: uppercase;
+}
+
+.username li:not(:last-child) {
+margin-bottom: 12px;
+}
+js:
+cosnt list = document.querySelector(".username");
+//adds item to the end of the list 
+const lastItemn = document.createElement("li");
+lastItem.textContent = "Poli";
+list.append(lastItem):
+
+//adds an item to the beginning of the list 
+const firstItem = dopcument.creatElement("li");
+firstItem.textContent = "Ajax";
+listprepend(firstItem) 
+
+Usuwanie elementów
+
+
+
+Aby usunąć element, używa się metody element.remove().
+
+
+
+<p class="text">Losowa treść tekstu</p>
+
+
+
+Jest ona wywoływana na elemencie element, który ma zostać usunięty.
+
+const text = document.querySelector(".text")
+text.remove();
+
+
+
+W rzeczywistym przykładzie usuwamy element tekstu ze strony.
+
+https://codepen.io/goit-academy/pen/mdWKWoM
+<article class="article">
+  <h2 class="title">Article title</h2>
+  <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore, ipsa quibusdam! Praesentium accusantium fugiat distinctio quidem minima fugit eos, veniam, nam laboriosam deleniti nisi qui neque explicabo perspiciatis, consectetur non.</p>
+<a class="link" href="">Read more</a>
+</article>
+
+css:
+body {
+  font-family: sans-serif;
+}
+js:
+const text=document.querySelector(`.text')
+text.remove()
+
+Właściwość innerHTML
+
+Istnieje jeszcze jeden sposób tworzenia elementów DOM i umieszczania ich w drzewie DOM.
+
+W tym celu używa się ciągów znaków z tagami i pozwala się przeglądarce wykonać całą
+ ciężką pracę. Ten podejście ma swoje zalety i wady.
+Odczyt
+Właściwość innerHTML przechowuje zawartość elementu, włączając w to tagi, w postaci
+ciągu znaków. Zwracana wartość zawsze jest poprawnym kodem HTML.
+https://codepen.io/goit-academy/pen/ZEeRegd
+html:
+<article class="article">
+<h2 class="title">Article title</h2>
+<p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore, 
+ipsa quibusdam! <strong>Praesentium</strong> accusantium fugiat distinctio quidem minima
+fugit eos, veniam, nam laboriosam deleniti nisi qui neque explicabo perspiciatis,
+consectetur non.</p>
+  <a class="link" href="">Read more</a>
+</article>
+css:
+body {
+  margin: 16px;
+  font-family: sans-serif;
+}
+js:
+cosnt article = document.querySelector(".article"):
+cosnole.log("article.innerHTML")
+
+const title = document.querySelector(".article.title");
+console.log(title.innerHTML)
+
+const text = document.querySelector(".article.text");
+console.log("text.innerHTML")
+
+const link = document.querySelector(".article.link"):
+console.log("link.innerHTML")
+
+Zmiana
+
+Właściwość innerHTML jest dostępna zarówno do odczytu, jak i do zapisu.
+Jeśli przypiszesz do niej ciąg znaków z tagami HTML, przeglądarka podczas 
+analizy ciągu przekształci go w poprawne elementy i dodaje do drzewa DOM.
+https://codepen.io/goit-academy/pen/JjWZNKb
+html:
+<article class="article">
+  <h2 class="title">Article title</h2>
+  <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore, ipsa quibusdam! <strong>Praesentium</strong> accusantium fugiat distinctio quidem minima fugit eos, veniam, nam laboriosam deleniti nisi qui neque explicabo perspiciatis, consectetur non.</p>
+  <a class="link" href="">Read more</a>
+</article>
+css:
+body {
+  margin: 16px;
+}
+
+.accent {
+  color: tomato;
+  text-decoration: underline;
+}
+js: 
+const title = document.querySelector(".article.title") 
+title.innerHTML = `New adn <span class="accent"> improved </span> title`
+
+Szablonowy markup jest tworzony z tablicy danych
+
+
+
+Technika polega na iterowaniu przez tę tablicę i tworzeniu jednego 
+wiersza z tagami HTML, który następnie jest zapisywany do właściwości 
+innerHTML elementu. Jeśli będziesz to robić za pomocą metody map(), pamiętaj,
+że zwraca ona tablicę. Dlatego przed dodaniem markupu do DOM, tę tablicę 
+należy przekonwertować na ciąg znaków za pomocą metody join().
+
+https://codepen.io/goit-academy/pen/qBrKmJP
+html:
+<section>
+  <h2>Popular technologies</h2>
+  <ul class="list"></ul>
+</section>
+css: 
+body {
+  padding: 16px;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  padding: 8px;
+  border-width: 2px;
+  border-style: dashed;
+}
+
+.list-item:nth-child(even) {
+  border-color: tomato;
+}
+
+.list-item:nth-child(odd) {
+  border-color: blueviolet;
+}
+
+.list-item:not(:last-child) {
+  margin-bottom: 8px;
+}
+js: 
+    const technologies=["HTML", "CSS", "JavaScript", "React", "Node"];
+
+    cosnt list = document.querySelector(".list");
+
+    const markup = technologies.map((technology) => `<li class="list-item"> ${technology} </li>`).join("");$
+
+    console.log(markup)
+
+    list.innerHTML = markup
+
+Nowa wartość dla element.innerHTML całkowicie usunie i ponownie utworzy
+wszystkie potomki elementu element. Jeśli element nie był początkowo
+pusty, to pojawią się dodatkowe koszty na ponowne utworzenie już istniejącej
+struktury, co jest niekorzystne.
+
+https://codepen.io/goit-academy/pen/QWpxvqR
+html
+<article class="article">
+  <h2>Article title</h2>
+</article>
+css:
+body {
+  padding: 16px;
+}
+
+.article {
+  max-width: 320px;
+}
+
+.article-text {
+  color: tomato;
+}
+js:
+const article=document.querySelector(".article");
+const htmlString ='<p class="acticle-text"> Nullam quis ante. Vestibulum dapibus 
+nunc ac augue. In consectetuer turpis ut velit.<.p>
+<a class="link" href="#"> Read more...</a>;'
+
+article.innerHTML += htmlString 
+// if we would just do = we will lost original content by overwriting it 
+Wykorzystaj właściwość element.innerHTML do dodania zawartości tylko wtedy, —
+gdy element element jest pusty, albo — gdy trzeba
+całkowicie zastąpić zawartość elementu.
+Metoda insertAdjacentHTML()
+
+
+
+Metoda insertAdjacentHTML() to nowoczesna metoda dodawania ciągu znaków z tagami HTML przed, po lub wewnątrz elementu. Rozwiązuje problem związany z użyciem innerHTML i ponowną serializacją zawartości elementu podczas dodawania znaczników do już istniejącej treści.
+
+
+
+jsx
+element.insertAdjacentHTML(pozycja, ciąg)
+
+
+
+Argument pozycja to ciąg znaków określający pozycję względem elementu element. Przyjmuje jedną z czterech wartości.
+
+
+
+
+
+
+"beforebegin" — przed elementem
+"afterbegin" — wewnątrz elementu, przed wszystkimi dziećmi
+"beforeend" — wewnątrz elementu, po wszystkich dzieciach
+"afterend" — po elemencie
+
+
+Wartości "beforebegin" i "afterend" działają tylko wtedy, gdy element już 
+znajduje się w drzewie DOM. Ograniczenie wynika z faktu, że niemożliwe jest 
+określenie, gdzie wstawić znacznik, dopóki element nie zostanie umieszczony w drzewie DOM.
+
+
+
+W przykładzie na żywo, najpierw w HTML znajduje się lista z trzema elementami. 
+Trzy kolejne dodajemy za pomocą JavaScript, używając metody insertAdjacentHTML, 
+podobnie jak nagłówek listy.
+
+https://codepen.io/goit-academy/pen/mdWKMOE
+html:
+<ul class="list">
+  <li class="list-item">HTML</li>
+  <li class="list-item">CSS</li>
+  <li class="list-item">JavaScript</li>
+</ul>
+
+css:
+body {
+  padding: 16px;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-width: 2px;
+  border-style: dashed;
+}
+
+.list-item.new::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.list-item:nth-child(even) {
+  border-color: tomato;
+}
+
+.list-item:nth-child(odd) {
+  border-color: blueviolet;
+}
+
+.list-item:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+js:
+const list=document.querySelector(".list"):
+
+const newTechnologies = ["React", "TypeScript", "Node.js"];
+const markup = newTechnologies.map((technology)=> `<li class="list-item new">${technology}</li>`).join("");$
+
+list.insertAdjacentHTML("beforeend", markup);
+list.insertAdjacentHTML("beforebegin", "<h2>Popular technologies</h2>");
+
+Zdarzenia
+Metoda addEventListener()
+
+
+
+Zdarzenie to sygnał od przeglądarki o tym, że coś wydarzyło się na stronie internetowej. Istnieje wiele rodzajów zdarzeń: zdarzenia myszy, zdarzenia klawiatury, zdarzenia formularzy, zmiany rozmiaru okna, ładowanie obrazów, schowek, zmiany etapu animacji CSS lub przejścia itp. Zdarzenia są używane do reagowania na działania użytkownika i wykonywania kodu związane z danym zdarzeniem.
+
+
+
+Jedno działanie użytkownika może spowodować wiele zdarzeń w JavaScript. Na przykład, po kliknięciu na element, najpierw występuje zdarzenie mousedown, które sygnalizuje naciśnięcie przycisku myszy. Po zwolnieniu przycisku myszy występują zdarzenia mouseup i click. W przypadkach, gdy jedno działanie generuje wiele zdarzeń, ich kolejność jest ustalona. Oznacza to, że obsługiwane są w kolejności mousedown → mouseup → click.
+
+
+
+Aby element reagował na działania użytkownika, należy dodać do niego nasłuchiwacza zdarzeń i zdefiniować dla niego obsługę.
+
+
+
+Nasłuchiwacz zdarzeń to mechanizm, który "nasłuchuje" lub "oczekuje" na wystąpienie określonego zdarzenia. Metoda addEventListener() dodaje nasłuchiwacza zdarzeń do elementu.
+
+
+
+element.addEventListener(zdarzenie, obsługa, opcje)
+
+
+
+Argumenty metody:
+
+zdarzenie — ciąg znaków zawierający nazwę zdarzenia, na przykład "click"
+obsługa — funkcja zwrotna, która zostanie wywołana podczas wystąpienia zdarzenia
+opcje — opcjonalny obiekt parametrów z zaawansowanymi ustawieniami
+
+
+Przyjrzyjmy się przykładowi. Na stronie masz przycisk do przeglądania galerii obrazów.
+
+W HTML jest przycisk z klasą my-button.
+<button class="my-button">Następny</button>
+
+
+
+Aby galeria przechodziła dalej, musisz w kodzie JavaScript uzyskać odniesienie do elementu przycisku i dodać do niego nasłuchiwacza zdarzeń kliknięcia.
+
+
+const button = document.querySelector(".my-button");
+
+button.addEventListener("click", () => {
+  console.log("Przycisk został wciśnięty, teraz pojawi się następny obraz");
+});
+
+
+
+W wywołaniu addEventListener() jako pierwszy argument przekazaliśmy nazwę zdarzenia "click", 
+a jako drugi — funkcję zwrotną obsługi zdarzeń — () => {console.log("Button was clicked")}. 
+Za każdym razem, gdy na elemencie button występuje zdarzenie "click", ta funkcja zwrotna 
+zostanie wykonana i w konsoli pojawi się komunikat "Przycisk został wciśnięty, teraz pojawi 
+się następny obraz".
+
+Dla funkcji zwrotnej można użyć nie anonimowej, ale osobnej funkcji, przekazując do niej 
+odwołanie, jak to jest zrealizowane w poniższym przykładzie. Funkcja nazwana zwiększa czytelność kodu.
+
+const button = document.querySelector(".my-button");
+
+const handleClick = () => {
+  console.log("Przycisk został wciśnięty, teraz pojawi się następny obraz");
+};
+
+button.addEventListener("click", handleClick);
+
+
+
+Na jednym elemencie może być dowolna liczba nasłuchiwaczy zdarzeń, nawet zdarzeń tego 
+samego typu. Funkcje zwrotne będą wywoływane w kolejności ich zarejestrowania w kodzie.
+
+https://codepen.io/goit-academy/pen/QWpxOvE
+html:
+<button id="single" class="btn">SINGLE CALLBACK</button>
+<hr>
+<button id="multiple" class="btn">MULTIPLE CALLBACKS</button>
+css:
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+  text-align: center;
+}
+js:
+const singleBtn - document.querySelector("#single");
+
+const handleClick = () => {console.log("click event listener callback");
+};
+
+singleBtn.addEventListener("click", handleClick);
+
+const multiBtn = dopcument.querySelector("#multie");
+
+const firstCallBack = () => {
+    console.log("First callback!");
+};
+const secondCallBack = () => {
+    console.log("Second callback!");
+};
+const thirdCallBack = () => {
+    console.log("Third callback!");
+};
+
+multiBtn.addEventListener("click", firstCallBack):
+multiBtn.addEventListener("click", secondCallBack):
+multiBtn.addEventListener("click", thirdCallBack):
+
+Metoda removeEventListener()
+
+
+
+Metoda removeEventListener() usuwa nasłuchiwacza zdarzeń z elementu.
+
+Argumenty są analogiczne do metody addEventListener():
+
+
+
+element.removeEventListener(zdarzenie, obsługa, opcje)
+
+
+
+Aby móc usuwać nasłuchiwacza zdarzeń z elementu za pomocą removeEventListener, 
+ważne jest, aby używać tego samego funkcji obsługi, która została przypisana przy 
+użyciu addEventListener. Z tego powodu zaleca się stosowanie nazwanych funkcji dla 
+obsługiwaczy zdarzeń, które można łatwo przekazywać jako argumenty.
+
+
+
+const button = document.querySelector(".my-button");
+
+const handleClick = () => {
+  console.log("Przycisk został wciśnięty, teraz pojawi się następny obraz");
+};
+
+button.addEventListener("click", handleClick);
+
+
+
+Rozważ przykład na żywo, w którym dla przycisku z tekstem Click me dodawany i 
+usuwany jest nasłuchiwacz zdarzeń za pomocą dwóch innych przycisków. Po kliknięciu 
+w przyciski, w konsoli deweloperskiej wyświetlają się komunikaty.
+
+https://codepen.io/goit-academy/pen/vYxrWpw
+
+html:
+<button class="btn js-add">Add Listener</button>
+<button class="btn js-remove">Remove Listener</button>
+<hr>
+<button class="btn target-btn">Click me</button>
+body {
+  padding: 16px;
+  text-align: center;
+}
+css:
+body {
+  padding: 16px;
+  text-align: center;
+}
+js:
+const addListenerBtn = document.querySelector(`.js-add');
+const removeListenerBtn = document.querySelector(`js-remove');
+const btn = document.querySelector(`.target-btn');
+
+const handleClick = () => {
+    console.log(`click event listener callback');
+};
+addListenerBtn.addEventListener("click, () => {
+    btn.addEventListener(`click', handleClick);
+    console.log(`lick event listener was added to btn');
+});
+
+removeListenerBtn.addEventListener(`click', () => {
+    btn.removeEventListener(`click', handleClick);
+    console.log(`click event listener was removed from btn');
+});
+
+Do obsługi zdarzeń nie wystarczy wiedzieć, że zdarzenie to kliknięcie lub naciśnięcie klawisza. Programiście mogą być potrzebne inne szczegóły, takie jak: element, na którym zdarzenie wystąpiło, jego aktualna wartość pola tekstowego, wbudowane metody itp.
+
+
+
+Każde zdarzenie to obiekt, który zawiera informacje na temat szczegółów zdarzenia i automatycznie przekazywany jest jako pierwszy argument do obsługującej zdarzenia funkcji zwrotnej. Wszystkie zdarzenia mają swoje źródło w podstawowej klasie Event.
+
+
+
+const handleClick = event => {
+  console.log(event);
+};
+
+button.addEventListener("click", handleClick);
+
+
+
+Parametr event to obiekt zdarzenia, który jest automatycznie przekazywany jako pierwszy argument podczas wywoływania funkcji zwrotnej. Możemy go nazwać dowolnie, ale zazwyczaj jest on deklarowany jako e, evt lub event.
+
+Niektóre właściwości obiektu zdarzenia to:
+
+event.type — typ zdarzenia.
+event.currentTarget — element, na którym jest wykonywana obsługa zdarzenia.
+
+
+Otwórz żywy przykład i sprawdź obiekt zdarzenia w konsoli deweloperskiej po 
+
+html:
+<button type="button" class="btn">Click me</button>
+body {
+  padding: 16px;
+  text-align: center;
+}
+js:
+const button = document.querySelector(".btn");
+
+const handleClick = (event) => {
+    console.log(`event: ', event);
+    cosnole.log(`event type: ', event.type);
+    console.log(`currentTarget: ', event.currentTarget);
+};
+
+button.addEventListener(`click', handleClick)
+
+Co zawiera obiekt zdarzenia?
+
+Zawiera dane na temat obiektu, do którego jest przypisane zdarzenie.
+Zawiera informacje na temat samego zdarzenia, takie jak jego typ i obiekt, który wywołał zdarzenie.
+Zawiera wszystkie obiekty na stronie internetowej.
+Result
+
+Świetnie!
+
+Jak można uzyskać dostęp do obiektu zdarzenia w obsłudze zdarzeń?
+
+Zawsze znajduje się w globalnej zmiennej event.
+Automatycznie przekazywany jest jako argument do funkcji obsługi zdarzeń.
+Można go uzyskać za pomocą metody getEvent().
+To niemożliwe, obiekt zdarzenia jest prywatny i niedostępny dla użytkownika.
+Result
+
+Świetnie!
+
+Zdarzenia klawiatury
+
+
+
+Istnieją dwie podstawowe zdarzenia klawiatury:
+
+keydown - zdarzenie występujące po naciśnięciu klawisza
+keyup - zdarzenie występujące po zwolnieniu klawisza
+
+
+W przeciwieństwie do innych zdarzeń, zdarzenia klawiatury są obsługiwane 
+na dokumencie, a nie na konkretnym elemencie. Obiekty zdarzeń klawiatury 
+dziedziczą po bazowej klasie KeyboardEvent.
+
+
+
+document.addEventListener("keydown", event => {
+  console.log("Naciśnięcie klawisza: ", event);
+});
+
+document.addEventListener("keyup", event => {
+  console.log("Zwolnienie klawisza: ", event);
+});
+
+
+
+Zdarzenia keydown i keyup są aktywowane po naciśnięciu dowolnego klawisza, 
+włączając w to klawisze służbowe (Ctrl, Shift, Alt, Escape, itp.).
+
+
+
+W praktyce często obsługuje się tylko zdarzenie keydown, ponieważ występuje 
+ono szybciej niż keyup, a użytkownik wcześniej widzi rezultat naciśnięcia.
+Dlaczego w praktyce obsługuje się zdarzenie keydown podczas pracy z zdarzeniami klawiatury?
+
+Ponieważ jest to główne zdarzenie klawiatury
+Ono występuje częściej, dzięki czemu można dokładniej przetwarzać wejście
+Występuje wcześniej i można szybciej przetworzyć wejście użytkownika
+Result
+
+Świetnie!
+
+Właściwości key i code
+
+
+
+Właściwość obiektu zdarzenia key zwraca symbol wygenerowany przez naciśnięcie klawisza 
+na klawiaturze. Ta właściwość uwzględnia:
+
+stan klawiszy modyfikujących, na przykład Shift
+bieżący język
+
+
+Właściwość obiektu zdarzenia code zwraca kod fizycznego klawisza na klawiaturze i nie 
+zależy od języka oraz stanu klawiszy modyfikujących.
+
+
+
+document.addEventListener("keydown", event => {
+  console.log("key: ", event.key);
+  console.log("code: ", event.code);
+});
+
+
+
+Kod w przykładzie tworzy prosty dziennik zdarzeń dla zdarzeń "keydown" i "keyup". 
+Kliknij myszą w oknie z przykładem, aby skupić się na nim. Śledzenie zdarzeń klawiatury 
+już istnieje na elemencie document. Naciśnij coś na klawiaturze, aby zobaczyć rezultat 
+ich przetwarzania.
+https://codepen.io/goit-academy/pen/ZEeRxaJ
+html:
+<button type="button" class="js-clear">Clear output</button>
+<div class="log-list"></div>
+css:
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.log-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.log-item {
+  flex-basis: calc((100% - 16px) / 2);
+  position: relative;
+  padding: 4px;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: monospace;
+}
+
+.log-item > .chip {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  display: inline-flex;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+js: 
+const clearLogBtn = document.querySelector(".js-clear");
+const = logList = document.querySelector(".log-list");
+let keypressCounter = 1;
+
+console.log(clearLogBtn);
+
+document.addEventListener("keydown", logMessage);
+document.addEventListener("keyup", logMessage);
+clearLogBtn.addEventListener("click", reset)
+
+function logMessage ({type, key, code}) {
+    cosnt markup = "<div class="log-item">
+        <span class="chip">${keypressCounter}$</span>
+        <ul>
+            <li><b>Event</b>: ${type}$</li>
+            <li><b>Key</b>; ${key}$</li>
+            <li><b>Code</b>: ${code}$</li>
+        </ul>
+    </div>;
+
+    logList.insertAdjacentHTML("afterbegin", markup);
+
+    if(type === "keyup") {
+        incrementKeypressCounter();
+    }
+}
+function reset() {
+    keypressCounter = 1;
+    logList.innerHTML = "";
+}
+function incrementKeypressCounter() {
+    keypressCounter += 1;
+}
+
+Klawisze modyfikatorów
+
+
+
+Oczywiście, znasz popularne kombinacje klawiszy, takie jak Ctrl + s, Ctrl + d czy Command + d.
+
+
+
+Niektóre kombinacje klawiszy mogą kolidować z domyślnym zachowaniem przeglądarki. Na przykład,
+Ctrl + d lub Command tworzy zakładkę. Przy projektowaniu systemu kombinacji klawiszy na stronie, 
+warto unikać konfliktów z wbudowanymi funkcjami przeglądarki.
+
+
+
+Do obsługi kombinacji klawiszy na obiekcie zdarzenia służą właściwości:
+
+ctrlKey
+altKey
+shiftKey
+metaKey
+
+Te właściwości przechowują wartość logiczną, wskazującą, czy został wciśnięty odpowiadający 
+klawisz modyfikatora.
+
+document.addEventListener("keydown", event => {
+  if ((event.ctrlKey || event.metaKey) && event.code === "KeyS") {
+    console.log("Kombinacja «Ctrl + s» lub «Command + s»");
+  }
+});
+
+Ostatnio do obsługi kombinacji klawiszy używano właściwości keyCode. Wiele wpisów na forach i 
+blogach może nadal z niej korzystać. Pamiętaj jednak, że keyCode jest już przestarzała, a 
+zamiast niej warto używać właściwości key i code.
+
+Zdarzenia elementów formularza
+Zdarzenie submit
+
+
+
+Wysłanie formularza zachodzi:
+
+po kliknięciu przycisku z atrybutem type="submit"
+Lub
+
+po naciśnięciu klawisza Enter podczas przebywania w dowolnym polu tekstowym formularza
+
+
+Zdarzenie submit występuje bezpośrednio na formularzu (tag form), dlatego obsługę zdarzeń 
+należy ustawić na samym formularzu.
+
+
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", event => {
+	// ...
+});
+
+
+
+Niektóre zdarzenia powodują domyślną akcję przeglądarki, która jest wbudowana jako reakcja 
+na określony rodzaj zdarzenia. Na przykład kliknięcie na odnośniku powoduje przeniesienie 
+na nowy adres określony w atrybucie href, a wysłanie formularza powoduje przeładowanie strony.
+
+
+
+Najczęściej to zachowanie jest niepożądane i należy je anulować. Aby anulować domyślną 
+akcję przeglądarki, używamy standardowej metody obiektu zdarzenia preventDefault().
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", event => {
+	event.preventDefault();
+});
+
+Zdarzenie submit można wykorzystać do walidacji formularza przed wysłaniem, ponieważ obiekt 
+zdarzenia zawiera wiele przydatnych właściwości związanych z elementami formularza.
+html:
+<form class="form" autocomplete="off">
+  <input type="text" name="login" placeholder="Login">
+  <input type="password" name="password" placeholder="Password">
+  <button class="btn" type="submit">Register</button>
+</form>
+css:
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 32px;
+}
+js:
+const registerForm = document.querySelector(".form"):
+
+registerForm.addEventListener("submit", handleSubmit);
+
+function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const login = form.element.login.value;
+    const password = form.elements.password.value;
+
+    if (login === "" || password === "") {return console.log("Please fill in all the fields");
+    }
+
+    console.log(`Login: ${login}$, Password: ${password}$`);
+    form.reset();
+}
+
+Właściwość elements obiektu DOM formularza zawiera obiekt z odnośnikami do wszystkich jego 
+elementów, które posiadają atrybut name. Dlatego w przykładzie uzyskujemy wartości pól, 
+odwołując się do event.target.elements.login.value i event.target.elements.password.value.
+
+Zdarzenie change
+
+Zdarzenie change występuje po zmianie elementu formularza.
+
+Dla pól tekstowych lub textarea zdarzenie nie wystąpi po wprowadzeniu każdego znaku, 
+lecz po utracie fokusu. To nie zawsze jest wygodne. Wyobraź sobie, że użytkownik coś 
+wpisuje w polu tekstowym - zdarzenie nie zachodzi. Dopiero gdy fokus zostanie utracony, 
+następuje zdarzenie change.
+
+Dla innych elementów, takich jak select, pola wyboru i przyciski radio, zdarzenie change 
+występuje natychmiast po wyborze wartości.
+
+Zwróć uwagę na przydatne właściwości podczas pracy z elementem <select> w przykładzie.
+
+Zdefiniuj, co przechowuje się w właściwościach value, selectedIndex i options.
+https://codepen.io/goit-academy/pen/gOmKKvj
+
+html:
+<p> 
+Selected option text: <span class="text-output">None</span>
+</p>
+<p>
+    Selected option value: <span class="value-output">none</span>
+</p>
+
+<select class="pizza-select">
+    <option value="four_meats">Four Meats</option>
+    <option value="royal_cheese">Royal</option>
+    <option value="vegetarian">Vegetarian</option>
+    <option value="smoked_salmon">Smoked Salmon</option>
+</select>
+css:
+body {
+  margin: 16px;
+}
+
+select {
+  padding: 4px;
+}
+js:
+const select = document.querySelector(".pizza-select");
+const textOutput = document.querySelector(".text-output");
+cosnt valueOutput = document.querySelector(".value-output");
+
+select.addEventListener("change", setOutput);
+
+function setOutput(event) {
+    const SelectedOptionValue = event.currentTarget.value;
+    const SelectedOptionIndex = event.currentTarget.selectedIndex;
+    const SelectedOptionText = event.currentTarget.option[SelectedOptionIndex].text;
+
+    textOutput.textContent = selectedOptionText;
+    valueOutput.textContent = selectedOptionValue;
+}
+Zdarzenie input
+
+
+
+Zdarzenie input występuje tylko w przypadku pól tekstowych i textarea.
+
+Tworzy się za każdym razem, gdy wartość elementu ulega zmianie, nie czekając 
+na utratę fokusu. W praktyce input to kluczowe zdarzenie do pracy z polami 
+tekstowymi formularza.
+https://codepen.io/goit-academy/pen/jOBKpNP
+html:
+<input type="text" class="text-input" />
+<p>Text field value: <span class="output">
+</span></p>
+css:
+body {
+    margin: 16px;
+    line-height: 1.5;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+}
+p {
+    overflow-wrap: anywhere;
+}
+input {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px;
+    font: inherit;
+    letter-spacing: inherit
+}
+js:
+const textInput = document.querySelector(".text-input"):
+const output = document.querySelector(".output");
+
+textInput.querySelector('input', (event) => {
+    output.textContent = event.currentTarget.value;
+})
+
+Zdarzenie focus i blur
+
+Element otrzymuje fokus podczas kliknięcia myszą lub przemieszczania klawiszem Tab.
+
+Chwila uzyskania i utraty fokusu jest bardzo istotna. Po uzyskaniu fokusu możemy 
+ładować dane do automatycznego wypełniania, zaczynać śledzić zmiany itp. 
+
+Podczas utraty fokusu możemy sprawdzić wprowadzone dane.
+
+Zdarzenie focus występuje podczas skupiania się na elemencie.
+Zdarzenie blur występuje podczas utraty fokusu, na przykład gdy użytkownik 
+kliknie w innym miejscu na ekranie.
+
+Aktywację lub deaktywację fokusu można również wywołać programowo. Aby to zrobić, 
+należy użyć w kodzie odpowiednich metod dla elementu: focus() i blur().
+
+Zobacz, jak zdarzenia focus i blur są implementowane w praktyce na przykładzie rzeczywistym.
+
+https://codepen.io/goit-academy/pen/JjWZBdM
+
+<button type="button" data-action="set">Set focus to input</button>
+<button type="button" data-action="remove"> Remove focus from input</button>
+<br><br>
+<input type="text" class= "type-input" />
+
+body {
+    margin: 16px;
+    line-height: 1.5;
+    font-family: sans-serif:
+    letter-spacing: 0.5px;
+}
+
+input {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px;
+    font: inherit;
+    letter-spacing: inherit;
+}
+button {
+    display: inline-flex;
+    padding: 4px;
+    margin-right; 2px;
+    margin-legt: 2px;
+}
+js:
+
+const textInput = document.querySelector(".text-input");
+cosnt setFocusBtn = document.querySelector(`[data-action="set"]`);
+cosnt removeFocusBtn = document.querySelector(`[data-action="remove"]`);
+setFocusBtn.addEventListener("click", () => {textInput.focus();})
+removeFocusBtn.addEventListener("click", () => {textInput.blur();})
+textInput.addEventListener("focus", () => {textInput.value = "This input has focus";})
+textInput.addEventListener("blur", () => {textInput.value = "";})
+
+

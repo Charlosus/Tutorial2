@@ -1,0 +1,231 @@
+<title>Form Event</title>
+<body>
+    <!-- <form autocomplete="off">
+        <fieldset>
+            <legend> Login form</legend>
+
+            <label for="login">
+                Login:
+                <input type="text" name="username" id="login">
+            </label>
+
+            <label for="pwd">
+                Password:
+                <input type="password" name="password" id="pwd">
+            </label>
+            <button type="submit">Submit & Login</button>
+        </fieldset>
+    </form> -->
+
+    <!-- <fieldset>
+        <legend>Radios</legend>
+        <label for="radio-a"> 
+            First
+        <input type="radio" name="radios" id="radio-a" value="a">
+        </label>
+        <label for="radio-b"> 
+            Second
+        <input type="radio" name="radios" id="radio-b" value="b">
+        </label><label for="radio-c"> 
+            Third
+        <input type="radio" name="radios" id="radio-c" value="c">
+        </label>
+    </fieldset> -->
+
+    <!-- <fieldset>
+        <select>
+            <option value="apple">Apple</option>
+            <option value="berry">Berry</option>
+            <option value="citrus">Citrus</option>
+        </select>
+    </fieldset> -->
+    <fieldset>
+        <legend>Text input</legend>
+
+        <input type="text" id="txt">
+        <p id="validation-msg"></p>
+
+        <textarea id="area"></textarea>
+    </fieldset>
+</body>
+
+<script id="form default event">
+    // // when subited for will reloade site 
+    // // its a default behavior
+    // const form = document.querySelector('form');
+
+    // form.addEventListener('submit', (event) => {
+    //     console.log("Form submitted!");
+    // })
+</script>
+
+<script id="how to stop this with preventDefault">
+
+    // const form = document.querySelector("form");
+
+    // form.addEventListener("submit", (event) => {
+    //     event.preventDefault();
+    //     console.log("Form submitted!");
+    //     // now submit wont reload page and will contain user data in consolo not revealing it in url
+    //     console.log(event.target.elements);
+    //     // this will show HTMLformColection a lot of data that are default for forms 
+    //     // but we want only our data user and login 
+    //     console.log(event.target.elements.username)
+    //     console.log(event.target.elements.password)
+    //     // now we have inputs from form but still wont see values to get acces to it 
+    //     // we need to use value propety
+    //     console.log("Username: ", event.target.elements.username.value);
+    //     console.log("Password: ", event.target.elements.password.value);
+    //     // and with those data we can create object 
+    //     const {username: {value: login}, password: {value: pwd}} = event.target.elements;
+    //     console.log({login, pwd}) 
+    // });
+    
+</script>
+
+<script id="radio form events">
+
+    // const radios = document.querySelectorAll("input[type='radio']")
+
+    // radios.forEach(radio => {
+    //     radio.addEventListener("change", (event) => {
+    //         console.log("Changed: ", event.target.value)
+    //     })
+    // })
+</script>
+
+<script id="options form events">
+
+    // const select = document.querySelector("select");
+
+    // select.addEventListener("change", (event) => {
+    //     const value = event.currentTarget.value;
+    //     const index = event.currentTarget.selectedIndex;
+    //     //to get text of current option need to do this
+    //     const text = event.currentTarget.option[index].text;
+
+    //     console.log({value, index, text})
+    // })
+
+</script>
+
+<script id="text input and textarea events">
+
+    // const input = document.querySelector('input#txt');
+
+    // input.addEventListener("change", (event) => {
+    //     console.log("Change: ", event.target.value);
+    //     // change will ocure only after element lose its focus, when its blured, clicked away
+    // });
+    // to change this behavior we need to use input as type of event 
+
+    // lets say that we wanted for console.log to write down previus value and print char
+    // that was just pressed key by key and whole input separatly 
+    // for these we need to add place where previous valeu will be saved by let
+    // let previousValue = input.value
+    // input.addEventListener("input", (event) => {
+    //     console.log("Input: ", event.target.value);
+    //     // to do this we will add const that slice whole input and leave only last printed char
+    //     const currantChar = event.target.value.slice(previousValue.length) // this will cut out previously typed chars 
+    //     previousValue = event.target.value; // and this will assigne new string and will be use later to cut from next input
+    //     console.log("Char: ", currantChar);
+    // })
+
+    // // Closure - domknięcie 
+    // const logLastCharacter = (element) => {
+    //     let pervValue = element.value;
+
+    //     return (event) => {
+    //         const currentFullValue = event.target.value;
+    //         const LastCharacter = currentFullValue.slice(pervValue.length);
+
+    //         pervValue = currentFullValue;
+    //         console.log("Last character: ", LastCharacter);
+
+    //     }
+
+    //     const LastCharacterCallback = logLastCharacter(input); // nie mam pojęcia co tu sie dzieje 
+    //     input.addEventListener("input", LastCharacterCallback)
+    // }
+</script>
+<style>
+    input.focused {
+        background-color: cyan;
+        color: white;
+        font-weight: bold;
+        padding: 1rem;
+    }
+    .invalid {
+        background-color: red;
+
+    }
+</style>
+<script id="focus, blur, document.activeElemnt">
+    // 
+    const input = document.querySelector("#txt");
+
+    // input.addEventListener("focus", ({target : {style}}) => {
+    //     console.log("Focused!");
+
+    //     const focusedStyles = {
+    //         backgroundColor: "dodgerblue",
+    //         color: "white",
+    //         fontWeight: "bold",
+    //         padding: "1rem",
+    //     };
+
+    //     Object.assign(style, focusedStyles);
+    // });
+
+    // input.addEventListener("blur", ({target: {style}}) => {
+    //     console.log("Blurred...");
+
+    //     const unfocusedStyles = {
+    //         backgroundColor: "white",
+    //         color: "black",
+    //         fontWeight: "normal",
+    //         padding: "1.5rem",
+    //     }
+    //     Object.assign(style, unfocusedStyles)
+    // }) 
+
+    // that above is problematic better to just add class in css 
+
+    input.addEventListener("focus", (event) => {
+        event.target.classList.add("focused");
+    });
+
+    input.addEventListener("blur", (event) => {
+        event.target.classList.remove("focused");
+    });
+
+    // // activeElement point which element is active (duh)
+    // // we can add interval so every 2 second console wil log which alement is currently active
+    // setInterval(() => {
+    //     const currentlyFocused=document.activeElement;
+    //     console.log({currentlyFocused})
+    // }, 2_000);
+
+    // example for use of blur and focus that we need inputs to be certin length 
+
+    const MIN_LENGTH = 3;
+    const MAX_LENGTH = 16;
+    const validationMsg = document.querySelector("#validation-msg")
+
+    input.addEventListener("focus", (event) => {
+        validationMsg.textContent = ""
+        event.target.classList.remove("invalid");
+    });
+    input.addEventListener("blur", (event) => {
+        const len = event.target.value.length;
+        
+
+        if (len < MIN_LENGTH) {
+            validationMsg.textContent = "Provided input is too short";
+            event.target.classList.add("invalid");
+        } else if (len > MAX_LENGTH) {
+            validationMsg.textContent = "Provided input is too long!";
+            event.target.classList.add("invalid");
+        }
+    })
+</script>

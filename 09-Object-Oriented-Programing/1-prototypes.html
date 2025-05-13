@@ -101,3 +101,26 @@
     // p2.fight({ noLevel: 1}) // player have won but we dont want something like this we coud add an error
     // ;                       // after adding change to fight function we will get Uncaught Error: Oponent is not of type Player
   </script>
+
+  <script id="adding function to js">
+
+    const arr = [1, 2, 3];
+
+    function duplicate(someArray) {
+        someArray.push(...someArray);
+        return someArray
+    }
+
+    const x = duplicate(arr);
+
+    console.log(arr, x)
+
+    // extending prototype method
+
+    Array.prototype.duplicate = function() { // we can build in a new custom method to prototype
+        this.push(...this);                  // now every array can be treated with that function
+        return this;    
+    }
+
+    console.log( arr.duplicate())
+  </script>

@@ -1,0 +1,170 @@
+<title>Element Manipulation</title>
+<style>
+    .red {
+        color: red;
+    }
+</style>
+<body>
+    <article>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dolores facere quae quidem soluta nisi deserunt laboriosam expedita dignissimos et inventore illum perferendis nesciunt enim excepturi, minus totam praesentium tempore?
+    </article>
+</body>
+
+<script id="Creating elements">
+
+    // const heading = document.createElement('h1');
+    // heading.textContent = 'Hello there';
+    // heading.classList.add('red');
+    // console.log(heading);
+
+    // heading.style.fontSize = "128px";
+    // heading.style.margin ="0";
+    // heading.style.padding = "0";
+
+    // console.log(heading)
+    // console.log(heading.getAttribute("aria-label"));
+
+    // document.body.append(heading);
+
+//     const createHeading = (text) => {
+//         const heading = document.createElement('h1');
+
+//         heading.textContent = text;
+//         heading.classList.add('red');
+//         console.log(heading);
+
+//         heading.style.fontSize = "128px";
+//         heading.style.margin ="0";
+//         heading.style.padding = "0";
+
+//         console.log(heading)
+//         console.log(heading.getAttribute("aria-label"));
+
+//         return heading
+//        }
+//        const heading = createHeading("Hello There !")
+//        document.body.append(heading)
+//        document.body.prepend(createHeading("naura"))
+//        document.body.after(createHeading("_after"))
+//        document.body.before(createHeading("_before"))
+
+//        document.body.append(createHeading("first"), createHeading("second!"))
+//        document.body.appendChild(heading)
+
+//        // if we need we can remove html elements 
+//        heading.remove(); // from child level 
+
+//        // but we can also remove from parent level parent for heading is body so
+//        document.body.removeChild(heading)
+// </script>
+
+<script id="moddifing innerHtml">
+    // console.log(document.body.innerHTML);
+
+    // document.body.innerHTML += "siema"; // we can just add text to site 
+    // document.body.innerHTML += "<button>Siema</button"; // but with this method we can even add tags 
+    
+    // // document.body.innerHTML += `<script>alert("uwaga zostałeś zchackowany") // nie da się tak 
+
+    
+
+</script>
+
+<script id="insert element">
+
+//     const creatBtn = (text) => {
+//         const button = document.createElement("button");
+//         button.textContent = text;
+//         return button;
+//     }
+
+// const art = document.querySelector("article");
+
+// const button = document.createElement("button");
+// button.textContent = "Pointles button";
+// art.insertAdjacentElement("beforebegin", creatBtn("Before begin"))
+// art.insertAdjacentElement("afterbegin", creatBtn("after begin"))
+// art.insertAdjacentElement("beforeend", creatBtn("Before end"))
+// art.insertAdjacentElement("afterend", creatBtn("after end"))
+</script>
+
+<script id="Creating entire section in js - not recomanded -just for funsies">
+
+
+    const assignStyles = (element, styleObject) =>{
+        Object.entries(styleObject)
+            .forEach(([key, value]) => {
+                element.style[key] = value;
+            });
+    };
+
+    const gallery = document.createElement("section");
+    // //assignStyles(gallery, {color: "red", backgroundColor: "blue", width: "100px", height: "100px"});
+
+    assignStyles(gallery, {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1rem",
+
+    })
+
+    const createBtn = (text) => {
+        const btn = document.createElement("button");
+        btn.textContent = text;
+        assignStyles (btn, {
+            border: "none",
+            width: "30px",
+            height: "30px",
+            backgroundColor: "dodgerblue",
+            color: "white",
+            cursor: "pointer",
+        })
+
+        return btn;
+    };
+
+    const previusBtn = createBtn("<=");
+    const nextBtn = createBtn("=>");
+    const toggleBtn = createBtn("Stop");
+
+    let picsumId = 200;
+    const img = document.createElement("img");
+    img.alt = "Gallery photo";
+    img.src = `https://picsum.photos/id/${picsumId}/300/300`;
+    img.width="300";
+    img.height="300";
+    document.body.append(gallery);
+    gallery.append(previusBtn, img, nextBtn);
+    gallery.insertAdjacentElement("afterend", toggleBtn)
+
+    const photo = {
+        previus: () => img.src = `https://picsum.photos/id/${--picsumId}/300/300`,
+        next: () => img.src = `https://picsum.photos/id/${picsumId++}/300/300`, 
+        toggle: () => {
+    if (isRunning) {
+        clearInterval(photoInterval);
+        toggleBtn.textContent = "Start";
+    } else {
+        photoInterval = setInterval(photo.next, 3000);
+        toggleBtn.textContent = "Stop";
+    }
+    isRunning = !isRunning;
+}
+    }
+
+    previusBtn.addEventListener("click", photo.previus)
+    nextBtn.addEventListener("click", photo.next)
+    toggleBtn.addEventListener("click", photo.toggle);
+
+    let photoInterval = setInterval(photo.next, 3_000)
+    assignStyles(toggleBtn, {
+    display: "block",
+    margin: "1rem auto", 
+    width: "5rem",
+});
+
+let isRunning = true;
+
+
+</script>

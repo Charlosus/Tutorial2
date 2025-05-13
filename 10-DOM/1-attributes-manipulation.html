@@ -1,0 +1,138 @@
+<body>
+    <h1>Document object model</h1>
+    <ol>
+        <li>
+            <span><a href="">First</a></span>
+        </li>
+        <li>
+            <span><a href="">Second</a></span>
+        </li>
+        <li>
+            <span><a href="">Third</a></span>
+        </li>
+    </ol>
+    <img src="#">
+    <img src="#abc">
+
+    <article class="promoted bestreads" aria-label="Super article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum saepe,
+         harum commodi dolorem unde dicta, sequi molestias autem reiciendis odio 
+         ad consectetur. Ullam ipsa ipsum aliquid temporibus quia nulla fuga!
+        </article>
+</body>
+
+<style>
+    .red {
+        color: red;
+    }
+</style>
+
+<script>
+        // // Attributes: href, textcontent, src, alt
+        // // getAttribute, setAttribute, removeAttribute, hasAttribute
+
+        // const secondLink = document.querySelector("li:nth-child(2) a");
+        // console.log(secondLink.href);
+        // console.log(secondLink.textContent);
+
+        // // we can set time wen script will change our website 
+        // setTimeout(() => {
+        //     secondLink.href = "https://www.google.com";
+        //     secondLink.textContent = "wujek cogelmogel gugel";
+        // }, 5000)
+        // secondLink
+
+        // const images = document.querySelectorAll("img");
+
+
+        // setTimeout(() => { 
+        //     // image.src = "https://picsum.photos/300/300"
+        //     // image.alt = "Some image";           
+        // images.forEach(image => {
+        //     image.src = "https://picsum.photos/300/300"
+        //     image.alt = "Some image";
+        //     });
+        // }, 5_100);
+        
+        // const article = document.querySelector("article")
+        // const articleAriaLabel= article.ariaLabel;
+        // const articleAriaLabel2 = article.getAttribute("aria-label");
+        // console.log(articleAriaLabel, articleAriaLabel2);
+
+        // article.setAttribute('id', "top-article") // both methods are viable but this is better looking
+        // article.id = "top-top-article"
+
+        // console.log(article.getAttribute('id'))
+
+        // // we can remove attribut aswell 
+        // article.removeAttribute('id');
+        // console.log(article.getAttribute('id'));
+
+        // // to check if element have attribut we are looking for we can use hasAttribut
+        // article.hasAttribute('id')
+        // article.hasAttribute('aria-label')  
+
+</script>
+
+<script id="Setiing class for elements">
+
+    // //classList
+    // const article = document.querySelector('article');
+    // console.log([...article.classList]);
+
+    // article.classList.add('red')
+    // console.log("Contains red: ", article.classList.contains('red'));
+    // article.classList.remove('red');
+    // console.log('Contains red: ', article.classList.contains('red'));
+
+    // // we can oparete with toggle if article has 
+    // article.classList.toggle('red')
+
+    // // this above is same as this below 
+    // // if (article.classList.contains('red')) {
+    // //     article.classList.remove('red');
+    // // } else {
+    // //     article.classList.add('red ')
+    // // }
+    // // can do somethign redonculus like this
+
+    // let i=0
+    // const interval = setInterval(() => {
+    //     article.classList.toggle("red");
+
+    //     i++;
+    //     if (i>10) clearInterval(interval) // this will break interval after 10 incrementation
+    // }, 500); 
+</script>
+
+<script id="Seting CSS styles"> 
+
+    // style
+
+    // const listItems = document.querySelectorAll('li a');
+
+    // listItems.forEach(item => {
+    //     item.style.color = '#fff';
+    //     item.style.backgroundColor = "#000";
+    // });
+
+    // const art = document.querySelector("article");
+    // art.style.color = "green";
+    
+    // listItems[1].style.color = "red";
+    
+</script>
+
+<script id="data attributes: dataset['name']">
+
+    // const listItems = Array.from(document.querySelectorAll('li'));
+
+    // listItems.forEach(item => {
+    //     item.dataset.order = Math.round(Math.random()*10);
+    // })
+
+    // const orders = listItems.map(item => item.dataset.order);
+    // console.log(orders)
+
+
+</script>

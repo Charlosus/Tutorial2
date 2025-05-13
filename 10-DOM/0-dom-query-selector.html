@@ -1,0 +1,104 @@
+<body>
+    <h1>Document object model</h1>
+    <ol>
+        <li>
+            <span id="abc">First</span>
+        </li>
+        <li>
+            <span id="xyz" class="red">Second</span>
+        </li>
+        <li>
+            <span id="abd">Third</span>
+        </li>
+    </ol>
+</body>
+<script>
+    // const element = document.querySelector("body>ol>li:nth-child(1)>spac"); // this and one below 
+    // const element1 = document.querySelector("body>ol>li>spac");             // will lead to the same selector 
+    // //                                                   // becasue querysele point to first matching elemnt 
+    // const element2= document.querySelector('#abc') ;        // but we can use id to select wanted selector 
+    // // there are other ways to pick selector 
+    // const elementByid = document.getElementById("xyz") ;// as you se we dont need to type # becasue it will automaticly focus on ids
+    // // third way is byClass
+    // const elementByClass = document.getElementsByClassName("red");
+    // // we can disect querySelector by assign parent element to cosnt and then choosing ither querySelecor
+    // const list = document.querySelector("ol");
+    // const secondItemSpan = list
+    //     .querySelector("li:nth-child(2)")
+    //     .querySelector("span");
+    // const lastSpan = document
+    //     .querySelector("body")
+    //     .querySelector("ol")
+    //     .querySelector("li:nth-child(3)")
+    //     .querySelector("span")      // however its not very usefull but can be done 
+        
+    // const secontSpanBetter = document.querySelector("span#xyz.red");// this will pick first element 
+    // //                                                              // that is 1)span 2)has id xyz 3) class="red"
+
+    // // querySelector will pick first and only one element matching descr
+    // // if needed all elements that are want such as all elements that are list item 
+    // // we can use querySelectorAll 
+    // const listItems = document.querySelectorAll("li"); // return NodeList - pseudoarray cant use all array methods 
+    // //but if we wanted to get all li content (in this case span)
+    // const listItemSpans = document.querySelectorAll("li span")
+
+    // const texts = listItems.map(item => item.textContent); // will cause error because picked are pseudoarrays 
+    // // to operate on such elements we need to use Array.from() to transform it to rightfull array 
+    // const textsProper = Array.from(listItems).map(item => item.textContent)
+</script>
+
+<script>
+
+    // const element0 = document.querySelector("li:nth-child(2)");
+    // // console.log(element0);
+
+    // // // to see parent node it which our element is located we can use property .parentNode
+    // // console.log(element0.parentNode);
+    // // // to see childNodes of element use property .childNodes
+    // // console.log(element0.childNodes);// return nodeList
+    // // // to see all childrens just use .children
+    // // console.log(element0.children) // this will return html colection 
+
+    // // // to get array from children you need to use array.from or spread operator ([...]) 
+    // // console.log(Array.from(element0.children))
+    // // console.log([...element0.children].map(el => el.textContent))
+
+    // // // to see just text content use .textContent 
+    // // const secondText = element0.children[0].textContent; 
+    // // console.log(secondText)
+
+    // // console.log(element0.firstChild) 
+    // // console.log(element0.firstElementChild)
+
+    // const parent = element0.parentElement;// here we assing const parent to parent of a elemnt0
+
+    // // console.log(parent.firstChild);
+    // // console.log(parent.firstElementChild);
+
+    // // console.log(parent.lastChild);
+    // // console.log(parent.lastElementChild);
+
+    // console.log(parent.previousSibling);
+    // console.log(parent.previousElementSibling);
+
+    // // console.log(parent.nextSibling);
+    // // console.log(parent.nextElementSibling);
+
+    // console.log(parent)
+
+    class Elem {
+        constructor(type, parent, text="", children = []) {
+            this.type = type;
+            this.parent = parent;
+            this.text = text;
+            this.children = children;
+        }
+        addChild(elem) {
+            elem.parent = this;
+            this.children.push(elem);
+        }
+    }
+
+
+
+</script>

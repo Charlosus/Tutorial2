@@ -1,0 +1,122 @@
+<title>Events & Event listeners</title>
+
+<body>
+    <button id="btn">Pointless Button</button>
+</body>
+
+<script> 
+
+    document.addEventListener("Click", function handleClick () {
+        console.log("Click!");
+    });
+
+</script>
+
+<script id="Adding and removing EventListener ">
+
+    // const pointlessBtn = document.querySelector('button#btn');
+
+    // pointlessBtn.addEventListener('click', () => {          // adding console log when clicked on button
+    //     console.log("not so pointless now :)");
+    //     pointlessBtn.textContent = "Not so pointless"
+    // });
+
+    // // pointlessBtn.addEventListener("mouseover", () => {      // kinda hoover but wont change back when mouse leave it 
+    // //     console.log("Is there any point in that?");
+    // //     pointlessBtn.style.backgroundColor = "red";
+    // // });
+
+    // pointlessBtn.addEventListener("mouseenter", () => {
+    //     pointlessBtn.style.backgroundColor = "red";
+    //     pointlessBtn.style.color = "white";
+    // })
+
+    //  pointlessBtn.addEventListener("mouseleave", () => {      // now better color will change when cursor will be on button
+    //     console.log("Is there any point in that?");
+    //     pointlessBtn.style.backgroundColor = "white";
+    //     pointlessBtn.style.color = "black";
+    // });
+
+    // // // in old style this can be done by on click
+    // // pointlessBtn.onclick = () => console.log("click") // but its not as functional 
+    // // // you can only add one event by onclick 
+    // // pointlessBtn.onclick = () => console.log("click2") // this will overright on click 
+    // // // and first one will be obselit
+
+
+    // // it seams that removing is not o easy as adding we need to have exacly the same function 
+    // // which mean it have to has a refernace 
+
+    // // firts we need to pull out function from event declaration 
+
+    //  const onMouseOver = () => {
+    //         console.log("Is there any point in that?")
+    //     }
+    
+    // // // now we can add function to event listener as particlar event 
+    // // pointlessBtn.addEventListener("mouseover", onMouseOver);
+
+    // // pointlessBtn.removeEventListener("mouseover", onMouseOver);
+
+    // // // only here we can remove event 
+    // // lets do something wacky 
+
+    // pointlessBtn.addEventListener("mouseover", onMouseOver);
+    
+    // const removeMouseOverOnce = () => {
+    //     console.log("removing mouse over");
+    //     pointlessBtn.removeEventListener("mouseover", onMouseOver);
+    //     pointlessBtn.removeEventListener("click", removeMouseOverOnce);
+    // };
+
+    // pointlessBtn.addEventListener("click", removeMouseOverOnce);
+    
+</script>
+
+<script id="single use button">
+    // const addEventListenerOnce = (element, eventType, callback) => {
+    //     const oneTimeCallBack = (event) => {
+    //         callback(event);
+    //         element.removeEventListener(eventType, oneTimeCallBack);
+    //     };
+    //     element.addEventListener(eventType, oneTimeCallBack);
+    // };
+    // addEventListenerOnce(document.querySelector("button#btn"), "click", () => {
+    //     console.log("I'll fire only once!");
+    // });
+
+</script>
+
+<script id="tracking mouse movement with addEventListnener ">
+
+    // const handleClick = (event) => {
+    //     console.log(event);
+    // };
+
+    // // document.querySelector("button#btn").addEventListener("click", handleClick);
+    // // document.querySelector("button#btn").addEventListener("mouseover", handleClick);
+
+    // // lets destructurize handleClick
+    // // document.querySelector("button#btn")
+    // //     // .addEventListner("click", (event) => {
+    // //     .addEventListener("click", ({type, currentTarget}) => {
+    // //         console.log({type, currentTarget})
+    // //     })
+    // // lets do that we know position of mouse we can do it by 
+    // // document/addEventListener("mousemove", (event) => {
+    // //     const { clientX: x, clientY: y } = event;
+        
+    // //     console.log({x, y})
+    // // });
+    // // same as above but in one lince 
+    // document.addEventListener("mousemove", ({clientX, clientY}) => console.log(clientX, clientY))
+   
+   // and now lets add it to page 
+       document/addEventListener("mousemove", (event) => {
+        const { clientX: x, clientY: y } = event;
+        
+        console.log({x, y});
+        document.body.innerText = `(${x}, ${y})`
+    });
+</script>
+

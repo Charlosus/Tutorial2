@@ -1,0 +1,654 @@
+<title> Conspect autocheck </title>
+
+<p id="1-Creating object with prototype">
+Zmodyfikuj kod tak, aby obiekt parent stał się prototypem obiektu w zmiennej сhild.
+
+Zadeklarowano zmienną parent
+Wartością zmiennej parent jest obiekt
+Zadeklarowano zmienną child
+Wartością zmiennej child jest obiekt
+Użyto metody Object.create()
+Wywołanie parent.hasOwnProperty("surname") zwraca true
+Wywołanie parent.hasOwnProperty("heritage") zwraca true
+Wywołanie child.hasOwnProperty("name") zwraca true
+Odwołanie się do child.name zwraca "Jason"
+Wywołanie child.hasOwnProperty("age") zwraca true
+Odwołanie się do child.age zwraca 27
+Wywołanie child.hasOwnProperty("surname") zwraca false
+Odwołanie się do child.surname zwraca "Moore"
+Wywołanie child.hasOwnProperty("heritage") zwraca false
+Odwołanie się do child.heritage zwraca "Irish"
+Wywołanie parent.isPrototypeOf(child) zwraca true
+
+const parent = {
+    name: "Stacey",
+    surname: "Moore",
+    age: 54,
+    heritage: "Irish",
+  };
+  
+  const child = {};
+  child.name = "Jason";
+  child.age = 27;
+  
+</p>
+
+<script id="1">
+//     const parent = {
+//   name: "Stacey",
+//   surname: "Moore",
+//   age: 54,
+//   heritage: "Irish",
+// };
+
+// const child = Object.create(parent);
+// child.name = "Jason";
+// child.age = 27;
+</script>
+
+<script id="Iteration only after own properties">
+// const animal = { legs: 4 };
+// const dog = Object.create(animal);
+// dog.name = "Mango";
+
+// for (const key in dog) {
+// 	if(dog.hasOwnProperty(key)) {
+// 		console.log(key); // "name"
+// 	}
+// }
+</script>
+
+<p id="2 chain of prototypes">
+Zmodyfikuj kod, tworząc łańcuch prototypów tak, aby obiekt ancestor był prototypem dla parent, a ten z kolei był prototypem dla child.
+
+Zadeklarowano zmienną ancestor
+Wartością zmiennej ancestor jest obiekt.
+Zadeklarowano zmienną parent
+Wartością zmiennej parent jest obiekt.
+Zadeklarowano zmienną child
+Wartością zmiennej child jest obiekt.
+Wywołanie ancestor.isPrototypeOf("parent") zwraca false
+Wywołanie parent.isPrototypeOf("child") zwraca false
+Wywołanie ancestor.hasOwnProperty("surname") zwraca true
+Odwołanie się do ancestor.surname zwraca "Dawson"
+Wywołanie parent.hasOwnProperty("surname") zwraca true
+Odwołanie się do parent.surname zwraca "Moore"
+Wywołanie child.hasOwnProperty("surname") zwraca false
+Odwołanie się do child.surname zwraca "Moore"
+Wywołanie ancestor.hasOwnProperty("heritage") zwraca true
+Odwołanie się do ancestor.heritage zwraca "Irish"
+Wywołanie parent.hasOwnProperty("heritage") zwraca false
+Odwołanie się do parent.heritage zwraca "Irish"
+Wywołanie child.hasOwnProperty("heritage") zwraca false
+Odwołanie się do child.heritage zwraca "Irish"
+Użyto metody Object.create()
+
+const ancestor = {
+    name: "Paul",
+    age: 83,
+    surname: "Dawson",
+    heritage: "Irish",
+  };
+  
+  const parent = {};
+  parent.name = "Stacey";
+  parent.surname = "Moore";
+  parent.age = 54;
+  
+  const child = {};
+  child.name = "Jason";
+  child.age = 27;
+</p>
+
+<script id="2">
+//     const ancestor = {
+//   name: "Paul",
+//   age: 83,
+//   surname: "Dawson",
+//   heritage: "Irish",
+// };
+
+// const parent = Object.create(ancestor);
+// parent.name = "Stacey";
+// parent.surname = "Moore";
+// parent.age = 54;
+
+// const child = Object.create(parent);
+// child.name = "Jason";
+// child.age = 27;
+</script>
+
+<p id="3Creating new class and new instance from it">
+Używając słowa kluczowego class, zadeklaruj pustą klasę Car.
+
+Zadeklarowano klasę Car
+W wyniku wywołania new Car() zwracany jest pusty obiekt
+</p>
+
+<script id="3">
+    // class Car {}
+</script>
+
+<p id="4 adding constructor to class">
+    Dodaj do klasy Car metodę constructor, która przyjmuje trzy parametry:
+
+brand – marka samochodu
+model – model samochodu
+price – cena samochodu
+Klasa Car powinna tworzyć obiekt z właściwościami brand, model i price, których wartości zostaną przekazane jako argumenty przy tworzeniu nowej instancji (przy użyciu operatora new).
+
+Zadeklarowano klasę Car
+Klasa Car zawiera metodę constructor
+W wyniku wywołania new Car("Audi", "Q3", 36000) zostanie utworzony obiekt {brand: "Audi", model: "Q3", price: 36000}
+W wyniku wywołania new Car("BMW", "X5", 58900) zostanie utworzony obiekt {brand: "BMW", model: "X5", price: 58900}
+W wyniku wywołania new Car("Nissan","Murano", 31700) zostanie utworzony obiekt {brand: "Nissan", model: "Murano", price: 31700}
+</p>
+
+<script id="4">
+    // class Car {
+    //     constructor(brand, model, price) {
+    //         this.brand = brand,
+    //         this.model = model,
+    //         this.price = price
+    //     }
+    // }
+    // const newCar = new Car ("VW", "Polo", 15000)
+    // console.log(newCar)
+</script>
+
+<p id="5 passing params to constuctor">
+Przeprowadź refaktoryzację klasy Car tak, aby przyjmowała ona jeden parametr, 
+tj. obiekt z właściwościami brand, model i price.
+
+Zadeklarowano klasę Car
+Klasa Car zawiera metodę constructor
+W wyniku wywołania new Car({ brand: "Audi", model: "Q3", price: 36000 }) zostanie 
+utworzony obiekt {brand: "Audi", model: "Q3", price: 36000}
+W wyniku wywołania new Car({ brand: "BMW", model: "X5", price: 58900 }) zostanie
+ utworzony obiekt {brand: "BMW", model: "X5", price: 58900}
+W wyniku wywołania new Car({ brand: "Nissan", model: "Murano", price: 31700 }) 
+zostanie utworzony obiekt {brand: "Nissan", model: "Murano", price: 31700}
+</p>
+
+<script id="5">
+    
+// class Car {
+// //   constructor(params) {
+// //     this.brand = params.brand;
+// //     this.model = params.model;
+// //     this.price = params.price;
+//     //this can also be done with destructurization
+//     constructor({brand, model, price}) {
+//         this.brand = brand;
+//         this.model = model;
+//         this.price = price;
+//   }
+// }
+// const newCarScatch = {
+//     brand: "Vw",
+//     model: "Polo",
+//     price: 15000,
+// }
+// const newCar = new Car(newCarScatch)
+// console.log(newCar)
+</script>
+
+<p id="6-Adding method to class">
+    Dodaj do klasy Car dwie metody.
+
+getPrice() zwraca wartość właściwości price w obiekcie, w którym metoda zostanie wywołana.
+
+changePrice(newPrice) zmieni wartość właściwości price na wartość parametru newPrice w 
+obiekcie, w którym metoda zostanie wywołana.
+Klasa Car zawiera metodę getPrice
+
+Metoda getPrice zwraca wartość właściwości price w obiekcie klasy, która tę metodę wywoła
+
+Klasa Car zawiera metodę changePrice
+Metoda changePrice zmienia wartość właściwości price w obiekcie klasy, która tę metodę wywoła
+
+Starting code:
+class Car {
+    constructor(params) {
+      this.brand = params.brand;
+      this.model = params.model;
+      this.price = params.price;
+    }
+  }
+  
+</p>
+
+<script id="6">
+//     class Car {
+//   constructor(params) {
+//     this.brand = params.brand;
+//     this.model = params.model;
+//     this.price = params.price;
+//   }
+//   getPrice() {
+//     return this.price
+//   }
+//   changePrice(newPrice) {
+//     this.price = newPrice
+//   }
+// }
+
+</script>
+
+<p id="7 incapsulating values date">
+Przeprowadź refaktoryzację klasy Car, ustawiając właściwość brand jako prywatną oraz dodając do publicznego interfejsu dwie metody pozwalające na pobranie lub zmianę wartości w tym polu.
+
+Metoda getBrand() zwraca wartość prywatnej właściwości brand.
+Metoda changeBrand(newBrand) ustawia wartość prywatnej właściwości brand na newBrand.
+Zadeklarowano klasę Car
+Właściwość brand należąca do klasy Car zadeklarowano jako prywatną
+Konstruktor klasy przyjmuje obiekt z właściwościami brand, model i price
+W wyniku wywołania new Car({ brand: "Audi", model: "Q3", price: 36000 }) zostanie utworzony obiekt { model: "Q3", price: 36000 }
+W wyniku wywołania new Car({ brand: "bmw", model: "X5", price: 58900 }) zostanie utworzony obiekt { model: "X5", price: 58900 }
+W wyniku wywołania new Car({ brand: "Nissan", model: "Murano", price: 31700 }) zostanie utworzony obiekt { model: "Murano", price: 31700 }
+Instancja nie zawiera publicznej właściwości brand
+Metoda getBrand() zwraca wartość prywatnej właściwości brand
+Metoda changeBrand("Honda") zmienia wartość prywatnej właściwości brand" na "Honda"
+
+class Car {
+    constructor(params) {
+      this.brand = params.brand;
+      this.model = params.model;
+      this.price = params.price;
+    }
+  
+    getPrice() {
+      return this.price;
+    }
+  
+    changePrice(newPrice) {
+      this.price = newPrice;
+    }
+  }
+</p>
+
+<script id="7">
+
+// class Car {
+//     #brand;
+//     model;
+//     price;
+//   constructor(params) {
+//     this.#brand = params.brand;
+//     this.model = params.model;
+//     this.price = params.price;
+//   }
+//   getBrand() {
+//     return this.#brand
+//   }
+//   changeBrand(newBrand){ 
+//     this.#brand = newBrand
+//   }
+//   getPrice() {
+//     return this.price;
+//   }
+
+//   changePrice(newPrice) {
+//     this.price = newPrice;
+//   }
+// }
+</script>
+
+<p id="8 privating whole date">
+Przeprowadź refaktoryzację klasy Car. Oprócz prywatnego pola #brand zadbaj o to, aby właściwości model i price również były prywatne. Należy ujednolicić interfejs publiczny klasy, zastępując zadeklarowane wcześniej metody getterami i setterami brand, model i price, aby umożliwić pracę z prywatnymi właściwościami klasy.
+
+Zadeklarowano klasę Car
+Klasa Car zawiera właściwość prywatną brand
+Klasa Car zawiera właściwość prywatną model
+Klasa Car zawiera właściwość prywatną price
+Konstruktor klasy przyjmuje obiekt z właściwościami brand, model i price
+W klasie Car zadeklarowano getter getPrice
+W klasie Car zadeklarowano setter brand
+W klasie Car zadeklarowano getter model
+W klasie Car zadeklarowano setter model
+W klasie Car zadeklarowano getter price
+W klasie Car zadeklarowano setter price
+</p>
+
+<script id="8">
+//     class Car {
+//   #brand;
+//   #model;
+//   #price;
+
+//   constructor(params) {
+//     this.#brand = params.brand;
+//     this.#model = params.model;
+//     this.#price = params.price;
+//   }
+
+//   get brand () {
+//     return this.#brand;
+//   }
+
+//   set brand (newBrand) {
+//     this.#brand = newBrand;
+//   }
+
+//   get model() {
+//     return this.#model;
+//   }
+
+//   set model(newModel) {
+//     this.#model = newModel;
+//   }
+
+//   get price() {
+//     return this.#price;
+//   }
+
+//   set price(newPrice) {
+//     this.#price = newPrice;
+//   }
+// }
+</script>
+
+<p id="9 static values">
+    Przeprowadź refaktoryzację klasy Car. Dodaj publiczną właściwość 
+    statyczną maxPrice i ustaw jej wartość na liczbę 50000, tj. 
+    maksymalna dopuszczalna cena samochodu.
+
+Dodaj do settera price sprawdzanie przekazywanej wartości parametru newPrice. 
+Jeśli przekazana wartość jest większa niż maxPrice, setter nie zapisuje żadnych
+ zmian, a jeśli jest mniejsza lub równa, nadpisuje cenę samochodu.
+
+Pod deklaracją klasy dodaliśmy inicjalizacje instancji i wywołania metod, aby
+ pokazać, w jaki sposób będą używane gettery i settery price.
+
+Zadeklarowano klasę Car
+Obiekt zawiera właściwość statyczną maxPrice
+Wartością statycznej właściwości maxPrice jest liczba 50000
+Instancja nie zawiera właściwości maxPrice
+W klasie Car zadeklarowano getter price
+W klasie Car zadeklarowano setter price
+Wywołanie settera price w instancji klasy z wartością argumentu mniejszą niż
+ wartość maxPrice aktualizuje wartość właściwości #price
+Wywołanie settera price w instancji klasy z wartością argumentu większą niż
+ wartość maxPrice NIE aktualizuje wartości właściwości #price
+
+ class Car {
+    #price;
+  
+    constructor(params) {
+      this.#price = params.price;
+    }
+  
+    get price() {
+      return this.#price;
+    }
+  
+    set price(newPrice) {
+      this.#price = newPrice;
+    }
+  }
+  
+  const audi = new Car({ price: 35000 });
+  console.log(audi.price); // 35000
+  
+  audi.price = 49000;
+  console.log(audi.price); // 49000
+  
+  audi.price = 51000;
+  console.log(audi.price); // 49000
+  
+</p>
+
+<script id="9">
+
+// class Car {
+//   static maxPrice = 50000;
+//   #price;
+//   }
+
+//   constructor(params) {
+//     this.#price = params.price;
+//   }
+
+//   get price() {
+//     return this.#price;
+//   }
+
+//   set price(newPrice) {
+//     if (newPrice <= Car.maxPrice) {
+//     this.#price = newPrice;}
+//   }
+// }
+
+// const audi = new Car({ price: 35000 });
+// console.log(audi.price); // 35000
+
+// audi.price = 49000;
+// console.log(audi.price); // 49000
+
+// audi.price = 51000;
+// console.log(audi.price); // 49000
+
+</script>
+
+<p id="10 seting static method">
+    Dodaj do klasy Car publiczną statyczną metodę checkPrice(price), 
+    która przyjmuje cenę auta jako argument. Metoda powinna porównać
+     wartość parametru price i prywatnej statycznej właściwości maxPrice.
+
+Jeśli cena samochodu przekracza wartość maksymalną, metoda powinna
+ zwrócić ciąg znaków "Error! Price exceeds the maximum".
+W przeciwnym razie metoda powinna zwrócić ciąg znaków "Success! Price
+ is within acceptable limits".
+Pod deklaracją klasy dodaliśmy inicjalizację instancji i wywołania
+ metod, aby pokazać, w jaki sposób używana będzie metoda checkPrice(price).
+
+Zadeklarowano klasę Car
+Klasa Car zawiera statyczną metodę checkPrice(price)
+Wywołanie Car.checkPrice(36000) zwraca ciąg znaków "Success! Price is within acceptable limits"
+Wywołanie Car.checkPrice(18000) zwraca ciąg znaków "Success! Price is within acceptable limits"
+Wywołanie Car.checkPrice(64000) zwraca ciąg znaków "Error! Price exceeds the maximum"
+Wywołanie Car.checkPrice(57000) zwraca ciąg znaków "Error! Price exceeds the maximum"
+</p>
+
+<script id="10">
+//     class Car {
+//   static #maxPrice = 50000;
+//   static checkPrice(price) {
+//    return price <= Car.#maxPrice
+//     ? "Success! Price is within acceptable limits"
+//     : "Error! Price exceeds the maximum" 
+//   }
+//   constructor(params) {
+//     this.price = params.price;
+//   }
+// }
+
+// const audi = new Car({ price: 36000 });
+// const bmw = new Car({ price: 64000 });
+
+// console.log(Car.checkPrice(audi.price)); // "Success! Price is within acceptable limits"
+// console.log(Car.checkPrice(bmw.price)); // "Error! Price exceeds the maximum"
+</script>
+
+<p id="11 adding static to child class">
+  Do obsługi aplikacji potrzebny jest administrator z uprawnieniami do dodawania adresów e-mail użytkowników do czarnej listy.
+
+Zadeklaruj klasę Admin, który jest dziedziczony z klasy User
+Dodaj do klasy Admin publiczną statyczną właściwość role (poziom dostępu), której wartością jest obiekt {BASIC: "basic", SUPERUSER: "superuser"}
+Zadeklarowano klasę Admin
+Klasa Admin jest dziedziczona z klasy User
+Klasa Admin zawiera publiczną statyczną właściwość role
+Odwołanie się do Admin.role.BASIC zwraca ciąg "basic"
+Odwołanie się do Admin.role.SUPERUSER zwraca ciąg "superuser"
+</p>
+
+<script id="11">
+//   class Car {
+//   static #maxPrice = 50000;
+//   static checkPrice(price) {
+//    return price <= Car.#maxPrice
+//     ? "Success! Price is within acceptable limits"
+//     : "Error! Price exceeds the maximum" 
+//   }
+//   constructor(params) {
+//     this.price = params.price;
+//   }
+// }
+
+
+// const audi = new Car({ price: 36000 });
+// const bmw = new Car({ price: 64000 });
+
+// console.log(Car.checkPrice(audi.price)); // "Success! Price is within acceptable limits"
+// console.log(Car.checkPrice(bmw.price)); // "Error! Price exceeds the maximum"
+</script>
+
+<p id="12">
+  Do obsługi aplikacji potrzebny jest administrator z uprawnieniami do dodawania adresów e-mail użytkowników do czarnej listy.
+
+  Zadeklaruj klasę Admin, który jest dziedziczony z klasy User
+  Dodaj do klasy Admin publiczną statyczną właściwość role (poziom dostępu), której wartością jest obiekt {BASIC: "basic", SUPERUSER: "superuser"}
+  Zadeklarowano klasę Admin
+  Klasa Admin jest dziedziczona z klasy User
+  Klasa Admin zawiera publiczną statyczną właściwość role
+  Odwołanie się do Admin.role.BASIC zwraca ciąg "basic"
+  Odwołanie się do Admin.role.SUPERUSER zwraca ciąg "superuser"
+</p>
+
+<script id="12">
+//   class User {
+//   constructor(email) {
+//     this.email = email;
+//   }
+
+//   get email() {
+//     return this.email;
+//   }
+
+//   set email(newEmail) {
+//     this.email = newEmail;
+//   }
+// }
+// class Admin extends User {
+//   static role = {BASIC: "basic", SUPERUSER: "superuser"}
+// }
+</script>
+
+<p id="13">
+  Dodaj do klasy Admin metodę constructor, która przyjmuje jeden parametr, tj. obiekt ustawień z dwiema właściwościami email i access. Dodaj do klasy Admin publiczną właściwość access, której wartość będzie przekazywana przy wywoływaniu konstruktora.
+
+Pod deklaracją klasy dodaliśmy inicjalizację instancji, aby pokazać, w jaki sposób będzie używana klasa Admin.
+
+Zadeklarowano klasę Admin
+Klasa Admin jest dziedziczona z klasy User
+Klasa Admin zawiera publiczną statyczną właściwość role
+Konstruktor klasy Admin powinien przekazywać właściwość email do konstruktora klasy nadrzędnej User za pomocą super
+Konstruktor klasy Admin powinien przypisywać wartość właściwości access do właściwości instancji access
+Konstruktor klasy Admin przyjmuje obiekt params, który zawiera email i access.
+Odwołanie się do Admin.role.BASIC zwraca ciąg "basic"
+Odwołanie się do Admin.role.SUPERUSER zwraca ciąg "superuser"
+</p>
+
+<script id="13 adding super constructor">
+//   class User {
+//   email;
+
+//   constructor(email) {
+//     this.email = email;
+//   }
+
+//   get email() {
+//     return this.email;
+//   }
+
+//   set email(newEmail) {
+//     this.email = newEmail;
+//   }
+// }
+
+// class Admin extends User {
+//   static role = {
+//     BASIC: "basic",
+//     SUPERUSER: "superuser",
+//   };
+//   constructor(params) {
+//     super(params.email)
+//   }
+// }
+
+// const mango = new Admin({
+//   email: "mango@mail.com",
+//   access: Admin.role.SUPERUSER,
+// });
+
+</script>
+
+<p id="14 adding public method blacklist">
+  Dodaj następujące właściwości i metody do klasy Admin.
+
+Publiczną właściwość blacklistedEmails, w której będzie czarna lista adresów e-mail użytkowników. Wartością domyślną jest pusta tablica.
+Publiczną metodę blacklist(email) służącą do dodawania adresu e-mail do czarnej listy. Metoda powinna dodawać wartość parametru email do tablicy przechowywanej we właściwości blacklistedEmails.
+Publiczną metodę isBlacklisted(email) służącą do sprawdzania, czy adres e-mail znajduje się na czarnej liście. Metoda powinna sprawdzać występowanie wartości parametru email w tablicy przechowywanej we właściwości blacklistedEmails i zwracać true lub false.
+Pod deklaracją klasy dodaliśmy inicjalizację instancji i wywołania metod w kolejności, w jakiej kod będzie sprawdzany w testach. Prosimy nic tam nie zmieniać.
+
+Zadeklarowano klasę Admin
+Klasa Admin jest dziedziczona z klasy User
+Klasa Admin zawiera publiczną właściwość blacklistedEmails
+Klasa Admin zawiera publiczną metodę blacklist
+Klasa Admin zawiera publiczną metodę isBlacklisted
+Po wywołaniu mango.blacklist("poly@mail.com") wartością właściwości blacklistedEmails jest tablica ["poly@mail.com"]
+Wywołanie mango.isBlacklisted("mango@mail.com") zwraca false
+Wywołanie mango.isBlacklisted("poly@mail.com") zwraca true
+</p>
+
+<script id="14">
+class User {
+  email;
+
+  constructor(email) {
+    this.email = email;
+  }
+
+  get email() {
+    return this.email;
+  }
+
+  set email(newEmail) {
+    this.email = newEmail;
+  }
+}
+class Admin extends User {
+  static role = {
+    BASIC: "basic",
+    SUPERUSER: "superuser",
+  };
+
+  constructor(params) {
+    super(params.email);
+    this.access = params.access;
+    this.blacklistedEmails = [];
+  }
+  blacklist(email) {
+    this.blacklistedEmails.push(email);
+  }
+  isBlacklisted(email) {
+    return this.blacklistedEmails.includes(email);
+  }
+}
+
+const mango = new Admin({
+  email: "mango@mail.com",
+  access: Admin.role.SUPERUSER,
+  
+});
+
+console.log(mango.email); // "mango@mail.com"
+console.log(mango.access); // "superuser"
+
+mango.blacklist("poly@mail.com");
+console.log(mango.blacklistedEmails); // ["poly@mail.com"]
+console.log(mango.isBlacklisted("mango@mail.com")); // false
+console.log(mango.isBlacklisted("poly@mail.com")); // true
+
+
+</script>

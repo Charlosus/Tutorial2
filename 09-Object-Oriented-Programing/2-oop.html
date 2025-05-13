@@ -1,0 +1,541 @@
+<title>OOP Object Oriented Porgraming</title>
+<script id="Procedural">
+    // const name = "Adam"; // creats variable name and seting it to Adam 
+
+    // const greet = () => {                    // this example of procedural programing
+    //     console.log(`Hello form ${name}`);
+    // };
+
+    // const greetParametrized = (username) => {
+    //     console.log(`Hello from ${username}`);
+    // };
+
+    // greet();
+    // greetParametrized(name);
+    // greetParametrized('Beth')
+</script>
+<script id="OOP">
+
+    // const user = {
+    //     name: "Adam",
+    //     greet() {
+    //         console.log(`hello from ${this.name}`);
+    //     }
+    // };
+
+    // user.greet();
+
+    // const anotherUser = Object.assign(user, {name: "Beth"}); 
+    // anotherUser.greet();
+    // //this can be also be done like this
+    // const user2 = {...user, name: "Cecil"};
+    // user2.greet();
+</script>
+
+<script id="creating new user by constructor">
+
+    // function User(name) {
+    //     console.log(`User ${name} was born`);
+
+    //     this.name = name;
+    //     this.experience = 0;
+
+    //     this.greet = function() {
+    //         console.log(`Hello from ${this.name}`);
+    //     }
+
+    //     this.study = function() {
+    //         this.experience++;
+    //     }
+    // }
+
+    // const adam = new User("Adam");
+    // const beth = new User("Beth");
+
+    // adam.greet();
+    // beth.greet();
+
+    // adam.study();
+    // adam.study();
+    // adam.study();
+
+    // beth.study();
+
+    // console.log("Adam expierience: ", adam.experience);
+    // console.log("Beth expierience: ", beth.experience);
+
+    // function studyManyTimes(user, times) {
+    //     for (let i=0; i<times; i++) {
+    //         user.study();
+    //     }
+    // };
+    // studyManyTimes(beth, 10);
+    // console.log("Adam expierience: ", adam.experience);
+    // console.log("Beth expierience: ", beth.experience);
+    // // this approche may be problematic, lets use studyManyTimes on user that wasnt created by constructor
+    
+    // const fakeUser = {
+    //     not: "A USER",
+    //     fakeUser: true,
+    // }
+
+    // // studyManyTimes(fakeUser, 10)
+
+    // // console.log("fakeUser expierience: ", fakeUSer.experience); // user.study is not a function
+    // // // because fakeUser was created with out using constructor he dont have function study 
+    // // // and this will cause an error
+    
+    // // even if we would just add study() to fake user resault will be nan becasue experiens is apsent
+    // // and our function try to add something to undefined so resault is NaN
+    
+    // // also if sb would add code delete adam.study or adam.study = null
+
+    // // this will also produce an error when we try to call it later 
+
+    // // to protect us from this probles we can use next big tool which are classes 
+
+</script>
+
+<script id="creating objects by classes">
+
+    // class User {
+    //     constructor(name) {
+    //     console.log(`User ${name} was born`);
+
+    //     this.name = name;
+    //     this.experience = 0;
+    //     }
+    //     greet = function() {
+    //         console.log(`Hello from ${this.name}`);
+    //     }
+
+    //     study = function() {
+    //         this.experience++;
+    //     }
+    // }
+    // const adam = new User("Adam");
+    // const beth = new User("Beth");
+
+    // adam.greet();
+    // beth.greet();
+
+    // adam.study();
+    // adam.study();
+    // adam.study();
+
+    // beth.study();
+
+    // console.log("Adam expierience: ", adam.experience);
+    // console.log("Beth expierience: ", beth.experience);
+
+    // we can even use our class to construct multiple users in array 
+
+    // const users = [
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    //     new User("Adam"),
+    // ]
+
+    // console.log(users); 
+
+    // // if we would like for one of them to use a function we can do it like this 
+
+    // users[3].study() // lets study with 4th adam so the 3index and function name 
+
+    // console.log(users); // only one object has more expierienc
+
+    // // if we would like to console log each users name and expierienc        `   `                                                                                                                   
+    // // we can use array method like forEach
+
+    // users.forEach((user, index) => {
+    //     console.log(`Adam #${index + 1}: expierience ${user.experience}`)
+    // }
+    // )
+
+    // now lets creat new users from array of names, we can do this using .map method
+    // const names = ["Adam", "Beth", "Cecil", "Dorthy"];
+    // const groupOfUsers = names.map(name => new User(name));
+    
+</script>
+
+<script id="Abstraction and implementation  hiding">
+
+    // class Scientist {
+    //     constructor(name) {
+    //         this.name = name;
+    //     }
+    //     power(a, b) {
+    //         return Math.pow(a, b)
+    //     }
+    // }   
+    
+    // class Mathematician {
+    //     constructor(name) {
+    //         this.name = name;
+    //     }
+    //     power(x, b) {
+    //         if (y === 0) return 1;
+    //         if (y%2 === 0) return this.power(x, parseInt(y/2))*this.power(x, parseInt(y/2));
+    //         return x*this.power(x, parseInt(y/2))*this.power(x, parseInt(y/2)) 
+    //     }
+    // } 
+
+    // class Physicist {
+    //     constructor(name) {
+    //         this.name = name;
+    //     }
+    //     power(a, b) {
+    //         return a**b;
+            
+    //     }
+    // } 
+
+    // // abstraction is when we dont know how things works but what be get what we wanted as resault 
+    // // above we have 3 classes that do 3 the same thing but how they are doing it is not what we 
+    // // are interest us thats why power is hidden because the process is not importatn 
+    // // and this is whats called abstraction
+
+    // const scientistA = new Scientist("A");
+    // const scientistB = new Mathematician("A"); 
+    // const scientistC = new Physicist("A"); 
+
+    // const a = scientistA.power(2, 3);
+    // const b = scientistB.power(2, 3);
+    // const c = scientistC.power(2, 3);
+
+    // console.log({ a, b, c});
+
+</script>
+
+<script id="Inheritance">
+    //  class Scientist {
+    //     constructor(name) {
+    //         this.name = name;
+    //     }
+    //     power(a, b) {
+    //         return Math.pow(a, b)
+    //     }
+    // }   
+
+    // class Mathematician extends Scientist {}
+
+    // class Physicist extends Mathematician {
+    //     constructor(title, username, yearsOfExpierienc = 0) {
+    //         const fullName = `Physicist ${title}. ${username}`;
+    //         super(fullName);
+
+    //         this.yearsOfExpierienc = yearsOfExpierienc
+
+           
+    //     } 
+    //     brag() {
+    //         console.log(`I am so pro i have ${this.yearsOfExpierienc} years of expierience`)
+    //         }
+    // }
+
+    // const math = new Mathematician("Abc");
+    // console.log(math.power(2, 5));
+
+    // const phys = new Physicist("Prof", "Xyz", 42)
+
+    // // even if we extended class Physicist by class Mathematician function brag called on mathematician 
+    // // would not work console would retutn brag is not a function 
+
+    // console.log(phys.brag()
+    // )
+
+    // const scientists = [new Scientist("A"), new Mathematician("B"), new Physicist("C")]
+    // // if we would like to all scientists to use a function we can do it by map
+    // const result = scientists.map(scientist => scientist.power(2, 5))
+    // console.log(result)
+
+    // // eventho not all scientists have brag function we can do for each with requairemnt to be physician
+
+    // scientists.forEach(scientist => {
+    //     const isPhysicist = scientist instanceof Physicist;
+    //     if (isPhysicist) {
+    //         scientist.brag();
+    //     }
+    // })
+</script>
+
+<script id="Enscapsulation">
+
+    // class Student {
+    //     //static // by using static we can oparate what to do with created object
+    //     // for example we have students list as array and we want all created students by this class 
+    //     // to be added to this list 
+
+    //     static studentsList = []
+
+    //     score = 0; //public field (default)
+    //     #secret = "super_secret"; // privat field
+
+    //     constructor(name) {
+    //         this.fullname = name;
+    //         //this.score = 0;
+
+    //         Student.studentsList.push(this)
+    //     }
+        
+
+    //     #secretMethod() {
+    //         console.log(`It is a secret! ${this.#secret}`);
+    //     }
+    //     revealSecret() {
+    //         this.#secretMethod()
+    //     }
+
+    //     // getter and setter // are method used to log object properties and setter allow use to change its values 
+
+    //     get name() {
+    //         return this.fullname;
+    //     };
+    //     set name(newName) {
+    //         this.fullname = newName
+    //     }
+
+    //     // thanks to encapsulation we can set logic of a function as hiden
+
+    //     #calculateSomething(a, b) {
+    //         return a + b // complex logic xD
+    //     }
+
+    //     // and using public function to return just a result 
+
+    //     performCalculation(x, y) {
+    //         return this.#calculateSomething(x, y);
+    //     }
+    // }
+
+    // const adam = new Student("Adam");
+    // console.log(adam.name);
+    // // console.log(adam.secret); // those method dont have access to the privet field
+    // // console.log(adam.#secret) // this will even cause an error 
+
+    // // but if we have another public (/out) # method that callback to the secret method
+
+    // adam.revealSecret() // calling it will log the privet field // # properties and method
+    // // can not be change after declaration of object
+
+    // // return to static
+    // console.log(Student.studentsList);
+    // new Student("Beth");
+    // console.log(Student.studentsList);
+
+    // // for example class Math and its methods are its static methods
+</script>
+
+<script id="Polymorhism">
+
+    // console.log(42);
+
+    // console.log("42");
+
+    // class A {
+    //     constructor() {
+    //         this.name = "A";
+    //     }
+
+    //     sayMyName() {
+    //         console.log(`My name is ${this.name}`);
+    //     }
+    // }
+    // class B {
+    //     constructor() {
+    //         this.name = "B";
+    //     }
+
+    //     sayMyName() {
+    //         console.log(`My name is ${this.name}`);
+    //     }
+    // }
+
+    // const a = new A();
+    // a.sayMyName();
+    
+</script>
+
+<script id="Open Close principe - Strategy patern">
+
+    // class ClosedPaczkomat {
+    //     constructor() {
+    //         this.carrier = new FedEx()
+    //     }
+    //     sendPackage(box, description) {
+    //         const describedPackage = this.#describePackage(box, description);
+    //         this.carrier.send(describedPackage)
+    //     }
+
+    //     #describePackage(box, description) {
+    //         // scribe scribe
+    //         return{ ...box, ...description};
+    //     }
+    // }
+    // class OpenPaczkomat {
+    //     #carrier;
+
+    //     constructor(carrier) {
+    //         this.#carrier = new DPD();
+    //     }
+    //     chooseCarrier(carrier) {
+    //         this.#carrier = carrier
+    //     }
+    //     sendPackage(box, data) {
+    //         const describedPackage = this.#describePackage(box, description);
+    //         this.#carrier.send(describedPackage)
+    //     }
+
+    //     #describePackage(box, description) {
+    //         // scribe scribe
+    //         return{ ...box, ...description};
+    //     }
+    // } 
+    // class Carrier {
+    //     send(box) {
+    //         throw new Error("Abstract class of carrier. Pleas implement own class.")
+    //     }
+    // }
+    // // class FedEx implements Carrier
+    // class FedEx extends Carrier {
+    //     send(box) {
+    //         // sending by FedEx
+    //         console.log("[FedEx] Wysyłanie: ", box)
+    //     }
+    // }
+    // // class DPD implement Carrier 
+    // class DPD extends Carrier {
+    //     send(box) {
+    //         // sending by DPD
+    //         console.log("[DPD] Wysyłania:", box)
+    //     }
+    // }
+
+   
+
+    // // const paczkomat = new ClosedPaczkomat();
+
+    // // const box = { clothes: "a lot" }
+    // // const description = { note: "fast please"}
+    // // paczkomat.sendPackage(box, description)
+
+    // const paczkomat = new OpenPaczkomat();
+
+    // const box = { clothes: "a lot" }
+    // const description = { note: "fast please"}
+    // paczkomat.sendPackage(box, description)
+    // paczkomat.chooseCarrier(new FedEx())
+    // paczkomat.sendPackage(box, description)
+
+    // // we implemanted strategy that we have 2 difrient class that is designating sending carrier and 
+    // // 2 sub class that act like carriers we can openly add new carriers and those are independet from 
+    // // one another we can choose between to do task even more we can add another 
+
+    // // Class InPost implemenst 
+    // class InPost extends Carrier {
+    //     send(box) {
+    //         //sending by inpost 
+    //         console.log(`[InPost] Wysyłanie `, box)
+    //     }
+    // }
+    // paczkomat.chooseCarrier(new InPost())
+    // paczkomat.sendPackage(box,description)
+</script>
+
+<script id="Depencency Inversion">
+
+    // class User {
+    //     constructor(name, number, email) {
+    //         this.name = name;
+    //         this.number = number; 
+    //         this.email = email; 
+    //     }
+    // }
+    // class Ecommerce {           //now Ecommerce class controle how message is send 
+    //     // constructor(user) {     // and its set to use smsSender but we can wright it diffriently 
+    //     //     this.user = user;
+    //     //     this.smsSender = new SmsSender 
+    //     // }
+
+    //     // we would like sender to be decided in moment of call 
+    //     // to do this we need sender to be able to send messege 
+    //     //both in e mail and sms
+    //     constructor(user, sender) {
+    //         this.user = user;
+    //         this.sender = sender;
+    //     }
+    //     confirmPurchase() {
+    //         // this.smsSender.send(user.number, "Hello there!"); // we also need to make change here
+    //         // can change this function to pass just user and this senders will take what they need from it 
+    //         this.sender.send("Hello there", this.user)
+    //     }
+    // }
+
+    // // class Sender {}
+
+    // class SmsSender {
+    //     // send(number, message) {
+    //     send(message, user) {
+    //         console.log(`[SMS -> ${user.number}]: ${message}`)
+    //     }
+    // }
+    // class EmailSender {
+    //     send(message, user) {
+    //         console.log(`[Email -> ${user.email}] ${message}`);
+    //     }
+    // }
+
+    // //main 
+    // const adam = new User ("Adam", 123, "adam@user.com")
+
+    // const allegro = new Ecommerce(adam, new EmailSender)
+    // const allegor2 = new Ecommerce(adam, new SmsSender)
+
+    // allegro.confirmPurchase()
+    // allegor2.confirmPurchase()
+    // // now we can test if its accept any new sender 
+    // // mock implemantation
+    // class FakeSender {
+    //     send(message, user) {
+    //         console.log(`[sending fake message]: dont buy it ${user.name} not wast money`)
+    //     }
+    // }
+    // const testUser = { name: "Test user", number: 0, email: "test@email.com"}
+    // const testEcommarce = new Ecommerce(testUser, new FakeSender); // injecting mock
+
+    // testEcommarce.confirmPurchase()
+
+// "use strict";
+
+// const user = {
+//   name: "Ala",
+//   show() {
+//     const arrow = () => {
+//       console.log("this.name in arrow:", this.name);
+//     };
+
+//     arrow();
+//   }
+// };
+
+// const otherUser = {
+//   name: "Olek",
+//   show: user.show
+// };
+
+// otherUser.show();
+
+const a = () => { console.log(this); };
+ function b() { 
+    a();
+  }
+   b.call({ user: "Mango" });
+
+</script>

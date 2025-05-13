@@ -1,0 +1,740 @@
+Klasy
+Składnia literału obiektu pozwala na stworzenie jednego obiektu. Jednak 
+często istnieje potrzeba stworzenia wielu podobnych obiektów z takim samym 
+zestawem właściwości, ale różnymi wartościami i metodami do interakcji z nimi.
+ Wszystko to musi być robione dynamicznie, podczas wykonywania programu. W tym celu używa się klas.
+
+
+
+Deklaracja klasy ma następującą składnię:
+
+słowo kluczowe class
+nazwa klasy (w przykładzie: User)
+ciało klasy w nawiasach klamrowych
+class User {
+  // Ciało klasy
+}
+
+Klasy przyjęło się nazywać z wielkiej litery, a w nazwie odzwierciedlać typ
+ tworzonego obiektu (rzeczownika).
+
+
+A jak stworzyć z klasy instancję?
+
+Po deklaracji klasy można stworzyć jej instancję za pomocą specjalnego operatora new, 
+umieszczając go przed wywołaniem klasy. Wynikiem wywołania new User() będzie instancja 
+klasy User. Będzie ona zawierać dane i mieć zachowanie opisane w klasie.
+
+class User {
+  // Ciało klasy
+}
+
+const mango = new User();
+console.log(mango); // {}
+
+const poly = new User();
+console.log(poly); // {}
+
+Sposób tworzenia klasy zależy od twojego zadania. W naszym przykładzie klasa User reprezentuje użytkownika, dlatego dodamy do niej pola dla imienia i poczty.
+
+
+
+Do inicjalizacji instancji klasy używana jest metoda constructor.
+
+Jeśli nie zdefiniujemy jej w sposób jawny, zostanie utworzony konstruktor domyślny — pusta funkcja, która nie zmienia instancji klasy.
+
+class User {
+  // Składnia deklaracji metody klasy
+  constructor() {
+		// ...
+  }
+}
+
+Wywołanie klasy z operatorem new prowadzi do utworzenia nowego obiektu i automatycznego wywołania metody constructor.
+
+class User {
+  constructor() {
+		console.log("constructor call")
+  }
+}
+
+const mango = new User(); // "constructor call"
+console.log(mango); // {}
+
+Argumenty, które są przekazywane podczas wywołania new User(), stają się wartościami parametrów dla metody constructor.
+
+class User {
+  constructor(name, email) {
+		console.log(name, email);
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com"); // "Mango mango@mail.com"
+console.log(mango); // {}
+
+Zwróć uwagę, że metoda constructor jest wywoływana w kontekście tworzonej instancji.
+
+class User {
+  constructor(name, email) {
+    // Inicjalizacja właściwości instancji
+    this.name = name;
+    this.email = email;
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com");
+console.log(mango); // { name: 'Mango', email: 'mango@mail.com' }
+
+const poly = new User("Poly", "poly@mail.com");
+console.log(poly); // { name: 'Poly', email: 'poly@mail.com' }
+
+W ten sposób this wewnątrz konstruktora odnosi się do nowo utworzonego obiektu.
+
+To pozwala nadać każdemu obiektowi właściwości z takimi samymi nazwami, ale różnymi wartościami.
+
+Właściwości name i email nazywane są publicznymi właściwościami, ponieważ są one własnymi właściwościami (own properties) obiektu-instancji.
+
+
+Klasa może przyjmować dużą liczbę danych wejściowych dla właściwości przyszłego obiektu.
+
+Można również zastosować wzorzec "Obiekt parametrów", przekazując jeden obiekt z logicznie nazwanymi właściwościami, zamiast niepowiązanego zestawu argumentów.
+
+class User {
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+console.log(mango); // { name: "Mango", email: "mango@mail.com" }
+
+Ponieważ konstruktor to zwykła funkcja, można zastosować do jego parametru destrukturyzację.
+
+class User {
+ constructor({ name, email }) {
+  this.name = name;
+  this.email = email;
+ }
+}
+
+const mango = new User({
+ name: "Mango",
+ email: "mango@mail.com",
+});
+console.log(mango); // { name: "Mango", email: "mango@mail.com" }
+Do pracy z właściwościami przyszłej instancji używane są metody klasy.
+
+
+
+Metody klasy to funkcje, które będą dostępne instancji w jej prototypie.
+ Są one deklarowane w dowolnej kolejności po konstruktorze. W przeciwieństwie
+  do składni metod obiektu (są oddzielone przecinkiem), metody klasy nie są
+   oddzielone żadnymi specjalnymi znakami.
+
+
+
+Rozważmy przykład użycia metod w klasie User.
+
+class User {
+  constructor({ name, email }) {
+    this.name = name;
+    this.email = email;
+  }
+
+  // Metoda getEmail
+  getEmail() {
+		// ...
+  }
+
+  // Metoda changeEmail
+  changeEmail(newEmail) {
+		// ...
+  }
+}
+
+
+
+Do dostępu do właściwości w metodach używa się słowa kluczowego this,
+ ponieważ metody będą wywoływane w kontekście obiektu-instancji.
+
+class User {
+  constructor({ name, email }) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+Po utworzeniu instancji można używać zadeklarowanych metod klasy, które będą
+ odwoływały się do właściwości obiektu, który je wywołał.
+
+const mango = new User({ 
+	name: "Mango", 
+	email: "mango@mail.com" 
+});
+
+console.log(mango.getEmail()); // "mango@mail.com"
+
+mango.changeEmail("new@mail.com");
+
+console.log(mango.getEmail()); // "new@mail.com"
+
+Rozważmy na przykład kod klasy User, który obecnie wygląda tak:
+
+class User {
+  constructor({ name, email }) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+const mango = new User({ 
+	name: "Mango", 
+	email: "mango@mail.com" 
+});
+
+console.log(mango.getEmail());  // “mango@mail.com”
+
+Jeśli spojrzymy na strukturę instancji klasy User w narzędziach deweloperskich, może
+ pojawić się pytanie: "Gdzie są metody, które wywołujemy?"
+
+
+
+
+Programowanie zorientowane obiektowo w JavaScript jest zbudowane na dziedziczeniu p
+rototypowym. Metody klasy nie stają się własnymi właściwościami instancji i jest to właściwe, ponieważ w przeciwieństwie do wartości właściwości, nie są one unikalne. To ta sama funkcja, która jest wywoływana w kontekście różnych obiektów. Nie ma sensu kopiować metod dla każdej instancji, biorąc pod uwagę, że może istnieć wiele tysięcy instancji.
+
+
+
+Metody klasy są dodawane do specjalnego obiektu, który jest przechowywany w 
+właściwości prototype samej klasy.
+
+class User {
+  constructor({ name, email }) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+console.log(User.prototype); // {constructor: ƒ, getEmail: ƒ, changeEmail: ƒ}
+
+Podczas tworzenia instancji za pomocą new, obiekt przechowywany w właściwości
+ prototype klasy automatycznie staje się jej prototypem. Oznacza to, że właściwość 
+ [[Prototype]] instancji otrzymuje odniesienie do właściwości prototype klasy.
+
+
+
+
+Dzięki temu obiekt-instancja może korzystać z metod klasy, czyli właściwości
+ swojego prototypu. W tym obiekcie przechowywane jest również odniesienie do
+  metody constructor klasy, ale jest to potrzebne tylko dla wewnętrznych mechanizmów 
+  klasy i nie ma znaczenia dla nas.
+Kierowca samochodu naciska na pedał gazu — i samochód przyspiesza. Kierowca może
+ wygodnie i łatwo sterować systemem klimatyzacji, widzi bieżącą prędkość na 
+ prędkościomierzu itp. Jednocześnie, aby umożliwić tak wygodne korzystanie z 
+ możliwości interfejsu wewnątrz samochodu, wykonuje się bardzo wiele czynności i procesów.
+
+
+
+Inkapsulacja — to paradygmat OOP, który zakłada ukrywanie szczegółów wewnętrznej 
+realizacji klasy przed zewnętrznym kodem. Inkapsulacja jest realizowana przez prywatne
+ właściwości i metody, do których dostęp można uzyskać tylko wewnątrz klasy.
+
+
+
+Inny programista, który korzysta z tej klasy, powinien mieć dostęp tylko do publicznego 
+interfejsu — zestawu publicznych właściwości i metod klasy.
+
+Załóżmy, że email użytkownika powinien być niedostępny do bezpośredniej zmiany
+ z zewnątrz, czyli prywatny. Dodając do nazwy właściwości na początku symbol
+  #, czynimy ją prywatną. Deklaracja prywatnej właściwości przed inicjalizacją w
+   konstruktorze jest obowiązkowa.
+
+class User {
+  // Nieobowiązkowa deklaracja publicznych właściwości
+  name;
+  // Obowiązkowa deklaracja prywatnych właściwości
+  #email;
+
+  constructor({ name, email }) {
+    this.name = name;
+    this.#email = email;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+console.log(mango.name); // "Mango"
+console.log(mango.#email); // Wystąpi błąd, to prywatna właściwość
+
+
+
+Do uzyskania lub zmiany wartości prywatnej właściwości używane są publiczne metody.
+
+class User {
+  name;
+  #email;
+
+  constructor({ name, email }) {
+    this.name = name;
+    this.#email = email;
+  }
+
+  getEmail() {
+    return this.#email;
+  }
+
+  changeEmail(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+
+console.log(mango.getEmail()); // "mango@mail.com"
+mango.changeEmail("mango@supermail.com");
+console.log(mango.getEmail()); // "mango@supermail.com"
+
+Już wiesz, jak działają publiczne metody. Przyjrzyjmy się temu na przykładzie klasy User z prywatną właściwością #email oraz publiczną właściwością name.
+
+class User {
+  name;
+  #email;
+
+  constructor({ name, email }) {
+    this.name = name;
+    this.#email = email;
+  }
+
+  // Publiczna metoda do pobierania adresu e-mail
+  getEmail() {
+    return this.#email;
+  }
+
+  // Publiczna metoda do zmiany adresu e-mail
+  changeEmail(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+
+console.log(mango.getEmail()); // "mango@mail.com"
+mango.changeEmail("mango@supermail.com");
+console.log(mango.getEmail()); // "mango@supermail.com"
+
+Czasami potrzebujemy nie tylko pobierać lub zmieniać adres e-mail, ale także wykonywać pewne działania, które powinny być ukryte przed "zewnętrznym światem".
+
+Załóżmy, że za każdym razem, gdy adres e-mail się zmienia, potrzebujemy zweryfikować jego format.
+
+Możemy to zrobić za pomocą prywatnych metod. Dodając na początku nazwy metody symbol #, czynimy ją prywatną.
+
+class User {
+  name;
+  #email;
+
+  constructor({ name, email }) {
+    this.name = name;
+    this.#email = email;
+  }
+
+  // Publiczna metoda do pobierania adresu e-mail
+  getEmail() {
+    return this.#email;
+  }
+
+  // Publiczna metoda do zmiany adresu e-mail
+  changeEmail(newEmail) {
+    if (this.#validateEmail(newEmail)) {
+      this.#email = newEmail;
+    } else {
+      console.log('Nieprawidłowy format adresu e-mail');
+    }
+  }
+
+  // Prywatna metoda do walidacji adresu e-mail
+  #validateEmail(email) {
+    return email.includes('@');
+  }
+}
+
+const mango = new User({
+  name: 'Mango',
+  email: 'mango@mail.com',
+});
+
+// Spróbujmy zmienić adres e-mail
+mango.changeEmail('newmail.com'); // "Nieprawidłowy format adresu e-mail"
+mango.changeEmail('new@mail.com');
+console.log(mango.getEmail()); // "new@mail.com"
+
+// Bezpośrednie wywołanie prywatnej metody z zewnątrz spowoduje błąd
+mango.#validateEmail('test'); // Błąd
+
+
+
+W tym przykładzie prywatna metoda #validateEmail zapewnia dodatkową 
+logikę do walidacji adresu e-mail.
+
+
+
+Ta metoda nie jest dostępna z zewnątrz klasy, więc użytkownicy 
+(lub inni programiści) nie mogą jej wywołać bezpośrednio. Mogą 
+jedynie używać publicznej metody changeEmail, która z kolei wykorzystuje prywatną metodę do walidacji.
+
+W ten sposób enkapsulujemy wewnętrzną logikę i zapewniamy 
+bezpieczeństwo oraz stabilność działania klasy.
+
+Gettery i settery to specjalna składnia deklaracji metod do interakcji z właściwościami. Getter i setter imitują zwykłą publiczną właściwość klasy, ale pozwalają na bardziej wygodną interakcję z innymi właściwościami.
+
+class User {
+  #email;
+
+  constructor({ name, email }) {
+    this.name = name;
+    this.#email = email;
+  }
+
+  // Getter email
+  get email() {
+    return this.#email;
+  }
+
+  // Setter email
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+W powyższym przykładzie zadeklarowano getter i setter email. Aby zadeklarować 
+getter i setter, należy umieścić odpowiednie słowa kluczowe przed nazwą właściwości — get i set. Wewnątrz tych metod:
+
+zwracamy wartość prywatnej właściwości #email za pomocą gettera,
+zmieniamy jej wartość za pomocą settera.
+Za dobrą praktykę uważa się również nazywanie getterów i setterów tak samo, 
+jak właściwość, z którą pracują. Ułatwia to czytanie kodu i jego rozumienie.
+ Gdy inni programiści widzą getter lub setter o tej samej nazwie co właściwość, 
+ mogą łatwo domyślić się, że ta metoda służy do dostępu do konkretnej właściwości.
+  Na przykład, getter i setter dla prywatnej właściwości #email najlogiczniej
+   nazywać po prostu email, jak w powyższym przykładzie.
+
+
+
+Getter i setter powinny mieć taką samą nazwę. Lepiej nazywać gettery i
+ settery tak samo, jak właściwość, z którą pracują. Getter może istnieć 
+ bez settera, tak samo jak setter bez gettera.
+
+
+Przyjrzyjmy się przykładowi: getter jest wykonywany podczas próby uzyskania 
+wartości właściwości, a setter — podczas próby jej zmiany.
+
+const mango = new User({ 
+	name: "Mango", 
+	email: "mango@mail.com" 
+});
+
+console.log(mango.email); // mango@mail.com
+
+mango.email = "mango@supermail.com";
+
+console.log(mango.email); // mango@supermail.com
+
+Odwołując się do mango.email, wywoływany jest getter get email() {...}
+ i wykonuje się jego kod.
+Przy próbie zapisu mango.email = "mango@supermail.com" wywołuje się 
+setter set email(newEmail) {...}, i ciąg "mango@supermail.com" będzie wartością parametru newEmail.
+Zaletą jest to, że są to metody. Dlatego podczas zapisywania lub
+ odczytywania można wykonać dodatkowy kod z wszelkimi sprawdzeniami, 
+ w przeciwieństwie do wykonania tej samej operacji bezpośrednio na właściwości.
+
+set email(newEmail) {
+  if(newEmail === "") {
+    console.log("Błąd! Mail nie może być pustym ciągiem znaków!");
+    return;
+  }
+
+  this.#email = newEmail;
+}
+
+Gettery i settery są odpowiednie do używania dla prostych operacji odczytu
+ i zmiany wartości właściwości, szczególnie prywatnych, jako ich publiczny
+  interfejs. Dla pracy z właściwością, która przechowuje tablicę lub obiekt
+   nie będą odpowiednie.
+
+Oprócz publicznych i prywatnych właściwości przyszłych instancji, w klasie można zadeklarować własne właściwości. Właściwości dostępne tylko dla klasy, ale nie dla jej instancji, to statyczne właściwości. Są one przydatne do przechowywania informacji związanych z klasą.
+
+
+
+Statyczne właściwości deklaruje się w ciele klasy. Przed nazwą właściwości dodaje się słowo kluczowe static. Statyczne właściwości można wykorzystywać zarówno w metodach klasy, jak i poza klasą.
+
+class MyClass {
+	static myProp = "value";
+}
+
+console.log(MyClass.myProp); // "value"
+
+Instancja nie ma dostępu do statycznych właściwości klasy.
+
+class MyClass {
+	static myProp = "value";
+}
+
+const inst = new MyClass();
+console.log(inst.myProp); // undefined
+
+Dodajmy do klasy użytkownika prywatną właściwość role — jego rolę, która określa zestaw uprawnień, na przykład: administrator, redaktor, zwykły użytkownik itp. Możliwe role użytkowników będziemy przechowywać jako statyczną właściwość roles — obiekt z właściwościami.
+
+class User {
+  static roles = {
+    admin: "admin",
+    editor: "editor",
+		basic: "basic"
+  };
+
+  #email;
+  #role;
+
+  constructor({ email, role = User.roles.basic }) {
+    this.#email = email;
+    this.#role = role;
+  }
+
+  get role() {
+    return this.#role;
+  }
+
+  set role(newRole) {
+    this.#role = newRole;
+  }
+}
+
+const mango = new User({
+  email: "mango@mail.com",
+  role: User.roles.admin,
+});
+
+console.log(mango.role); // "admin"
+mango.role = User.roles.editor;
+console.log(mango.role); // "editor"
+
+W klasie można zadeklarować nie tylko metody przyszłych instancji, ale także statyczne
+ metody. Statyczne metody to metody dostępne tylko dla klasy. Mogą być one publiczne i prywatne.
+
+
+
+Składnia deklaracji statycznych metod jest niemal identyczna jak w przypadku statycznych
+ właściwości. Jedyna różnica polega na tym, że wartością będzie metoda.
+
+	class MyClass {
+		static myMethod() {
+			console.log("A static method");
+	}
+}
+
+MyClass.myMethod(); // "A static method"
+
+
+
+Dodajmy do klasy User:
+
+statyczną właściwość takenEmails do przechowywania zajętych adresów e-mail użytkowników
+statyczną metodę isEmailTaken, która sprawdza, czy adres e-mail jest dostępny
+Podczas inicjalizacji instancji w konstruktorze klasy będziemy dodawać adres e-mail do listy zajętych.
+
+class User {
+  static #takenEmails = [];
+
+  static isEmailTaken(email) {
+    return User.#takenEmails.includes(email);
+  }
+
+  #email;
+
+  constructor({ email }) {
+    this.#email = email;
+    User.#takenEmails.push(email);
+  }
+}
+
+const mango = new User({ email: "mango@mail.com" });
+
+console.log(User.isEmailTaken("poly@mail.com")); // false
+console.log(User.isEmailTaken("mango@mail.com")); // true
+
+Cechy szczególne statycznych metod: podczas ich wywoływania słowo kluczowe this odnosi
+ się do samej klasy. Oznacza to, że statyczna metoda może uzyskać dostęp do statycznych
+  właściwości klasy, ale nie do właściwości instancji. Jest to logiczne, ponieważ statyczne
+   metody są wywoływane przez samą klasę, a nie jej instancje.
+
+   Słowo kluczowe extends umożliwia realizację dziedziczenia klas, kiedy jedna klasa (potomna, pochodna) dziedziczy właściwości i metody innej klasy (rodzicielskiej).
+
+Rozważmy przykład:
+
+class Parent {}
+
+class Child extends Parent {
+  // ...
+}
+
+
+
+W wyrażeniu class Child extends Parent potomna klasa Child dziedziczy (rozszerza) od
+ klasy rodzicielskiej Parent.
+
+Oznacza to, że możemy zadeklarować klasę bazową, która przechowuje wspólne cechy i metody 
+dla grupy klas pochodnych, które dziedziczą właściwości i metody rodzicielskie, ale również
+ dodają swoje unikalne.
+
+
+
+
+
+
+Wyobraźmy sobie, że w aplikacji są użytkownicy z różnymi rolami: administrator,
+ copywriter, menedżer treści itp. Każdy typ użytkownika posiada zestaw wspólnych
+  cech, na przykład e-mail i hasło, ale również ma unikalne.
+
+Tworząc niezależne klasy dla każdego typu użytkownika, otrzymamy duplikację
+ wspólnych właściwości i metod. Jeśli trzeba zmienić, na przykład nazwę właściwości,
+  trzeba by przejść przez wszystkie klasy, co jest niewygodne i wymaga dużo czasu.
+
+Zamiast tego można:
+
+stworzyć ogólną klasę User, która będzie przechowywać zestaw wspólnych właściwości i metod
+następnie stworzyć klasy dla każdego typu użytkownika, które dziedziczą ten zestaw od klasy User
+Jeśli potrzeba zmienić coś wspólnego, wystarczy zmienić tylko kod klasy User.
+
+class User {
+  #email;
+
+  constructor(email) {
+    this.#email = email;
+  }
+
+  get email() {
+    return this.#email;
+  }
+
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+class ContentEditor extends User {
+	// Тіло класу ContentEditor
+}
+
+const editor = new ContentEditor("mango@mail.com");
+console.log(editor); // { #email: "mango@mail.com" }
+console.log(editor.email); // "mango@mail.com"
+
+Klasa ContentEditor dziedziczy od klasy User jego konstruktor, getter i setter email,
+ a także prywatną właściwość #email.
+
+ W konstruktorze klasy potomnej konieczne jest wywołanie specjalnej funkcji super(args) — jest to pseudonim konstruktora klasy rodzicielskiej.
+
+W przeciwnym razie, przy próbie odwołania się do this w konstruktorze klasy potomnej, pojawi się błąd.
+Podczas wywoływania konstruktora klasy rodzicielskiej przekazujemy mu potrzebne argumenty do zainicjowania właściwości.
+
+class User {
+  #email;
+
+  constructor(email) {
+    this.#email = email;
+  }
+
+  get email() {
+    return this.#email;
+  }
+
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+class ContentEditor extends User {
+  constructor({ email, posts }) {
+    super(email); // Wywołanie konstruktora klasy nadrzędnej User
+    this.posts = posts;
+  }
+}
+
+const editor = new ContentEditor({ 
+	email: "mango@mail.com", 
+	posts: [] 
+});
+console.log(editor); // { #email: "mango@mail.com", posts: [] }
+console.log(editor.email); // "mango@mail.com"
+
+Co się stanie, jeśli nie wywołamy super w konstruktorze klasy potomnej?
+
+Wystąpi błąd przy próbie dostępu do this w jego metodach
+Wystąpi błąd przy próbie dostępu do this w jego konstruktorze
+Wystąpi błąd podczas dziedziczenia klasy
+
+Klasa potomna może wykorzystywać metody i właściwości klasy rodzicielskiej. Ponadto, w klasie potomnej można deklarować metody, które będą dostępne tylko dla jej instancji.
+
+// Wyobraźmy sobie, że powyżej znajduje się deklaracja klasy User
+
+class ContentEditor extends User {
+  constructor({ email, posts }) {
+    super(email);
+    this.posts = posts;
+  }
+
+  addPost(post) {
+    this.posts.push(post);
+  }
+}
+
+const editor = new ContentEditor({ 
+	email: "mango@mail.com", 
+	posts: [] 
+});
+
+console.log(editor); // { #email: "mango@mail.com", posts: [], addPost: f }
+
+editor.addPost("post-1");
+editor.addPost("post-2");
+console.log(editor.posts); // ['post-1', 'post-2']
+
+W przykładzie widzimy, że ContentEditor dziedziczy po klasie User.
+
+User — to klasa bazowa, która posiada prywatną właściwość #email.
+ContentEditor rozszerza klasę User i posiada własną właściwość posts. Klasa ContentEditor ma także metodę addPost, która umożliwia dodawanie nowych postów do posts.
+Metoda addPost to metoda klasy potomnej ContentEditor. Będzie ona dostępna tylko dla instancji ContentEditor.
