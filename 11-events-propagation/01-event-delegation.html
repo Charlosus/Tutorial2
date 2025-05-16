@@ -1,0 +1,199 @@
+<style>
+    #boxes {
+        padding: 1rem;
+        border: 1px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .box{
+        --size: 40px;
+        width: var(--size);
+        height: var(--size);
+        box-sizing: border-box;
+
+        cursor: pointer;
+
+        background-color: dodgerblue;
+        color: white;
+        font-weight: bold;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .box:hover {
+        background-color: blueviolet;
+    }
+    .box.interactive{
+        border: px solid hotpink;
+    }
+    .box.special {
+        background-color: gold;
+    }
+</style>
+
+<body>
+    <form>
+        <input type="number" name="amout" id="amount" placeholder="Amount of boxes" step ="1" min="1">
+        <button id="adder">Add boxes</button>
+    </form>
+
+    <button id="attacher">Attach box listeners</button>
+
+    <main id="boxes">
+
+    </main>
+</body>
+
+<script>
+
+    // IIFE immediatly invoked function expression //
+    // (() =>{}()) 
+    // function that is called as soon as document opens 
+    // all variables stays inside of function scope  
+    (() => {
+        const createBox = (id) => {
+            const box = document.createElement("div");
+            box.id = id;
+            box.textContent = id;
+            box.classList.add("box");
+
+            const SPECIAL_CHANCE = 0.05;
+            if (Math.random() <= SPECIAL_CHANCE) {
+                box.classList.add("special");
+            }
+            return box;
+        };
+        // we can add function that track time 
+        const timed = (callback) => {
+            const TIMER_LABEL = "Rendering Boxes";
+            console.time(TIMER_LABEL);
+
+            callback();
+
+            console.timeEnd(TIMER_LABEL);
+        };
+        // here belowe we create boxes in array and just add it directly to root(main#boxes) but its less eficient 
+        // slower aprox 750 ms 
+        // const renderBoxes = (amount, root) => root.append(...Array.from({ length: amount }, (_, i) => creatBox(root.children.length + 1));)
+        // here we are creating boxes adding it to fragment and then adding it to root("main#boxes") 
+        // its about 50% faster then just adding it to root aprox 500ms 
+        const renderBoxes = (amount, root) => {
+            const boxes = Array.from({ length: amount }, (_, i) => createBox(root.children.length + i));
+
+            const fragment = document.createDocumentFragment();
+            fragment.append(...boxes);
+
+            root.appendChild(fragment);
+        };
+        const boxesContainer = document.querySelector("main#boxes");
+
+        document.querySelector("form").addEventListener("submit", event => {
+            event.preventDefault();
+
+            const amountOfBoxes = event.target.elements.amount.valueAsNumber;
+            event.target.reset();
+            timed ( () =>
+                renderBoxes(amountOfBoxes, boxesContainer))
+            ;
+
+        });
+    })();
+</script>
+
+<script id="Idividual listeners">
+
+    const boxes = document.querySelectorAll(".box");
+
+    boxes.forEach(box => {
+        box.addEventListener("click", ({target}) => {
+            console.log(target.id);
+        });
+
+        box.classList.add("interacive");
+    });
+    // the problem here is that we declare boxes befor we create them 
+    // thats why boxes.querySelector will be = [];
+
+    // const boxes decleration neet to be assinge this whole script to attach box listener 
+    // declaration of boxes will happen only after user wants it 
+
+    // // // lets add timer to this function also 
+    // document.querySelector("button#attacher").addEventListener("click", () => {
+    //     const boxes = document.querySelectorAll(".box");
+
+    //     boxes.forEach(box => {
+    //         box.addEventListener("click", ({ target }) => {
+    //             console.log(target.id);
+    //         });
+    //         box.classList.add("interactive ")
+    //     })
+    // })
+    const  timed = (callback) => {
+        const TIMER_LABEL_CLICK = "Execution time";
+        console.time(TIMER_LABEL_CLICK);
+        callback();
+
+        console.timeEnd(TIMER_LABEL_CLICK);
+    }
+        const logEventTargetId = ({target}) => console.log(target.id);
+
+    const makeBoxInteractive = (box) => {
+        // // 2)
+        //  box.addEventListener("click", ({target}) => {
+        //     console.log.(target.id)
+        // });
+
+        // 3)
+        box.addEventListener("click", logEventTargetId);
+
+        box.classList.add("interactive")
+
+    }
+    document.querySelector("button#attacher").addEventListener("click", () => {
+        timed( () => {
+        const boxes = document.querySelectorAll(".box");
+
+        // boxes.forEach(box => {
+        //     box.addEventListener("click", ({ target }) => {
+        //         console.log(target.id);
+        //     });
+        //     box.classList.add("interactive ")
+        //   });
+        });
+        boxes.forEach(makeBoxInteractive)
+    });// this whole proces for 10000 boxes take aprox 460ms
+    //  we can short it out by parting our code to the smaller parts 
+    // after changes 1) 2) and 3) time of whole function took action take 278 ms so almoust halfe the time 
+    // then in case of orgin code 
+
+    // this whole process can be even faster and with use only one event listener 
+
+</script>
+<script id="Event delegation">
+
+    const boxesContainer = document.querySelector("main#boxes");
+
+    // //boxesContainer.addEventListener("click", ({target, currentTarget}) => {
+    // //    if (!target.classList.contains("box")) return; // condition reversed if click not on box 
+    //  //                                                  // breaks function and return nothing
+
+    //  //   console.log(target.id, currentTarget)                         // but when clicked on box, log its id 
+    // //});
+
+    // // //thats drasticly shorts time of function 
+
+    boxesContainer.addEventListener("click", ({target, ...event}) => {
+        if (!target.classList.contains("box")) return;
+        // here we cant use stop propagation and other because we destructurize event 
+        // and is no longer a mouse event, its just an object and top propagation dont work 
+        // event.stopPropagation();
+        // event.stopImmediatePropagation();
+
+        if (target.classList.contains("special")) {
+            return console.log("Special: ", target.id);
+        }
+        console.log(target.id)
+    })
+</script>

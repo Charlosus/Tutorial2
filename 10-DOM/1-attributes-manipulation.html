@@ -28,49 +28,49 @@
 </style>
 
 <script>
-        // // Attributes: href, textcontent, src, alt
-        // // getAttribute, setAttribute, removeAttribute, hasAttribute
+        // Attributes: href, textcontent, src, alt
+        // getAttribute, setAttribute, removeAttribute, hasAttribute
 
-        // const secondLink = document.querySelector("li:nth-child(2) a");
-        // console.log(secondLink.href);
-        // console.log(secondLink.textContent);
+        const secondLink = document.querySelector("li:nth-child(2) a");
+        console.log(secondLink.href);
+        console.log(secondLink.textContent);
 
-        // // we can set time wen script will change our website 
-        // setTimeout(() => {
-        //     secondLink.href = "https://www.google.com";
-        //     secondLink.textContent = "wujek cogelmogel gugel";
-        // }, 5000)
-        // secondLink
+        // we can set time wen script will change our website 
+        setTimeout(() => {
+            secondLink.href = "https://www.google.com";
+            secondLink.textContent = "wujek cogelmogel gugel";
+        }, 5000)
+        secondLink
 
-        // const images = document.querySelectorAll("img");
+        const images = document.querySelectorAll("img");
 
 
-        // setTimeout(() => { 
-        //     // image.src = "https://picsum.photos/300/300"
-        //     // image.alt = "Some image";           
-        // images.forEach(image => {
-        //     image.src = "https://picsum.photos/300/300"
-        //     image.alt = "Some image";
-        //     });
-        // }, 5_100);
+        setTimeout(() => { 
+            // image.src = "https://picsum.photos/300/300"
+            // image.alt = "Some image";           
+        images.forEach(image => {
+            image.src = "https://picsum.photos/300/300"
+            image.alt = "Some image";
+            });
+        }, 5_100);
         
-        // const article = document.querySelector("article")
-        // const articleAriaLabel= article.ariaLabel;
-        // const articleAriaLabel2 = article.getAttribute("aria-label");
-        // console.log(articleAriaLabel, articleAriaLabel2);
+        const article = document.querySelector("article")
+        const articleAriaLabel= article.ariaLabel;
+        const articleAriaLabel2 = article.getAttribute("aria-label");
+        console.log(articleAriaLabel, articleAriaLabel2);
 
-        // article.setAttribute('id', "top-article") // both methods are viable but this is better looking
-        // article.id = "top-top-article"
+        article.setAttribute('id', "top-article") // both methods are viable but this is better looking
+        article.id = "top-top-article"
 
-        // console.log(article.getAttribute('id'))
+        console.log(article.getAttribute('id'))
 
-        // // we can remove attribut aswell 
-        // article.removeAttribute('id');
-        // console.log(article.getAttribute('id'));
+        // we can remove attribut aswell 
+        article.removeAttribute('id');
+        console.log(article.getAttribute('id'));
 
-        // // to check if element have attribut we are looking for we can use hasAttribut
-        // article.hasAttribute('id')
-        // article.hasAttribute('aria-label')  
+        // to check if element have attribut we are looking for we can use hasAttribut
+        article.hasAttribute('id')
+        article.hasAttribute('aria-label')  
 
 </script>
 
@@ -125,14 +125,14 @@
 
 <script id="data attributes: dataset['name']">
 
-    // const listItems = Array.from(document.querySelectorAll('li'));
+    const listItems = Array.from(document.querySelectorAll('li'));
 
-    // listItems.forEach(item => {
-    //     item.dataset.order = Math.round(Math.random()*10);
-    // })
+    listItems.forEach(item => {
+        item.dataset.order = Math.round(Math.random()*10);
+    })
 
-    // const orders = listItems.map(item => item.dataset.order);
-    // console.log(orders)
+    const orders = listItems.map(item => item.dataset.order);
+    console.log(orders)
 
 
 </script>

@@ -1,0 +1,276 @@
+<title>Destructurization</title>
+
+<script id="00 Array destructurization">
+    // const elements = ["one", "two", "foo", "bar", "baz"];
+
+    // // if we wanted to get two elements to disconect 
+    // // from array we would need to do
+
+    // const first = elements[0];
+    // const second = elements[1];
+    // const foobar = elements.slice(2);
+    // console.log(first, second, foobar);
+
+    // // but with destructurization we can do it much faster 
+
+    // const [first1, second1, ...foobars1] = elements;
+    // console.log({first1, second1, foobars1});
+
+    // // Omiting elements
+    // const [,,foo,,baz] = elements // by typing space,space,foo,space,baz we 
+    // console.log({foo, baz});      // ommited elements in those positions
+
+</script>
+
+<script id="01 Object destructurization">
+
+    // const student1 = {
+    //     name: "Adam",
+    //     email: "surlynotadam@adam.com",
+    //     age: 42,
+    //     password: "adam123",
+    // };
+    //     const student2 = {
+    //     name: "Adam",
+    //     email: "surlynotadam@adam.com",
+    //     age: 42,
+    //     password: "adam123",
+    // };
+
+    // console.log(`I'am ${student1.name} and I am ${student1.age} years old.`);
+
+    // const {name, age} = student1;
+    // // const {name, age} = student2; // this is not aloud name and age are already declered  
+    // console.log(`I'm ${name} and I'm ${age} years old`) 
+</script>
+
+<script id="02 Non existing properties in destructurizated Object">
+
+    const dude = {
+        nick: "Bruh",
+        drip: ["Balenciaga", "Gucci"],
+    };
+
+    const { swag } = dude; // if we tried to destructuriza non 
+    console.log({swag}) //existing property console will return undefined
+    
+    // Default value 
+    const {$wag = "Golden Chainzzz"} = dude;
+    console.log ({$wag});
+
+    const oneTwo = ["one", "two"];
+    // we can also assign default value to array
+    const [one, two, three = "three"] = oneTwo;
+    console.log({one, two, three})
+
+</script>
+
+<script id="03 Destructurization and nameing at the same time ">
+
+    // const mate = {
+    //     name: "Jonh",
+    //     surname: "Doe",
+    // }
+    // // also adding a default param to non existing property `howOld` while renaming it.
+
+    // const {name: firstName, surname: lastName, howOld: age = 42 } = mate; //its assigning name to 
+    // // property firstName with value of "Jhon", surname to property lastName with value of "Doe",
+    // //  and adding default value original name howOld but is refered as age vith value 42 
+    // console.log(mate) // whats important it won't change original object
+    // console.log({ name, surname, howOld }); // surname can not be name of variable its reseved for immportant 
+    // console.log({ firstName, lastName, age }) // coding thingy i dont know, swag 4real 4real
+
+</script>
+
+<script id="04 Destructurizing nested structurs">
+
+    // const student = {
+    //     name: "Beth",
+    //     grades: {
+    //         math: 4,
+    //         bio: 3,
+    //         pe: 5,
+    //         physics: 3,
+    //         it: 6,
+    //     },
+    // };
+
+    // // Destructurizing grandes to get math and renaming "it" into "informatics"
+    // const {name, grades: {math, it: informatics}} = student;
+    // console.log(`${name}s grades for math and informatics are ${math} & ${informatics}`);
+    
+    // const students = [
+    //     { name: "Adam", age: 42},
+    //     { name: "Beth", age: 15},
+    //     { name: "Cyntia", age: 26},
+    // ];
+
+    // const [,, { name: cyntiaName, age}] = students; // first two objects wear omited by ,space, 
+    // console.log(`${cyntiaName} is ${age} years old! `) // Cyntia is 26 years old! 
+
+</script>
+
+<script id="05 Omiting properties form object via spread">
+
+    // const user = {
+    //     name: "Adam",
+    //     age: 42,
+    //     email: "surlynotadam@adam.com",
+    //     password: "adam123",
+    // };
+    // // we need to get only properties that are not password
+    // // we can, like ... pull it out 
+
+    // const{password, ...sanitizedUser}=user;
+    // console.log( password ); // adam123
+    // console.log( {sanitizedUser})// {name: 'Adam', age: 42, email: 'surlynotadam@adam.com'}
+    // // but its not recommended 
+
+</script>
+
+<script id="06">
+
+    // const anotherUser = {
+    //     name: 'Adam',
+    //     age: 42,
+    //     email: "surlynotadam@gmail.com",
+    //     password: "adam123"
+    // }
+
+    // // Destructurization in parameters with spread usege
+
+    // const sanitizeUser = ({password, ...sanitizedUser}) => sanitizedUser;
+    // // ok it works we dont want password to be shown and we got the efect 
+    // // but lets say that in future idea for user construction would change 
+    // // and we add some data that also should remain secret 
+
+    // // New data model for user
+    // anotherUser.secret = "this_shouldnt_be public";
+
+    // const sanitized = sanitizeUser(anotherUser);
+    // //{name: 'Adam', age: 42, email: 'surlynotadam@gmail.com', secret: 'this_shouldnt_be public'}
+
+    // // upsi secret data are now leak now we all can see your dingdong 
+
+    // console.log(sanitized)
+    // // When mapping, we should be explicit with:
+    // // what we want - rather then what we don't want,
+
+    // const properMapper = (user) => ({
+    //     username: user.name,
+    //     age: user.age,
+    // })
+    // const anotherMapper = ({ name, age}) => ({username: name, age});
+
+    // console.log(properMapper(anotherUser), anotherMapper(anotherUser))
+    //  // console{username: 'Adam', age: 42} {username: 'Adam', age: 42} 
+    //  // now we only get what we want and our secret data whenever added won't leak 
+
+</script>
+<script id="07 Reasigning destructured values">
+
+    // const player = {
+    //     nickname: "NotAdam24",
+    //     level: 42,
+    //     friends: ["7orever", '4lone']
+    // };
+    // // Basic type 
+    // let {level} = player;
+
+    // level = 69;
+    // console.log(player); // even after changing level
+    // //  Objectfriends: (2)
+    // //  ['7orever', '4lone']
+    // // level: 42
+    // // nickname: "NotAdam24"
+    // // [[Prototype]]: Object
+
+    // // original object remains the same 
+    // console.log(level); // 69
+
+    // // Complex type 
+    // const {friends} = player;
+
+    // friends.push("Autumn");
+
+    // console.log(player);
+    // // {nickname: 'NotAdam24', level: 42, friends: Array(3)}
+    // // friends: (3) ['7orever', '4lone', 'Autumn'] level: 42 nickname: "NotAdam24" [[Prototype]] :Object
+    // console.log(friends);
+    // //['7orever', '4lone', 'Autumn']
+
+    // // the diffrienc is using const and let
+    
+    // // using let we just assigne copy of a values from object to variable 
+    // // by using const we assigne whole object by refernance to the variable 
+    
+    // // we can also create new object take every keys and property 
+    // // and put it im new object if needed
+
+    // const updatedPlayer = {
+    //     ...player, // here we take whole player
+    //     friend: [...player.friends, "Autumn"] // and here we make changes in new object in this case adding friend
+    // };
+
+    // console.log(updatedPlayer)
+    // //friends: (3) ['7orever', '4lone', 'Autumn'] level: 42 nickname: "NotAdam24"
+</script>
+<script id="08 Destructuring in the wild - loop">
+
+    const users = [
+        {name:"Adam", age: 42},
+        {name:"Bogna", age: 50},
+        {name:"Cyryl", age: 60},
+    ];
+    // we can also destructurize array of object inside loop
+    for (const {name, age} of users) {
+        console.log(`I'a ${name} and I'm ${age} years old!`);
+    }
+
+</script>
+<script id="10 Destructurizing function arrgument">
+    const logFirst=([first, ..._]) => console.log("First: ", first);
+
+    logFirst([1,2,3,4]);
+    logFirst("abc");
+    // logFirst({username: "mama"}); // illigal statment 
+    logFirst([]);
+
+    const logPlayerLevel = ({level}) => console.log("Level: ", level);
+
+    const player = {
+        username: "Artur",
+        level: 9001,
+    };
+
+    const something={im:"not", a: [player]};
+    
+    logPlayerLevel(player); //9001
+    logPlayerLevel(something);// undefined
+    logPlayerLevel("hello");// undefined
+    logPlayerLevel("level");// undefined
+
+    const logLength= ({length}) => console.log("Length: ", length);
+
+    logLength(player) // undefined
+    logLength("hallo")// 5 because i takes length of string
+    logLength(["player"])// 1 because it takes length of array, and array have only one element 
+</script>
+<script id="11 Merging two objects">
+
+    const base = {
+        name: "Adam",
+        age: 42,
+    };
+    const extension ={
+        surname: "Badam",
+        hobbies: ["sleeping"],
+        age: 15,
+    };
+    const merged = {
+        ...base,
+        ...extension,
+    }
+    console.log(merged)// {name: 'Adam', age: 15, surname: 'Badam', hobbies: Array(1)}
+    // age was overwriten so be carefull 
+</script>

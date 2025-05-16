@@ -1,0 +1,79 @@
+<head>
+    <title> Libraries - Third Party Code</title>
+    <!-- Script from cdn - lodash Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+</head>
+<body>
+   <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script> 
+   <div id="plotly-chart"><!--Plotly chart will be drown here--></div>
+
+
+<script id="Lodash">
+
+    console.log(_);
+
+    console.log( _.sum([1, 2, 3, 4]));
+
+    console.log( _.shuffle([1, 2, 3, 4]));
+    console.log( _.shuffle([1, 2, 3, 4]));
+    console.log( _.shuffle([1, 2, 3, 4]));
+    
+</script>
+
+<script id="basicLightbox">
+
+    // https://basiclightbox.electerious.com/
+    // https://github.com/electerious/basicLightbox/
+</script>
+
+<script id="Plotly">
+//    const rednderSimpleChart = () =>{  
+//      document.addEventListener("DOMContentLoaded", () => {
+//      const trace1 ={
+//         x: [1,2,3,4],
+//         y: [10,15,13,17],
+//         type: 'scatter'
+//     };
+//     const trace2 ={
+//         x: [1,2,3,4],
+//         y: [16,5,11,9],
+//         type: 'scatter'
+//     };
+
+//     const data=[trace1,trace2];
+    
+//     Plotly.newPlot("myDiv", data)    
+//     });
+// };
+    const xs = Array.from({ length: 100}, (_,i) => i)
+    // const renderFunctionChart = () =>{ 
+    const renderFunctionChart = (ys) =>{
+        // Plotly.newPlot["plotly-chart", [{
+        //     x: [1,2,3,4],
+        //     y: [10,15,13,17],
+        //     type: `scater`
+        // }]];
+        // Plotly.newPlot("plotly-chart", [{ // but we could pullout ys from this and put it to function render
+        //     x: xs,
+        //     y: xs.map(x => Math.pow(x, 2)),
+        //     type: 'scattr'
+        // }])
+         Plotly.newPlot("plotly-chart", [{ 
+            x: xs,
+            y: ys(xs),
+            type: 'scatter'
+        }])
+    }
+    // rednderSimpleChart();
+    //renderFunctionChart();
+    //renderFunctionChart( xs.map(x => Math.pow(x, 2))); // now we can pass whateveer function we want with ingering with function
+    renderFunctionChart( 
+        (xs) => xs.map(x => x*Math.round(Math.random()*10))
+    );
+
+
+
+   
+</script>
+</body>
