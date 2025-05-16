@@ -1,0 +1,1660 @@
+Delegowanie wydarzeń
+Rozprzestrzenianie się zdarzeń
+
+
+
+Rozprzestrzenianie się zdarzeń (event propagation) — to termin opisujący cykl życia 
+zdarzenia, który składa się z trzech etapów:
+
+Zanurzenie (capture phase)
+Celowanie (target phase)
+Wypływanie (bubble phase)
+
+
+W praktyce najczęściej używana jest tylko faza wypływania.
+
+
+
+
+Przyjrzyjmy się bliżej tym etapom podczas wystąpienia zdarzenia.
+
+Faza zanurzania (capture phase) — zdarzenie rozpoczyna się na window i "zanurza się" 
+(przechodzi przez wszystkie elementy-rodziców) do najgłębszego celowego elementu, na
+ którym wystąpiło zdarzenie. Na schemacie zdarzenie to kliknięcie, a zanurzanie kończy 
+ się na elemencie <button>. Faza celowania (target phase) — zdarzenie dotarło do celowego 
+ elementu. W tej fazie zawarte są tylko informacje o tym, że na danym elemencie wystąpiło 
+ zdarzenie. Faza wypływania (bubble phase) — końcowa faza, w której zdarzenie "wypływa" z 
+ najgłębszego, celowego elementu, przez wszystkie elementy-rodziców, aż do window.
+
+
+Rozprzestrzenianie się zdarzeń często błędnie jest używane jako synonim dla fazy wypływania, 
+ale jest to tylko część całego procesu. Dlatego za każdym razem, gdy występuje zdarzenie, 
+następuje jego rozprzestrzenianie się.
+
+W jakiej kolejności zachodzą fazy podczas rozprzestrzeniania się zdarzenia?
+
+Celowanie > Zanurzanie > Wypływanie
+Zanurzanie > Celowanie > Wypływanie
+Rozprzestrzenianie > Celowanie > Zanurzanie
+Result
+
+To jest poprawna odpowiedź!
+
+Wypływanie zdarzeń
+
+
+
+Teraz skoncentrujemy się na fazie wypływania zdarzeń, ponieważ często programista 
+pracuje właśnie z wypływaniem.
+
+
+
+Podczas występowania zdarzenia obsługiwane są najpierw na najbardziej zagnieżdżonym 
+elemencie. Następnie na jego rodzicu, potem wyżej i tak dalej, w górę łańcucha 
+zagnieżdżenia. Ten proces nazywa się wypływaniem zdarzeń (event bubbling), 
+ponieważ zdarzenia "wypływają" od wewnętrznego elementu do góry przez wszystkich 
+przodków do okna (window), podobnie jak bańka powietrza w wodzie.
+
+
+
+Rozważmy przykład: mamy trzy zagnieżdżone tagi <div> z obsługą kliknięć na każdym z nich.
+
+
+
+<div id="parent">
+  Rodzic
+  <div id="child">
+    Dziecko
+    <div id="descendant">Potomek</div>
+  </div>
+</div>
+
+
+
+
+Wypływanie zapewnia, że kliknięcie na #descendant wywoła obsługę kliknięcia w 
+następującej kolejności:
+
+
+
+najpierw na samym #descendant,
+następnie na elemencie #child,
+dalej na elemencie #parent
+i tak dalej, w górę łańcucha przodków do window.
+
+
+Zatem jeśli w przykładzie klikniesz na #descendant, to kolejno zostaną wyświetlone
+ komunikaty przez console.log dla descendant → child → parent.
+
+Od którego elementu rozpoczyna się wypływanie zdarzenia?
+
+Od samego górnego elementu w hierarchii
+Od elementu, na którym wystąpiło zdarzenie
+Od najbliższego przodka elementu, na którym zdarzyło się zdarzenie
+Result
+
+Zgadza się!
+
+Celowy element
+
+
+
+Bez względu na to, gdzie przechwyciliśmy zdarzenie podczas jego wypływania,
+ zawsze można dowiedzieć się, gdzie dokładnie się to stało.
+
+Element, na którym wystąpiło zdarzenie, nazywany jest docelowym, lub źródłowym. 
+Zawsze jest to najgłębszy element, od którego rozpoczyna się wypływanie. Jest
+ on dostępny jako event.target.
+
+
+
+event.target — jest to odnośnik do docelowego elementu, na którym wystąpiło zdarzenie,
+ w trakcie wypływania jest on niezmienny.event.currentTarget — jest to odnośnik do
+  bieżącego elementu, do którego jest przypisany bieżący obsługujący funkcję zdarzenia,
+   i do którego w wyniku wypływania dotarło nasłuchiwane zdarzenie.
+
+
+Jeśli nasłuchiwacz zdarzeń jest zarejestrowany na najwyższym elemencie, będzie on 
+"łapał" wszystkie kliknięcia, które występują na jego elementach podrzędnych, dzięki
+ mechanizmowi wypływania zdarzeń. W poniższym przykładzie działa to w ten sposób:
+  nasłuchiwacz jest zarejestrowany na elemencie "Parent". Kliknięcia na "Descendant"
+   lub "Child" będą wypływać do "Parent", gdzie zostaną one obsłużone przez ten 
+   nasłuchiwacz. Dlatego ważne jest zrozumienie różnicy między elementem, na którym
+    zdarzenie faktycznie wystąpiło (event.target), a elementem, do którego zdarzenie
+     wypłynęło, a nasłuchiwacz je przechwycił (event.currentTarget).
+
+
+Co to jest celowy element?
+
+Element, na którym wykonał się obsługujący zdarzenia
+#Element, na którym wystąpiło zdarzenie
+Element, do którego zdarzenie wypłynęło
+Result
+
+Świetnie!
+
+Zatrzymywanie propagacji
+
+
+
+Zazwyczaj zdarzenie będzie wypływać w górę do elementu window, wywołując wszystkie 
+dostępne obsługiwacze na swojej drodze.
+
+
+
+Ale czasami jeden element może mieć kilka obsługiwaczy dla tego samego zdarzenia.
+
+
+
+Wyobraź sobie, że zdarzenie wystąpiło na elemencie Descendant. Zdarzenie wypływa do
+ Child i Parent. Każdy pośredni obsługiwacz może zatrzymać propagację tego zdarzenia
+  za pomocą metod obiektu zdarzenia (event):
+
+event.stopPropagation()
+event.stopImmediatePropagation()
+
+
+Jaka jest różnica w użyciu tych metod?
+
+
+
+event.stopPropagation()
+
+Zatrzymuje "propagację" zdarzenia w drzewie DOM. Oznacza to, że żaden element nadrzędny
+ nie będzie w stanie złapać tego zdarzenia. Nie przeszkadza innym obsługiwaczom zdarzeń
+  w wykonywaniu się na tym samym elemencie.
+
+
+event.stopImmediatePropagation()
+
+Zatrzymuje "propagację" zdarzenia tak samo jak event.stopPropagation().
+Również zatrzymuje wykonanie wszystkich innych obsługiwaczy zdarzeń, które nasłuchują
+ tego samego zdarzenia na danym elemencie, nawet jeśli zostały zarejestrowane wcześniej.
+
+
+Nie zatrzymuj propagacji, jeśli nie jest to konieczne.
+Zatrzymywanie propagacji tworzy swoje pułapki, które później trzeba omijać. 
+Na przykład analityka internetowa wykorzystuje propagację, aby śledzić działania
+ użytkownika na stronie, więc zatrzymanie propagacji zdarzeń uniemożliwi zbieranie tych informacji.
+
+Delegowanie zdarzeń
+
+
+
+Propagacja pozwala na zastosowanie jednej z najbardziej przydatnych technik -
+ delegowania zdarzeń.
+
+
+
+Wyobraź sobie, że masz grupę elementów, których zdarzenia trzeba obsługiwać w
+ taki sam sposób. Dodanie obsługiwacza do każdego z nich byłoby nieporęczne.
+
+Delegowanie zdarzeń (event delegation) polega na dodaniu jednego obsługiwacza do 
+wspólnego przodka tych elementów.
+
+
+
+Rozważmy delegowanie na przykładzie:
+
+tworzymy element <div>
+dodajemy do niego dowolną liczbę przycisków, na przykład, 100
+rejestrujemy dla każdego przycisku nasłuchiwanie zdarzenia kliknięcia z 
+obsługiwaczem handleButtonClick
+
+
+
+
+
+
+
+Problem polega na tym, że mamy 100 nasłuchiwaczy zdarzeń. Wszystkie wskazują na ten
+ sam obsługiwacz, ale mamy 100 nasłuchiwaczy.
+
+
+
+Dzięki temu, że zdarzenia się propagują, możemy je przechwycić na wspólnym przodku
+ - elemencie <div>.
+
+
+
+
+
+
+
+
+Teraz mamy tylko jeden obsługiwacz zdarzenia kliknięcia z obsługą handleButtonClick, 
+i przeglądarka nie musi przechowywać w pamięci 100 różnych nasłuchiwaczy.
+
+
+
+Delegowanie realizowane jest w trzech prostych krokach.
+
+
+Określ wspólnego przodka grupy elementów, dla których chcesz śledzić zdarzenia.
+Zarejestruj na elemencie-rodzicu obsługiwacz zdarzeń, które chcesz przechwytywać
+ z grupy elementów. W obsługiwaczu użyj event.target do wybrania docelowego
+  elementu, na którym bezpośrednio wystąpiło zdarzenie.
+
+
+W kodzie będzie to wyglądać następująco:
+
+const box = document.querySelector(".box");
+
+box.addEventListener("click", function (event) {
+	console.log(event.target); // Element, na którym wystąpiło zdarzenie kliknięcia
+});
+
+
+
+
+Takie podejście ułatwia inicjalizację obsługiwaczy dla elementów o jednakowych
+ właściwościach. Można dodawać, usuwać lub zmieniać elementy, nie trzeba ręcznie
+  dodawać ani usuwać obsługiwaczy zdarzeń dla każdego z nich.
+
+W czym polega koncepcja delegowania zdarzeń?
+
+Dodawanie osobnego obsługiwacza zdarzeń do każdego elementu z grupy
+#Dodawanie jednego wspólnego obsługiwacza zdarzeń dla grupy elementów
+Result
+
+Masz całkowitą rację!
+
+Sprawdzenie docelowego elementu zdarzenia
+
+
+
+Zadaniem jest stworzenie palety kolorów. Paleta pozwala na wybór koloru za pomocą 
+kliknięcia i wyświetla wybrany kolor.
+
+
+
+
+
+
+<p class="output">Wybrany kolor: -</p>
+<div class="color-palette"></div>
+
+
+
+Każde kliknięcie na elemencie palety jest zdarzeniem, które zmienia kolor i 
+zawartość nagłówka. Jest wiele elementów. Zamiast przypisywania obsługiwacza
+ do każdego elementu palety, zawieśmy jednego słuchacza na wspólnym przodku 
+ div.color-palette.
+
+
+
+const colorPalette = document.querySelector(".color-palette");
+
+colorPalette.addEventListener("click", selectColor);
+
+function selectColor(event) {
+  console.log(event.target);
+  const selectedColor = event.target.dataset.color;
+}
+
+
+
+W obsłudze zdarzenia kliknięcia używamy event.target, aby uzyskać element, 
+na którym bezpośrednio wystąpiło zdarzenie, i powiązany z nim kolor. Informacje
+ o kolorze będziemy przechowywać w atrybucie data-color.
+
+
+
+Koniecznie sprawdzamy docelowy element zdarzenia kliknięcia.
+
+
+
+Musimy się upewnić, że jest to dokładnie przycisk, w przeciwnym razie możemy
+ przypadkowo obsłużyć kliknięcie, gdy użytkownik kliknie między przyciskami,
+  co może spowodować błąd.
+
+
+
+Do sprawdzenia typu elementu używamy właściwości nodeName.
+
+
+
+function selectColor(event) {
+  if (event.target.nodeName !== "BUTTON") {
+    return; // użytkownik kliknął między przyciskami
+  }
+
+  const selectedColor = event.target.dataset.color; // użytkownik kliknął przycisk,
+   więc mamy dostęp do jego atrybutów
+}
+
+Po co sprawdzać docelowy element zdarzenia podczas delegacji?
+
+#Aby wykluczyć obsługę zdarzeń dla niepotrzebnych typów elementów
+Taka weryfikacja nie jest potrzebna
+Result
+
+Świetnie!
+
+Biblioteki
+Biblioteki
+
+
+
+Biblioteki to zestaw wcześniej napisanych funkcji, metod i klas, które dostarczają 
+programistom gotowe narzędzia do rozwiązywania określonych zadań. Biblioteki są
+ tworzone w celu ułatwienia procesu programowania, ponieważ umożliwiają korzystanie 
+ z gotowych rozwiązań niezbędnych do wielu zadań, bez konieczności pisania kodu od podstaw.
+
+
+
+Główne cechy bibliotek:
+
+Wielokrotne użytkowanie: Biblioteki są tworzone w celu wielokrotnego użytkowania. 
+Programiści mogą integrować biblioteki w różnych projektach i korzystać z ich
+ funkcjonalności bez potrzeby pisania kodu od zera.
+Gotowe rozwiązania: Biblioteki zawierają gotowy kod, który można wykorzystać do 
+rozwiązywania powszechnych zadań. Na przykład, biblioteki mogą zawierać funkcje 
+do pracy z datami, przetwarzania ciągów znaków, animacji i wiele innych.
+Przyspieszenie procesu programowania: Korzystanie z bibliotek pozwala skrócić czas 
+programowania, ponieważ programista nie musi tworzyć i dostosowywać funkcji lub 
+komponentów od zera. Mogą one używać gotowych i sprawdzonych rozwiązań.
+Społeczność i wsparcie: Dobre biblioteki często są aktywnie wspierane przez społeczność 
+programistów, którzy wprowadzają ulepszenia, naprawiają błędy i zapewniają kompatybilność wsteczną.
+
+
+Przykłady popularnych bibliotek w języku JavaScript:
+
+Chart.js: Biblioteka do tworzenia interaktywnych wykresów i diagramów.
+Lodash: Biblioteka do pracy z tablicami, obiektami, łańcuchami znaków itp., 
+która dostarcza wiele przydatnych funkcji.
+
+
+Ważne jest wybieranie bibliotek, które najlepiej pasują do twojego projektu, oraz
+ śledzenie ich aktualizacji, aby korzystać z najnowszych ulepszeń i poprawek błędów.
+
+Co to jest biblioteka?
+
+Kod, który musisz napisać, aby później używać go w projekcie
+XZbiór uprzednio napisanego kodu gotowego do użycia w projekcie
+Dowolny skrypt projektu
+Result
+
+Świetnie!
+
+CDN
+
+
+
+CDN (Content Delivery Network) to geograficznie rozproszona infrastruktura sieciowa.
+ Zapewnia szybką dostawę treści (takich jak style, skrypty, obrazy i inne zasoby) 
+ użytkownikom serwisów internetowych i stron internetowych. Serwery należące do CDN 
+ są rozmieszczone geograficznie w różnych częściach świata, aby minimalizować czas
+  odpowiedzi dla użytkowników witryny/serwisu.
+
+
+
+
+
+
+
+
+Głównym celem CDN jest poprawa wydajności i dostępności witryny dla użytkowników
+ poprzez zmniejszenie opóźnień w ładowaniu treści.
+
+Jest to osiągane poprzez przechowywanie kopii treści na serwerach CDN, które 
+są fizycznie bliżej użytkowników. Podczas żądania treści przeglądarka użytkownika
+ automatycznie odwołuje się do najbliższego serwera CDN, co przyspiesza ładowanie.
+
+
+
+Korzyści płynące z korzystania z CDN:
+
+Szybkie ładowanie treści: Treść jest ładowana z serwera, który jest fizycznie
+ blisko użytkownika, co skraca czas ładowania.
+Rozłożone obciążenie: Serwery CDN są rozmieszczone na całym świecie, co
+ umożliwia równomierne rozłożenie obciążenia i zmniejsza ryzyko przeciążeń.
+Poprawiona dostępność: Jeśli jeden serwer jest niedostępny, przeglądarka
+ użytkownika może skorzystać z innego serwera CDN, zapewniając dostępność treści.
+Zmniejszenie obciążenia na serwerze źródłowym: Kopie treści są przechowywane
+ na serwerach CDN, co zmniejsza obciążenie na serwerze źródłowym, szczególnie
+  przy wysokiej liczbie odwiedzin.
+
+Wybierz korzyści wynikające z użycia CDN (2 poprawne odpowiedzi)
+
+#Szybkość ładowania treści dla użytkownika
+Zwiększone bezpieczeństwo wykonania kodu
+#Zmniejszenie obciążenia serwera, z którego pobierana jest treść
+Szybkość działania kodu w przeglądarce
+Result
+
+Świetnie!
+
+Podłączanie biblioteki
+
+
+
+Aby móc korzystać z biblioteki w projekcie, musisz ją podłączyć, czyli dodać 
+pliki biblioteki do projektu.
+
+
+
+Na przykładzie podłączymy do projektu bibliotekę Lodash za pomocą CDN. Podłączenie
+ biblioteki JavaScript za pomocą CDN składa się z kilku kroków.
+
+
+
+Krok 1. Najpierw odwiedź stronę usługi CDN na https://www.jsdelivr.com/ i
+ znajdź potrzebną bibliotekę po jej nazwie.
+
+
+
+Krok 2. Z listy wyników wybierz potrzebną bibliotekę, klikając na jej nazwę.
+ Po przejściu pod link, znajdziesz się na stronie z informacjami o bibliotece.
+
+
+
+
+
+
+
+
+
+
+
+Krok 3. Skopiuj kod HTML tagu script, a następnie otwórz swój plik HTML i dodaj
+ odnośnik do skryptu biblioteki na końcu dokumentu HTML, jak pokazano na przykładzie.
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	 <!-- tagi nagłówka -->
+  </head>
+  <body>
+    <!-- znaczniki HTML -->
+
+    <!-- Plik skryptu biblioteki Lodash -->
+		<script async src="<https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js>"></script>
+    <!-- Twój plik skryptu -->
+    <script defer src="path/to/script.js"></script>
+  </body>
+</html>
+
+
+
+Podłączenie skryptu biblioteki powinno być przed podłączeniem twojego głównego 
+pliku skryptów. Nie zapomnij dodać atrybutu async do tagu script biblioteki.
+ Jest to konieczne, aby plik biblioteki ładował się możliwie szybko.
+
+
+Teraz możesz uzyskać dostęp do biblioteki w swoim skrypcie.
+
+Podczas podłączania bibliotek za pomocą CDN, do obiektu window dodawana jest 
+właściwość, w której przechowywane są dane udostępniane przez bibliotekę. 
+Nazwa tej właściwości jest unikalna dla biblioteki i opisana w jej dokumentacji.
+
+Dla Lodash jest to znak podkreślenia _.
+
+
+
+console.log(_); // Cały obiekt biblioteki Lodash
+
+
+Do sprawdzenia używaj metod:
+
+[sum](<https://lodash.com/docs/4.17.15#sum>), — oblicza sumę wartości w tablicy
+`shuffle`` — tworzy tablicę przetasowanych wartości
+console.log(_.sum([4, 2, 8, 6])); // 20
+console.log(_.sum([5, 10])); // 15
+
+console.log(_.shuffle([1, 2, 3, 4])); // [4, 1, 3, 2]
+console.log(_.shuffle([1, 2, 3, 4])); // [3, 2, 1, 4]
+
+
+
+Uwaga! Sposób podłączania i korzystania z bibliotek może się różnić w zależności
+ od konkretnej biblioteki. Wszystkie współczesne biblioteki dostarczają dokumentacji 
+ i przykładów użycia na swoich oficjalnych stronach internetowych, co może pomóc w 
+ lepszym zrozumieniu ich funkcjonalności.
+
+Jak czytać dokumentację biblioteki
+
+
+
+Wyobraź sobie, że jesteś programistą, który tworzy stronę do wyszukiwania obrazów. 
+Potrzebujesz, aby po kliknięciu na mały obrazek otwierało się okno modalne z tym 
+obrazkiem w dużym rozmiarze i lepszej jakości. Oczywiście, możesz napisać tę logikę 
+samodzielnie, ale możesz zaoszczędzić swój czas, podłączając ten funkcjonalność z 
+biblioteki.
+
+
+
+Przykładem takiej biblioteki może być "basicLightbox".
+
+
+
+Po pierwsze, powinieneś zapoznać się z dokumentacją, którą można znaleźć:
+
+na oficjalnej stronie tej biblioteki (https://basiclightbox.electerious.com/)
+lub
+
+w repozytorium na GitHubie (https://github.com/electerious/basicLightbox)
+
+
+Zauważ, że projektowanie, struktura i interfejs wszystkich bibliotek zawsze będą różne, 
+ale zawsze będą:
+instrukcje dotyczące instalacji i podłączenia do projektu;
+przykłady użycia;
+cechy i możliwości konfiguracji.
+
+
+Instalacja i podłączenie biblioteki
+
+W większości oficjalnych dokumentacji bibliotek instrukcje dotyczące instalacji i 
+podłączenia do projektu najczęściej znajdują się w sekcjach o nazwach "Rozpocznij",
+ "Szybki start", "Instalacja", "Konfiguracja" lub podobnych. To stała praktyka, która 
+ pozwala programistom szybko znaleźć potrzebne informacje.
+
+Na przykład, w basicLightbox ta sekcja nosi nazwę Instalacja. Opisuje, jak zainstalować
+ basicLightbox za pomocą menedżerów pakietów (czego nauczysz się później).
+
+
+
+
+
+
+Jeśli chcesz podłączyć bibliotekę za pomocą CDN, znajdując tę bibliotekę na serwisie 
+CDN jsdelivr, otrzymasz gotowe tagi do podłączenia skryptów i styli, które należy po
+ prostu dodać do swojego HTML-a.
+
+
+
+
+
+
+
+
+Ale czasami podany jest tylko ścieżka do pliku, a gotowy tag można skopiować, klikając 
+odpowiedni przycisk obok ścieżki.
+
+
+
+
+
+
+Użycie
+
+
+
+Po podłączeniu biblioteki ważne jest zrozumienie, jak jej używać. Większość dokumentacji
+ dostarcza różnorodne przykłady użycia, które można dostosować do swoich potrzeb. Często
+  są one przedstawione w sekcjach "Użycie", "Przykłady", "API" lub "Demo".
+
+
+
+W oficjalnej dokumentacji basicLightbox i na GitHubie w sekcji API znajdziesz różnorodne
+ przykłady użycia, które pomogą ci zrozumieć, jak działa biblioteka. Przykłady często
+  pokazują, jak korzystać z podstawowych funkcji i możliwości biblioteki. Ale nie ograniczaj
+   się tylko do przykładów z dokumentacji. Spróbuj łączyć różne funkcje, dostosowując
+    je do własnych potrzeb i zadań swojego projektu.
+
+
+
+
+
+
+Na przykład, metoda create() stworzy nową instancję basicLightbox. Oczekuje 2 parametrów:
+
+zawartość okna modalnego (obowiązkowy parametr, typu element DOM lub string {Node|String})
+obiekt opcji (opcjonalny parametr, typu obiekt {?Object})
+
+
+Wynikiem wywołania metody create() będzie obiekt instancji basicLightbox, który należy 
+zapisać w zmiennej, na przykład instance.
+
+
+
+const instance = basicLightbox.create(`
+	<h1>Nie można zamknąć</h1>
+	<p>Nie można zamknąć tego okna modalnego kliknięciem.</p>
+`, {
+	closable: false
+})
+
+
+
+Zauważ, że w instancji instance w dokumentacji istnieje również oddzielny dział Instance
+ API, który opisuje dostępne metody.
+
+
+
+
+
+
+
+
+Na przykład, wywołanie metody instance.show() pokaże okno modalne, a instance.close() 
+- przeciwnie, ukryje je.
+
+
+
+Funkcje specjalne i dodatkowe opcje
+
+
+
+Bardzo ważną sekcją w dokumentacji każdej biblioteki jest sekcja opisująca jej funkcje 
+specjalne i dodatkowe opcje konfiguracyjne. Ta sekcja może mieć różne nazwy w różnych
+ dokumentacjach, ale najczęściej nosi nazwę "Opcje", "Zaawansowane ustawienia", 
+ "Opcje konfiguracji", "Zaawansowane użycie" lub "Zaawansowana konfiguracja" itp.
+
+
+
+W bibliotece basicLightbox w sekcji Opcje znajduje się opis obiektu opcji, który można 
+przekazać podczas tworzenia instancji do metody create().
+
+
+
+
+
+
+Na przykład, opcja className pozwala dodawać dodatkowe klasy do głównego kontenera okna
+ modalnego. Może to być przydatne do stylizacji okna modalnego zgodnie z twoim projektem,
+  bez konieczności zmiany podstawowych stylów biblioteki.
+
+
+
+Opcja onShow służy do wywołania funkcji, gdy okno modalne zostanie otwarte. Może to być 
+przydatne, jeśli musisz wykonać określone czynności (na przykład dodać nasłuchiwacz) podczas otwierania okna modalnego.
+
+
+
+Po zapoznaniu się z dokumentacją łatwiej będzie orientować się w przykładach dostarczanych
+ przez programistę tej biblioteki.
+
+
+
+A teraz spróbuj powtórzyć kod w przykładach, dodając do niego funkcje, które są potrzebne 
+dla twojego zadania.
+
+<script id="destructurization"></script>
+Destrukturyzacja
+Po co jest destrukturyzacja?
+
+
+
+Destrukturyzacja (Destructuring) to specjalny składniowy sposób pozwalający wydobyć wartości z struktur danych, takich jak obiekty lub tablice, i przypisać je do zmiennych. Jest to wygodny sposób na uzyskanie potrzebnych danych złożonych struktur i ich użycie w kodzie.
+
+
+
+Bez destrukturyzacji praca z właściwościami obiektu wygląda następująco:
+
+const user = {
+	name: "Jacob",
+	age: 32
+};
+
+console.log(user.name); // Jacob
+console.log(user.age); // 32
+
+
+
+Z destrukturyzacją praca z właściwościami obiektu wygląda następująco:
+
+
+
+const user = { 
+	name: "Jacob", 
+	age: 32 
+};
+
+const { name, age } = user;
+console.log(name); // Jacob
+console.log(age); // 32
+
+Destrukturyzacja obiektów
+
+
+
+Złożone dane zawsze są reprezentowane jako obiekty. Wielokrotne odwołania do właściwości
+ obiektu sprawiają, że kod staje się mniej czytelny.
+
+
+
+const book = {
+  title: "Ostatnie królestwo",
+  author: "Bernard Cornwell",
+  genres: ["proza historyczna", "przygodowa"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+const accessType = book.isPublic ? "publiczny" : "prywatny";
+const message = `Książka ${book.title} autorstwa ${book.author} o ocenie ${book.rating} 
+jest dostępna ${accessType}!`;
+
+
+
+Destrukturyzacja pozwala "rozpakować" wartości właściwości obiektu do lokalnych zmiennych.
+ Sprawia to, że kod jest mniej "głośny" w miejscu ich użycia.
+
+
+
+const book = {
+  title: "Ostatnie królestwo",
+  author: "Bernard Cornwell",
+  genres: ["proza historyczna", "przygodowa"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+// Destrukturyzacja
+const { title, author, isPublic, rating } = book;
+
+// Użycie
+const accessType = isPublic ? "publiczny" : "prywatny";
+const message = `Książka ${title} autorstwa ${author} o ocenie ${rating} jest dostępna 
+${accessType}!`;
+
+
+
+Po słowie kluczowym const lub let umieszczamy nawiasy klamrowe, podobnie jak w przypadku
+ deklaracji obiektu.
+
+
+
+Wewnątrz nawiasów klamrowych, oddzielając przecinkami, podajemy nazwy zmiennych, którym 
+zostaną przypisane odpowiednie wartości właściwości zdestrukturyzowanego obiektu.
+
+
+
+Destrukturyzacja zawsze znajduje się po lewej stronie operacji przypisania.
+Zmiennym wewnątrz nawiasów klamrowych przypisywane są wartości o tej samej nazwie 
+właściwości obiektu.
+Kolejność deklaracji zmiennych w nawiasach klamrowych nie ma znaczenia.
+
+Wybierz poprawną składnię destrukturyzacji obiektu w zmiennej profile:
+
+const profile { }
+const profile = { }
+=== const { } = profile ===
+const () = profile
+Result
+
+Zgadza się!
+
+Destrukturyzacja nieistniejących właściwości
+
+
+
+W przypadku, gdy nazwa zmiennej jest taka sama jak nazwa właściwości, dochodzi do przypisania.
+
+
+
+Ale co w innym przypadku?
+
+
+
+Kiedy w obiekcie nie ma właściwości o takiej nazwie, zmiennej zostanie przypisane undefined.
+
+
+
+const book = {
+  title: "Ostatnie królestwo",
+  author: "Bernard Cornwell",
+  genres: ["proza historyczna", "przygodowa"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+// Destrukturyzacja
+const { title, bookTitle, coverImage, bookRating } = book;
+console.log(title); // "Ostatnie królestwo"
+console.log(bookTitle); // undefined
+console.log(coverImage); // undefined
+console.log(bookRating); // undefined
+
+
+
+Aby uniknąć przypisania undefined podczas destrukturyzacji nieistniejących 
+właściwości, można przypisać zmiennym wartości domyślne za pomocą operatora =. 
+Ta wartość zostanie przypisana tylko wtedy, gdy w obiekcie brakuje właściwości 
+o takiej nazwie.
+
+
+
+const book = {
+  title: "Ostatnie królestwo",
+  author: "Bernard Cornwell",
+};
+
+// Dodajemy obraz okładki, jeśli brakuje go w obiekcie książki
+const {
+  title,
+  author,
+  coverImage = "<https://via.placeholder.com/640/480>"
+} = book;
+
+console.log(title); // "Ostatnie królestwo"
+console.log(author); // "Bernard Cornwell"
+console.log(coverImage); // "<https://via.placeholder.com/640/480>"
+
+
+Jaką wartość przyjmie zmienna podczas destrukturyzacji, której nazwa nie odpowiada 
+żadnej właściwości obiektu?
+
+Błąd
+null
+===undefined===
+false
+Result
+
+Świetnie!
+
+Wybierz poprawny składniowo sposób przypisania wartości domyślnej podczas 
+destrukturyzacji właściwości username z obiektu profile
+
+const { "Guest" = username } = profile
+const { username = "Guest" } = profile
+const { username: "Guest" } = profile
+const { username - "Guest" } = profile
+Result
+
+Świetnie!
+
+Przemianowanie zmiennej
+
+
+
+Podczas destrukturyzacji możemy przemianować zmienną, do której rozpakowujemy 
+wartość właściwości, używając :
+
+
+
+const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+// Destrukturyzacja
+const { title, author: bookAuthor, isPublic, rating: bookRating } = book;
+console.log(title); // "The Last Kingdom"
+console.log(bookAuthor); // "Bernard Cornwell"
+console.log(isPublic); // true
+console.log(bookRating); // 8.38
+
+
+
+Aby to zrobić:
+
+nazwę właściwości, z której chcemy otrzymać wartość
+dodajemy dwukropek :
+wpisujemy nazwę zmiennej, do której chcemy umieścić wartość tej właściwości.
+
+Wybierz poprawną składnię przemianowania zmiennej podczas destrukturyzacji 
+właściwości username z obiektu profile
+
+===const { coolName: username } = profile===
+const { username = coolName } = profile
+const { username: coolName } = profile
+const { username - coolName } = profile
+Result
+
+Niestety nie.
+
+Wartość domyślna
+
+
+
+Podczas przemianowywania zmiennej, do której rozpakowujemy wartość właściwości 
+obiektu, możemy również przypisać wartość domyślną.
+
+Aby to zrobić, po nowej nazwie umieszczamy znak równości = i określamy jej wartość domyślną.
+
+
+
+const book = {
+  title: "The Last Kingdom",
+  coverImage:
+    "<https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg>",
+};
+
+const {
+  title,
+  coverImage: bookCoverImage = "<https://via.placeholder.com/640/480>",
+} = book;
+
+console.log(title); // "The Last Kingdom"
+console.log(bookCoverImage); // "<https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg>"
+
+
+
+Jeśli taka właściwość istnieje w obiekcie, zostanie do niej przypisana wartość zmiennej.
+
+
+
+W przeciwnym razie zmiennej zostanie przypisana wartość domyślna.
+
+
+
+const book = {
+  title: "The Dream of a Ridiculous Man",
+};
+
+const {
+  title,
+  coverImage: bookCoverImage = "<https://via.placeholder.com/640/480>",
+} = book;
+
+console.log(title); // "The Dream of a Ridiculous Man"
+console.log(bookCoverImage); // "<https://via.placeholder.com/640/480>"
+
+
+Destrukturyzacja w pętlach
+
+
+
+Podczas iteracji po tablicy obiektów za pomocą pętli for...of wielokrotnie
+ odwołujemy się do właściwości obiektu.
+
+
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+];
+
+for (const book of books) {
+  console.log(book.title);
+  console.log(book.author);
+  console.log(book.rating);
+}
+
+
+
+Aby zmniejszyć liczbę powtórzeń, można zdestrukturyzować właściwości obiektu
+ do lokalnych zmiennych w ciele pętli.
+
+
+
+for (const book of books) {
+  const { title, author, rating } = book;
+
+  console.log(title);
+  console.log(author);
+  console.log(rating);
+}
+
+
+
+Jeśli obiekt zawiera niewiele właściwości, destrukturyzację można wykonać
+ bezpośrednio w miejscu deklaracji zmiennej book.
+
+
+
+for (const { title, author, rating } of books) {
+  console.log(title);
+  console.log(author);
+  console.log(rating);
+}
+
+
+Destrukturyzacja parametrów
+
+
+
+Podczas przekazywania obiektów do funkcji można zdestrukturyzować te obiekty, 
+aby uzyskać dostęp do potrzebnych danych. Pozwala to jawnie określić, które
+pola obiektu są używane w funkcji.
+
+
+
+Bez destrukturyzacji obiektu:
+
+function printUserInfo(user) {
+  console.log(`Imię: ${user.name}, Wiek: ${user.age}, Hobby: ${user.hobby}`);
+}
+
+printUserInfo({
+	name: "Alice",
+	age: 25,
+	hobby: "taniec"
+}); // Imię: Alice, Wiek: 25, Hobby: taniec
+
+
+
+Z destrukturyzacją obiektu w ciele funkcji:
+
+
+
+function printUserInfo(user) {
+const { name, age, hobby } = user
+  console.log(`Imię: ${name}, Wiek: ${age}, Hobby: ${hobby}`);
+}
+
+printUserInfo({
+	name: "Alice",
+	age: 25,
+	hobby: "taniec"
+}); // Imię: Alice, Wiek: 25, Hobby: taniec
+
+
+
+Z destrukturyzacją obiektu w miejscu deklaracji parametrów:
+
+
+
+function printUserInfo({ name, age, hobby }) {
+  console.log(`Name: ${name}, Age: ${age}, Hobby: ${hobby}`);
+}
+
+printUserInfo({ 
+	name: "Alice", 
+	age: 25, 
+	hobby: "dancing" 
+}); // Name: Alice, Age: 25, Hobby: dancing
+
+Wzorzec „Parametry Obiektowe”
+
+
+
+Jeśli funkcja przyjmuje więcej niż 2-3 parametry, łatwo jest się pogubić w
+kolejności i tym, co przekazywać.
+
+
+
+W rezultacie kod w miejscu jej wywołania staje się bardzo niejasny.
+
+
+
+function doStuffWithBook(title, pages, downloads, rating, isPublic) {
+  // Operujemy na parametrach
+  console.log(title);
+  console.log(numberOfPages);
+  // I tak dalej
+}
+
+// ❌ Co to jest 736? Co to jest 10283? Co to jest true?
+doStuffWithBook("Ostatnie Królestwo", 736, 10283, 8.38, true);
+
+
+
+Wzorzec „Parametry Obiektowe” pomaga rozwiązać ten problem.
+
+Zamiast zestawu parametrów używa tylko jednego - obiektu z nazwanymi właściwościami.
+
+
+
+function doStuffWithBook(book) {
+  // Operujemy na właściwościach obiektu
+  console.log(book.title);
+  console.log(book.pages);
+  // I tak dalej
+}
+
+
+
+W ten sposób, podczas jej wywoływania przekazujemy jeden obiekt z wymaganymi właściwościami.
+
+
+
+// ✅ Wszystko jest jasne
+doStuffWithBook({
+  title: "Ostatnie Królestwo",
+  pages: 736,
+  downloads: 10283,
+  rating: 8.38,
+  isPublic: true,
+});
+
+
+Kolejną zaletą jest to, że można zdestrukturyzować obiekt w parametrze book.
+
+Można to zrobić zarówno w ciele funkcji...
+
+function doStuffWithBook(book) {
+  const { title, pages, downloads, rating, isPublic } = book;
+  console.log(title);
+  console.log(pages);
+}
+
+
+
+Jak i w sygnaturze funkcji - nie ma to znaczenia.
+
+
+
+function doStuffWithBook({ title, pages, downloads, rating, isPublic }) {
+  console.log(title);
+  console.log(pages);
+}
+
+
+Głęboka destrukturyzacja
+
+
+
+Najczęściej dane będą reprezentowane jako obiekty z więcej niż jednym poziomem zagnieżdżenia.
+
+
+
+Na przykład, obiekt opisujący użytkownika mediów społecznościowych może wyglądać następująco:
+
+
+
+const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  stats: {
+    followers: 5603,
+    views: 4827,
+    likes: 1308,
+  },
+};
+
+
+
+Do destrukturyzacji właściwości zagnieżdżonych obiektów stosuje się te same 
+zasady. Na początek napiszemy kod destrukturyzacji właściwości obiektu użytkownika.
+
+
+
+const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  stats: {
+    followers: 5603,
+    views: 4827,
+    likes: 1308,
+  },
+};
+
+const { name, tag, stats } = user;
+
+console.log(name); // Jacques Gluke
+console.log(tag); // jgluke
+console.log(stats); // { followers: 5603, views: 4827, likes: 1308 }
+
+
+
+Teraz dodajmy głęboką destrukturyzację właściwości obiektu stats.
+
+W tym celu po nazwie właściwości w destrukturyzacji stawiamy dwukropki : i 
+zaczynamy destrukturyzację obiektu dla tej właściwości.
+
+
+
+const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  stats: {
+    followers: 5603,
+    views: 4827,
+    likes: 1308,
+  },
+};
+
+const {
+  name,
+  tag,
+  stats: { followers, views, likes },
+} = user;
+
+console.log(name); // Jacques Gluke
+console.log(tag); // jgluke
+console.log(followers); // 5603
+console.log(views); // 4827
+console.log(likes); // 1308
+
+
+
+Podczas głębokiej destrukturyzacji można również zmieniać nazwy zmiennych i 
+przypisywać wartości domyślne, korzystając ze znajomego ci składni.
+
+
+
+const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  stats: {
+    followers: 5603,
+    views: 4827,
+    likes: 1308,
+  },
+};
+
+const {
+  name,
+  tag,
+  stats: { followers = 0, views: userViews = 0, likes: userLikes = 0 },
+} = user;
+
+console.log(name); // Jacques Gluke
+console.log(tag); // jgluke
+console.log(followers); // 5603
+console.log(userViews); // 4827
+console.log(userLikes); // 1308
+
+Destrukturyzacja tablicy
+Składnia
+
+
+
+Destrukturyzowane przypisanie można stosować nie tylko do obiektów, ale także do tablic, 
+ale z pewnymi różnicami.
+
+
+
+Zamiast nawiasów klamrowych {} używane są nawiasy kwadratowe [].
+Zmiennym zdefiniowanym w nawiasach kwadratowych [] zostaną przypisane wartości kolejnych 
+elementów tablicy.
+
+
+Na przykład, mamy tablicę liczb. Chcemy uzyskać wartości każdej składowej koloru w 
+osobnych zmiennych.
+
+
+
+const color = [200, 255, 100];
+const [ red, green, blue ] = color;
+
+console.log(`rgb(${red}, ${green}, ${blue})`); // “rgb(200, 255, 100)"
+
+
+
+Po słowie kluczowym const lub let dodajemy nawiasy kwadratowe, podobnie jak w przypadku
+ deklaracji tablicy. Wewnątrz nawiasów, oddzielając przecinkami, podajemy nazwy zmiennych, 
+ do których zostaną przypisane wartości odpowiednich elementów tablicy.
+
+
+
+W wyniku takiego zapisu zostaną utworzone 3 zmienne, a do nich zostaną przypisane elementy
+ w kolejności numerowania: od 0 do końca tablicy.
+
+Wybierz poprawną składnię destrukturyzacji tablicy w zmiennej fruits
+
+const { } = fruits
+const fruits = [ ]
+const [] = fruits
+const fruits [ ]
+Result
+
+Świetnie!
+
+Wartości domyślne
+
+
+
+Jeśli zmiennych jest więcej niż elementów w tablicy, zostaną im przypisane wartości 
+undefined. Aby temu zapobiec, można określić wartości domyślne.
+
+Składnia jest taka sama jak w przypadku obiektów, po nazwie zmiennej stawiamy = i 
+wartość domyślna.
+
+
+
+const color = [200, 100, 255];
+const [ red, green, blue, alfa = 0.3 ] = color;
+
+console.log(`rgba(${red}, ${green}, ${blue}, ${alfa})`); // “rgba(200, 100, 255, 0.3)"
+
+
+Wybierz poprawną składnię dla przypisania ciągu znaków "A fruit" jako wartości
+ domyślnej podczas destrukturyzacji tablicy fruits
+
+const [ "A fruit" = firstFruit ] = fruits
+const [ firstFruit = "A fruit" ] = fruits
+const [ firstFruit: "A fruit" ] = fruits
+const [ firstFruit, "A fruit" ] = fruits
+Result
+
+Świetnie!
+
+Częściowa destrukturyzacja
+
+
+
+Czasem z tablicy potrzebujemy zdekstrukturyzować tylko pierwsze N elementów, a 
+resztę zachować w jednej zmiennej jako tablicę.
+
+
+
+Destrukturyzując tablicę, możemy rozpakować potrzebne elementy i przypisać 
+resztę elementów tablicy do zmiennej, używając operatora ...rest.
+
+
+
+const color = [200, 255, 100];
+
+const [ red, ...otherColors ] = color;
+
+console.log(red); // 200
+console.log(otherColors); // [255, 100]
+
+
+
+W ten sposób oryginalna tablica nie zostanie zmieniona, a w zmiennej 
+otherColors pojawi się nowa tablica z kopiami zebranych wartości.
+
+
+
+Z obiektami również działa to samo. Możemy zdekstrukturyzować określone 
+właściwości do osobnych zmiennych, a resztę zebrać w nowy obiekt.
+
+
+
+const user = {
+	name: "Jacob",
+	age: 32,
+	email: "j.cob@mail.com",
+	isOnline: true
+};
+
+const { name, isOnline, ...otherProps } = user;
+
+console.log(name); // "Jacob"
+console.log(isOnline); // true
+console.log(otherProps); // {age: 32, email: "j.cob@mail.com"}
+
+
+
+W ten sposób oryginalny obiekt nie zostanie zmieniony, a w zmiennej otherProps 
+pojawi się nowy obiekt z kopiami zebranych właściwości.
+
+Pomijanie wartości
+
+
+
+W przeciwieństwie do nazwanych właściwości obiektu, elementy tablicy są zbiorem 
+zindeksowanych wartości. Jeśli chcesz zdekstrukturyzować tylko na przykład trzeci 
+element, pierwsze dwa należy pominąć.
+
+
+
+Załóżmy, że z tablicy color chcesz wziąć tylko ostatnią wartość. W destrukturyzacji 
+należy oddzielić przecinkami pomijane elementy.
+
+
+
+const rgb = [200, 100, 255];
+
+const [, , blue] = rgb;
+
+console.log(`Niebieski: ${blue}`); // "Niebieski: 255"
+
+
+
+W praktyce ta możliwość jest rzadko używana w tablicach, ale dobrze wiedzieć,
+że taka opcja istnieje.
+
+Destrukcja parametrów
+
+
+
+Podczas przekazywania tablicy do funkcji można zdekstrukturyzować jej elementy.
+
+Bez destrukturyzacji:
+
+
+
+function printFruits(fruits) {
+  console.log(fruits[0], fruits[1], fruits[2]);
+}
+
+printFruits(["jabłko", "banan", "pomarańcza"]); // "jabłko banan pomarańcza"
+
+
+
+Z destrukturyzacją w miejscu deklaracji parametrów:
+
+
+
+function printFruits([pierwszyOwoc, drugiOwoc, trzeciOwoc]) {
+  console.log(pierwszyOwoc, drugiOwoc, trzeciOwoc);
+}
+
+printFruits(["jabłko", "banan", "pomarańcza"]); // "jabłko banan pomarańcza"
+
+
+
+W ten sposób można od razu przypisać elementy tablicy do osobnych zmiennych 
+podczas deklaracji funkcji.
+
+
+
+function printFruits([firstFruit, secondFruit, thirdFruit]) {
+  console.log(firstFruit, secondFruit, thirdFruit);
+}
+
+printFruits(["apple", "banana", "orange"]); // "apple banana orange"
+
+
+
+
+Zalety destrukturyzacji
+
+
+
+Przejdźmy przez zalety destrukturyzacji:
+
+Wygodne wyodrębnianie wartości z obiektów i tablic: Zamiast ciągłego odwoływania
+się do pól obiektu lub elementów tablicy za ich indeksami lub nazwami, można od
+razu wyciągnąć potrzebne wartości do zmiennych.Krótki i czytelny kod: Destrukturyzacja 
+sprawia, że kod jest krótszy i bardziej zrozumiały. Zamiast długich wyrażeń dostępu 
+do pól obiektów lub elementów tablicy, można od razu przypisać wartości do 
+zmiennych o zrozumiałych nazwach. Parametry funkcji: Podczas przekazywania 
+obiektów do funkcji można zdekstrukturyzować te obiekty, aby uzyskać dostęp 
+do potrzebnych danych. Pozwala to jasno określić, jakie pola obiektu są używane 
+w funkcji. Praca z funkcjami zwracającymi obiekty: Jeśli funkcja zwraca obiekt, 
+można od razu zdekstrukturyzować ten obiekt, aby wyciągnąć z niego wartości.
+
+Dwie trzecie kursu JavaScript zostało przebyte — tak trzymać! 💪
+
+Chwila odpoczynku, zanim przejdziemy dalej, aby przeanalizować, jakie ważne tematy zostały omówione w module 8.
+
+
+
+Po przyswojeniu materiałów teoretycznych, wiesz już:
+
+jakie są etapy cyklu życia zdarzenia i rozumiesz, co to jest zdarzenie wypływające,
+potrafisz określić, gdzie wystąpiło zdarzenie i zatrzymać jego propagację,
+jak wykorzystywać wzorce podczas pracy z zdarzeniami (rozprzestrzenianie, delegowanie zdarzeń),
+znasz podstawowe cechy bibliotek i potrafisz je podłączać,
+czym jest destrukturyzacja,
+masz pojęcie, jak używać wzorca "Obiekt parametrów",
+potrafisz destrukturyzować obiekty i tablice.
+
+
+Nadszedł czas, aby wykorzystać tę wiedzę w praktyce!
+
+
+
+Zadanie domowe nr 8
+
+Utwórz repozytorium goit-js-hw-08.
+Zadanie wykonuj w plikach gallery.js i index.html.
+Zapoznaj się z treścią zadania i wykonaj je w edytorze kodu.
+Upewnij się, że kod jest sformatowany za pomocą Prettier, a w konsoli nie ma błędów ani ostrzeżeń podczas otwierania strony z zadaniem.
+Prześlij zadanie do sprawdzenia.
+
+
+Format przekazania: Praca domowa zawiera dwa linki: do plików źródłowych i strony roboczej na GitHub Pages.
+
+Do stylizacji układu twoich zadań użyj tego szablonu.
+
+
+Zadanie — Galeria obrazków
+
+Utwórz galerię z możliwością kliknięcia w jej elementy i przeglądania obrazu w pełnym rozmiarze w oknie modalnym. Zobacz demonstracyjne wideo działania galerii.
+
+
+
+Tworzenie galerii to złożone zadanie, które lepiej podzielić na kilka prostszych podzadań, wykonując każde z nich, zbliżasz się do końcowego celu. Ten proces nazywa się dekompozycją zadania.
+
+
+
+1 - Układ galerii
+
+Logiczne jest zacząć od stworzenia miejsca, do którego będziemy dodawać elementy galerii. W tym celu w kodzie HTML dodaj kontener galerii - nieuporządkowaną listę z klasą gallery.
+
+
+
+<ul class="gallery"></ul>
+
+
+
+
+2 - Tablica obrazów
+
+Do stworzenia elementów galerii będziesz potrzebować danych. Dodaj ten tablicę obiektów do swojego pliku JavaScript. Każdy obiekt reprezentuje jeden element galerii.
+
+preview — link do małej wersji obrazu dla karty galerii
+original — link do dużej wersji obrazu dla okna modalnego
+description — opis tekstowy obrazu, dla atrybutu alt małego obrazu i podpisu dużego obrazu w oknie modalnym.
+const images = [
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg',
+    description: 'Hokkaido Flower',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg',
+    description: 'Container Haulage Freight',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg',
+    description: 'Aerial Beach View',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg',
+    description: 'Flower Blooms',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg',
+    description: 'Alpine Mountains',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg',
+    description: 'Mountain Lake Sailing',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg',
+    description: 'Alpine Spring Meadows',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg',
+    description: 'Nature Landscape',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
+    description: 'Lighthouse Coast Sea',
+  },
+];
+
+
+
+
+3 - Układ elementów galerii
+
+Masz już kontener, do którego można dodawać elementy galerii, i dane, za pomocą których je stworzyć. Teraz czas wypełnić galerię układem.
+
+Użyj tablicy obiektów images i tego szablonu HTML elementu galerii, a następnie stwórz układ elementów w kodzie JavaScript, a następnie dodaj cały układ do ul.gallery. Nie dodawaj innych tagów HTML poza tymi, które są zawarte w tym szablonie.
+
+<li class="gallery-item">
+  <a class="gallery-link" href="large-image.jpg">
+    <img
+      class="gallery-image"
+      src="small-image.jpg"
+      data-source="large-image.jpg"
+      alt="Image description"
+    />
+  </a>
+</li>
+
+
+W atrybucie src tagu <img> podaj link do małej wersji obrazu.
+Dla atrybutu alt użyj opisu obrazu.
+Link do dużego obrazu powinien być przechowywany w atrybucie danych source na elemencie <img>, a adres powinien być podany w atrybucie href.
+Zwróć uwagę, że obraz jest opakowany w link, którego atrybut href wskazuje na ścieżkę do pliku z obrazem. Kliknięcie w ten link może spowodować pobranie obrazu na komputer użytkownika. Zablokuj to zachowanie domyślnie.
+
+
+4 - Style
+
+Dodaj stylizację galerii zgodnie z projektem.
+
+
+
+5 - Delegacja
+
+Nadszedł czas, aby dodać funkcjonalność nasłuchiwania kliknięć na elementach galerii i uzyskiwania linku do dużego obrazu po kliknięciu. Użyj techniki delegacji na ul.gallery. Na razie po kliknięciu na element galerii wyświetl adres do dużego obrazu w konsoli.
+
+
+
+6 - Podłączenie biblioteki
+
+Biblioteka basicLightbox zapewnia w pełni funkcjonalne okno modalne, które doskonale nadaje się do naszego zadania. Użyj serwisu CDN jsdelivr i dodaj w pliku HTML linki do zminifikowanych plików JS i CSS biblioteki.
+
+
+
+7 - Okno modalne
+
+Rozszerz swój kod tak, aby po kliknięciu na element galerii otwierało się okno modalne podłączonej biblioteki. Aby dowiedzieć się, jak zainicjować okno modalne w swoim kodzie i jak z niego korzystać, zapoznaj się z dokumentacją i przykładami.
+
+
+
+8 - Duży obraz
+
+Wykorzystaj swój kod uzyskiwania linku do dużego obrazu, aby zmienić wartość atrybutu src elementu <img> w oknie modalnym przed otwarciem. Użyj gotowego układu okna modalnego z obrazem z przykładów biblioteki basicLightbox.
+
+
+
+9 - Zamknięcie za pomocą klawiatury
+
+Dodaj funkcjonalność zamykania okna modalnego po naciśnięciu klawisza Escape. Upewnij się, że nasłuchiwanie klawiatury zachodzi tylko wtedy, gdy otwarte jest okno modalne. Biblioteka basicLightbox zawiera metodę do programowego zamykania okna modalnego.
+
+
+
+Na co zwróci uwagę mentor podczas sprawdzania:
+
+Galeria obrazów jest wyświetlana na żywo na stronie z danymi z tablicy images.
+Galeria obrazów jest stylizowana zgodnie z projektem.
+Dane dla galerii są generowane dynamicznie w JS.
+Podczas nasłuchiwania kliknięć na elementach galerii zastosowano technikę delegacji.
+Po kliknięciu między elementami galerii nie dzieje się nic.
+Podłączono bibliotekę basicLightbox.
+Po kliknięciu na element galerii otwiera się okno modalne podłączonej biblioteki, zawierające powiększoną wersję klikniętego obrazu.
+Zaimplementowano funkcjonalność zamykania okna modalnego po naciśnięciu klawisza Escape.
+Nasłuchiwanie klawiatury zachodzi tylko wtedy, gdy otwarte jest okno modalne.
