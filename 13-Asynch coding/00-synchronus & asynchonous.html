@@ -1,0 +1,278 @@
+<title>Sunchonous & Asynchronous code</title>
+
+<styles>
+
+</styles>
+
+<main>
+    <section>
+        <h1>Rockets <span id="countdown"></span></h1>
+        <button id="start"> LaUNCH! </button>
+        <button id="stop" style="color:red">ABOrT!</button>
+    </section>
+
+    <section id="count"></section>
+
+    <section id="clock"></section>
+</main>
+
+<script id="1-Sync">
+    // in js sync means that code is done 
+    // in the order in which they were entered
+
+    // console.log("First")
+    // console.log("Second")
+    // console.log("Third")
+    // console.log("Forth")
+
+    // logs one by one will print in console 
+
+</script>
+
+<script id="2-Async">
+
+    // // async means that we are destroying this order
+    // // by for example adding timeout to console log 
+
+    // console.log("First");
+
+    // setTimeout(() =>  { 
+    //     console.log("Second");
+    // }, 1337);
+    // console.log("Third");
+    // console.log("Forth");
+
+    // // now in console first, third and forth will appear instantly
+    // // in console and after 1337ms second   
+
+</script>
+
+<script id="Zero timeout">
+    // eventho time in settimeout would be set to zero 
+    // just adding this function will cause to "Second" to apear last in console
+    // so jaust adding setTimeout already makes code async
+
+    // // console.log("First");
+
+    // setTimeout(() =>  { 
+    //     console.log("Second");
+    // }, 0);
+    // console.log("Third");
+    // console.log("Forth");
+
+</script>
+
+<script id="setTimeout function">
+    
+    // console.log("start");
+
+    // const delay = 5_000;
+
+    // const timeoutId = setTimeout(() => {
+    //     console.log({ timeoutId });
+    //     console.log("Doing some work");
+    //     document.body.backgroundColor = "red";
+    //     console.log("Finish");
+    // }, delay);
+
+    // console.log("Hello there!")
+</script>
+
+<script id="Clearing timeout">
+    // to stop time which havent fimished counting down we can use 
+    // clearTimeout(nameOfaTimeout)
+    // const timeoutOne = setTimeout(() => {
+    //     console.log("Lunching missiles")
+    // }, 10_000);
+
+    // console.log(`Aborting launch #${timeoutOne}`)
+    // clearTimeout(timeoutOne)
+</script>
+
+<script id="Nesting timeout">
+
+    // const ONE_SECOND = 1_000;
+    // let timeout = null;
+    // let counter = 5;
+
+    // const formatCountdown = (seconds) => `(${seconds} seconds)`;
+
+    // const countdown = document.querySelector("span#countdown");
+
+    // const launchRocket = () => {
+    //     if (counter <= 0) {
+    //         countdown.textContent ="";
+    //         console.log("Lift off!");
+
+    //         document.body.classList.add("boom");
+
+    //         setTimeout(() =>  {
+    //             document.body.classList.remove("boom");
+    //         }, 1_000);
+    //         counter = 5
+    //         return clearTimeout(timeout);
+    //     }
+    //     countdown.textContent = formatCountdown(counter);
+    //     console.log(counter--);
+
+    //     timeout = setTimeout(() => {
+    //         launchRocket()
+    //     }, ONE_SECOND)
+    // };
+
+    // document.querySelector("button#start").addEventListener("click", () => {
+    //     timeout = setTimeout(launchRocket, ONE_SECOND);
+    // });
+
+    // document.querySelector("button#stop").addEventListener("click", () => {
+    //     console.log(`Aborting countdown you p$$uy #${timeout}...`);
+    //     clearTimeout(timeout);
+    //     counter = 5;
+    //     countdown.textContent = "";
+    // })
+</script>
+
+<script id="Paralell timeouts">
+    // const rnd = () => Math.random() * 10_000;
+
+    // let count = 0;
+
+    // const countElement = document.querySelector("section#count")
+
+    // setTimeout(() => {
+    //     countElement.textContent = count++;
+    //     }, rnd());
+
+    // setTimeout(() => {
+    // countElement.textContent = count++;
+    // }, rnd());
+
+    // setTimeout(() => {
+    // countElement.textContent = count++;
+    // }, rnd());
+
+    // const runMultiplePralelTimeouts = (amount) => {
+    //     for (let i=0; i<amount; i++) {
+    //         const delay = rnd();
+
+    //             console.log(`Running time out with deley: ${delay}`)
+    //            setTimeout(() => {
+    //            countElement.textContent = count++;
+    //           }, rnd()); 
+    //     }
+    // };
+
+    // runMultiplePralelTimeouts(2137)
+</script>
+
+<script id="Set interval function">
+    // we can not only set time out but also set interval to do things in set time non stop
+
+
+    // const intervalId = setInterval(() => {       // after const we add id for our interval for referance
+    //     console.log({intervalId}, Math.random()) // part of code to be done in each interval
+    // }, 1_000);                                   // sets time counter between repetition 
+
+</script>
+
+<script id="Clearing Interval">
+
+    //     const dateInterval = setInterval(() => {     // const id = setInterval(() => {
+    //     console.log(new Date())                      //     body of function
+    // }, 1_000);                                       // }, time between iteration)
+
+    // // if wantet to stop interval after specific amount of loops 
+    // // we can ad clearinterval with its id from refernace 
+    // setTimeout(() => {
+    //     clearInterval(dateInterval);
+    // }, 5 + Math.random() * 20_000)
+
+</script>
+
+<script id="Encapsulateing countdown and CURRING ">
+    // // here we have axample of curring function that return other function
+    // const creatCountdown = (countdown = 10) => () => {  //in first we add deafult value 
+    //     console.log(countdown--);
+    //     if (countdown <= 0) clearInterval(interval);
+    // };
+    // // each work idvidualy 
+    // const interval = setInterval(creatCountdown(12), 1_000);
+    // const interval2 = setInterval(creatCountdown(), 1_000) // will count from 10 because its default value in decleration 
+    // const first = setInterval(creatCountdown(5), 1000);    // but there is a problem here 
+    // const second = setInterval(creatCountdown(8), 1500);   // counting will not stop for all the functions 
+
+    // // its because in body of the function we declared interval 
+    // // and its only stops interval with name interval 
+    // // those with other names will count down endlessly to maximum value so kinda endless loop
+
+    // // there are few solution 
+    // const creatCountdown0 = (countdown = 10, intervalId) => () => { // ad interval id to function
+    // console.log(countdown--);
+    // if (countdown < 0) clearInterval(intervalId);  // and put it in clearInterval 
+    //  };
+
+    // const interval1 = setInterval(creatCountdown(12, interval), 1_000);
+    // const interval3 = setInterval(creatCountdown(_, interval3), 1_000) 
+    // const first1 = setInterval(creatCountdown(5, first1), 1000);    
+    // const second2 = setInterval(creatCountdown(8, second2), 1500); 
+
+    // //or we could make function that would be bullet prove for such an error
+
+    // const createCountdownBetter = (start = 10) => {
+    //     let count = start;
+    //     const id = setInterval(() => {
+    //         console.log(`${id}`, count--);
+    //         if (count < 0) clearInterval(id);
+    //     }, 1000);
+    // }; 
+    
+    // createCountdownBetter(12);
+    // createCountdownBetter(); // startuje z 10
+    // createCountdownBetter(5);
+
+</script>
+
+<script id="Rockets with interval">
+    // // custom countdown for rockets 
+    // let interval;
+
+    // let timeout = null;
+
+    // const formatCountdown = (seconds) => `${seconds} seconds`
+
+    // const countdown = document.querySelector("span#countdown");
+
+    // document.querySelector("button#start").addEventListener("click", () => {
+
+    //     let counter = 5;
+
+    //     interval = setInterval(() => {
+    //         // theoreticly this should stop interval but it will still be going 
+
+    //        // if (counter < 0) return // here is missing clearinterval // 
+    //        // eventho function wont console log number inside interval is still going 
+    //        // if (counter <= 0) return clearInteval(interval) // only now this will stop counting
+    //        if (counter <= 0) {
+    //         countdown.textContent = "";
+    //         return clearInterval(interval)
+    //        }
+
+    //         countdown.textContent = formatCountdown(counter);
+    //         console.log(counter--);
+    //     }, 1_000)
+    // });
+
+    // document.querySelector("button#stop").addEventListener("click", () => {
+    //     console.log(`Aborting countdown #${interval}...`);
+    //     clearInterval(interval)
+    // })
+</script>
+
+<script id="Clock">
+
+    const clock=document.querySelector("section#clock");
+
+    setInterval(() => {
+        clock.textContent = new Date();
+    }, 500)
+</script>

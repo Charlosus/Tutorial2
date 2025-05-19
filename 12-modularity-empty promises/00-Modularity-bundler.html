@@ -1,0 +1,98 @@
+<title>Json</title>
+
+<script id="Json format - serialization">
+
+    // const student = {
+    //     firstname: "Adam",
+    //     lastname: "Foboar",
+    //     isGraduate: true,
+    //     friends: ["Beth", "Cecil", "Dorothy"],
+    //     grades: {
+    //         math: 5,
+    //         physics: 4,
+    //         chemistry: 4.5,
+    //     }, 
+    //     detentsion: null,
+    //     sayHI() {
+    //         console.log("Hello there!")
+    //     }
+    // };
+
+    // console.log(typeof student, student);
+
+    // const serializedJson = JSON.stringify(student);
+    // console.log(typeof serializedJson, serializedJson)
+
+</script>
+
+<script id="JSON parsing - deserialization">
+
+    // const parseAndLog = (serialized) => {
+    //     const deserialized = JSON.parse(serialized);
+    //     console.log(typeof deserialized,deserialized)
+    // } 
+    // parseAndLog(`{ "username": "Kuba" }`)
+
+    // // parseAndLog("[3,2,1"); // opsi ewror 
+
+    // the problem here is that when error ocure its stops whole code from proceeding 
+    // later we will try to hadle with error because thay are ineveteble and we cant allow it
+    // to stop us 
+
+    // parseAndLog("[3, 2, 1]")
+
+    // parseAndLog(`{ "username": "Kuba"}`);
+
+</script>
+
+<script id="Handling errors try/catch">
+
+    // const parseAndLogSafely = (serialized) => {
+    //     try { // here our function it trying to do make an action 
+    //         const deserialized = JSON.parse(serialized);
+    //         console.log(typeof deserialized, deserialized)
+    //     } catch (error) { // here we intercept error and choose how we want to handle it 
+    //         console.log("Failed to parse data.", error, {error});
+    //     } 
+    // };
+    // // thanks to this we omited error and make letter code to run 
+    // // but we need to remeber to fix the error 
+    // // but now it wont paralize whole code 
+    // // We can add our own Error 
+    // class AbcError extends Error {};
+    // // this will extend bassic error prototype --
+
+    // // parseAndLogSafely("[3,2,1");
+    // // parseAndLogSafely("[3,2,1]");
+
+    // try {
+    //     throw new Error("SomeError");
+    // } catch (error) {
+    //     console.log(error);
+    //         // throw new Error("Some Error")
+    //         throw error;
+    // }
+    // // console.log("This wont run after the unhandled error!")
+
+    // const add = (x, y) => {
+    //     if (typeof x !== "number" || typeof y !== "number") {
+    //         throw new Error("Add arguments must be a number");
+    //     }
+    //     return x + y;
+    // };
+
+    // console.log(add(40, 2));
+    // console.log(add(40, "2")); // faulty code
+    
+</script>
+
+<script id="Runtime errors vs Syntax/Compile* time errors">
+
+    // syntax error
+    // led smthing = 42;
+    //proper let smthing = 42
+    // console.log(smthing);
+
+    // Runtime error
+    // console.log(JSON.parse("[42"))
+</script>

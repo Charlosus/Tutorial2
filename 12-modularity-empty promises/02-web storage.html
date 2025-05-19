@@ -1,0 +1,276 @@
+<title>Web Storage</title>
+
+<script id="1 - Local Storage">
+
+    // console.log(window.localStorage);
+
+    // console.log(localStorage)
+</script>
+
+<script id="2 - Setting an Item to localStorage">
+
+    // localStorage.setItem("key", "value")
+
+    // console.log(localStorage)
+
+</script>
+
+<script id="3 - Getting an Item value form localStorage">
+
+    // //Refresh Page - persistant storage on this page.
+    // const valueFromLocalStorage = localStorage.getItem("key");
+
+    // console.log(typeof valueFromLocalStorage, valueFromLocalStorage);
+
+    // console.log(localStorage.getItem("non-existing-key"));
+
+</script>
+
+<script id="4 - Storing structures - resault">
+
+    // const logWithType = (value, label ="") => console.log(label, {
+    //     value, 
+    //     type: typeof value
+    // })
+
+    // // const arr = [3, 2, 1]; // we are declering array 
+
+    // // localStorage.setItem("array", arr); // putting it to localstorage
+    // // const storedArr = localStorage.getItem("array");    // and assined storedArr to value in local storage
+    // // // eventho its array in local storage its changing to object
+
+    // // //now lets check it with our function 
+    // // logWithType(arr, "array");  //{value: Array(3), type: 'object'} default array is an object 
+    // // // eventho its array its type of is object
+    
+    // // //but what happen to it when we put it in local storage
+    // // logWithType(storedArr, "stored array"); // {value: '3,2,1', type: 'string'}
+    // // // what it is its A MF STRING, its because when we put in in local storage its 
+    // // // converted with .toString() which can be troblesome becasue we can't do .map or .push
+    // // // if we needed it to be array 
+    // // const arr = [1, 2, 3];
+    // // localStorage.setItem("myArray", JSON.stringify(arr));
+
+    // // const stored = JSON.parse(localStorage.getItem("myArray"));
+
+    // // console.log(stored);       // [1, 2, 3]
+    // // console.log(typeof stored); // "object"
+    // // console.log(Array.isArray(stored)); // true
+    
+    // // lets make an object and add it to local storage
+    // const obj = { a: 42, b: "foo"};
+    // localStorage.setItem("object", obj);
+    // const storedObj = localStorage.getItem("object");
+
+    // logWithType(obj, "object"); // checking object which is not in local storage it remaing the same 
+    // logWithType(storedObj, "stored object"); //but in local storage its changing type to string 
+    // // {value: '[object Object]', type: 'string'}
+
+    // the problem with that is we loose object values and dont have acces to obj 
+</script>
+
+<script id="5 - -Type of storag value - example">
+
+    // const getTypeOfLocalStorageItem = (key, item) => {
+    //     const originalType = typeof item;
+    //     console.log(`[${key}] Setting (${originalType}): `, item);
+    //     localStorage.setItem(key, item);
+
+    //     const storedItem = localStorage.getItem(key);
+    //     const storedType = typeof storedItem;
+    //     console.log(`[${key}] Getting stored (${storedType}): `, storedItem )
+
+    //     return storedType;
+    // }
+
+    // const examples = [
+    //     {key: "String", value: "hawk"},// [String] Setting (string):hawk\\ [String] Getting stored (string):  hawk
+    //     {key: "Number", value: 42},//[Number] Setting (number):  42 \\ [Number] Getting stored (string):  42
+    //     {key: "Boolean", value: "true"},// [Boolean] Setting (string):  true\\ [Boolean] Getting stored (string):  true
+    //     {key: "undefined", value: undefined},//[undefined] Setting (undefined):  undefined \\ [undefined] Getting stored (string):  undefined
+    //     {key: "null", value: null},//[null] Setting (object):  null\\[null] Getting stored (string):  null
+    //     {key: "Array", value: [3, 2, 1]},//[Array] Setting (object):  (3) [3, 2, 1]\\[Array] Getting stored (string):  3,2,1
+    //     {key: "Object", value: { name: "Adam", age: 42}},//[Object] Setting (object):  {name: 'Adam', age: 42}\\[Object] Getting stored (string):  [object Object]
+    // ];
+
+    // // for (const { key, value } of examples ) {
+    // //     getTypeOfLocalStorageItem(key, value);
+    // // }
+
+    // const storedType = examples
+    //     .map(({key, value}) => getTypeOfLocalStorageItem( key, value));
+
+    // // console.log(storedType);
+
+    // console.log(storedType.every(type => type === "string"));
+
+    // const areAllStoredTypesString = examples
+    //     .map((({key, value}) => getTypeOfLocalStorageItem(key, value)))
+    //     .every(type => type === "string");
+
+    //     console.log({areAllStoredTypesString});
+</script>
+
+<script id="6 - Properly storing/retrieveing structures">
+    // so every type is transfered to tring and we loose object 
+    // how to prevent it, lets create object that we want to store 
+
+    // const user = {
+    //     username: "Adam",
+    //     age: 42,
+    //     friends: ["Beth", "Cecil"],
+    //     permissions: {
+    //         admin: false,
+    //         moderator: false,
+    //         user: true,
+    //         guest: true,
+    //     },
+    // };
+
+    // console.log("Original:", typeof user, user);
+
+    // const KEY = "USER";
+
+    // // Set & Get raw item.
+    // localStorage.setItem(KEY, user);
+    // const localUser = localStorage.getItem(KEY);
+    // console.log("Local:", typeof localUser, localUser);
+
+    // // Serialization item.
+    // const serializedUser = JSON.stringify(user);
+    // console.log("Serialized:", typeof serializedUser, serializedUser);
+
+    // // Set & Get serialized item.
+    // localStorage.setItem(KEY, serializedUser); // overwrite
+    // const savedUser = localStorage.getItem(KEY);
+    // console.log("Saved:", typeof localUser, localUser);
+
+    // // Check returned item.
+    // console.log("@username:", savedUser.username); //@username: undefined
+
+    // // Deserialize (parse) returned item.
+    // const deserializedSavedUser = JSON.parse(savedUser);
+    // console.log("Deserialized:", typeof deserializedSavedUser, deserializedSavedUser) 
+    // // to get obcject to original shape we need to use pares on user
+    // console.log("@username:", deserializedSavedUser.username ); // Yeay we got it back 
+</script>
+
+<script id="7 - Check `Application` tab in Dev Tools - removing items">
+
+    // // now local storage got very messy every thing that was typed got saved 
+
+    // for (let index=0; index<localStorage.length; index++) {
+    //     const key = localStorage.key(index);
+    //     console.log(key, index) // this will get back localStorage list of keyname + index
+    //     console.log(key, localStorage.getItem(key)); // this log name and whats inside it 
+    // }
+
+    // // Removing item by key 
+    // for (let index=0; index<localStorage.length; index++) {
+    //     const key = localStorage.key(index);
+        
+    //     localStorage.removeItem(key);
+    //     console.log(`Removed: [${key}]`);
+    // };
+    // // but its not reliable, some times leaves behind some entries 
+    // // need to run few times to make it properly
+
+    // console.log(localStorage.length, { localStorage })
+
+    // // Here is much better method for that 
+    // Object.keys(localStorage) 
+    //     .forEach(key => localStorage.removeItem(key));
+    // console.log(localStorage.length, { localStorage });
+
+    // // leaves local storage nice and clean 
+
+</script>
+
+<script id="8 - Clearing all items">
+
+    //  const examples = [
+    //     {key: "String", value: "hawk"},
+    //     {key: "Number", value: 42},
+    //     {key: "Boolean", value: "true"},
+    //     {key: "undefined", value: undefined},
+    //     {key: "null", value: null},
+    //     {key: "Array", value: [3, 2, 1]},
+    //     {key: "Object", value: { name: "Adam", age: 42}},
+    // ];
+
+    // examples.forEach(({  key, value }) => {
+    //     localStorage.setItem(key, value);
+    // });
+
+    // console.log(localStorage.length, { localStorage });
+
+    // // and here comes all in white 
+    // localStorage.clear();
+
+    // console.log(localStorage.length, {localStorage})
+</script>
+
+<script id="9 - Working with Local Storage - handling bad data">
+    // most of a data from local storage comes from users
+    // so wrong data are inevitable so we need to be able to handle them
+    const items = [
+        { key: "arr", serializedValue: "[3, 2, 1" },
+        { key: "obj", serializedValue: "{ age 42" },
+    ];
+
+    // items.forEach(item => {
+    //     localStorage.setItem(item.key, item.serializedValue);
+    // });
+    
+    // const keys = items.map( i => i.key );
+    // const deserializedValues = keys
+    //     .map(k => localStorage.getItem(k))
+    //     .map(serializedValue => JSON.parse(serializedValue)); // error paralizing our console
+
+    // console.log({ deserializedValues });
+
+    // const safelyDeserializedValues = items
+    //     .map(i => i.key)
+    //     .map(key => localStorage.getItem(key))
+    //     .map(serializedValue => {
+    //         try {
+    //             const deserialized = JSON.parse(serializedValue);
+    //             return deserialized;
+    //         } catch(error) {
+    //             console.log("Failed to parse. Returning default.");
+    //             return "DEFAULT VALUE";
+    //         }
+    //     });
+
+    // console.log({ safelyDeserializedValues })
+
+    // but three map thats unnessery 
+    
+    // Using one map.
+//     const safelyParsedValue = items.map(item => {
+//         const serializedValue = localStorage.getItem(item.key);
+//         try {
+//             const deserialized = JSON.parse(serializedValue); // this action might fail
+//             return deserialized;
+//         } catch(error) {
+//             console.log("Failed to parse. Returning default.");
+//             return "DEFAULT VALUE"
+//         }
+//     }
+// );
+
+//     console.log({ safelyParsedValue });
+
+    // Shortened
+    // const parsedValues = items.map(item => {
+    //     try {
+    //         return JSON.parse(localStorage.getItem(item.key));
+    //     } catch(error) {
+    //         console.log("Faild to parse. Returning default.");
+    //     } finally {
+    //         return "DEFAULT VALUE"
+    //     }
+    // });
+
+    // console.log({ parsedValues });
+</script>

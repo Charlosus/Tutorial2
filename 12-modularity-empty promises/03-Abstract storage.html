@@ -1,0 +1,211 @@
+<title>Abstracting storage</title>
+
+<script id="Hash Map structure">
+
+    // const records = new Map ();
+
+    // records.set("Adam", 42);
+    // records.set("Beth", 21);
+    // records.set("Cecil", 23);
+
+    // console.log("Entries:", Array.from(records.entries()));
+
+    // const adamRec = records.get("Adam");
+    // console.log("Adam record:", adamRec);
+
+    // console.log("Non existing entry:", records.get("non-existing-entry"));
+    // // if we asked for not existing records, return will be undefined 
+
+    // console.log("Is in records?", records.has("Adam"), records.has("adam")) // true, false 
+    // // keys are case sensitive so its important how key was writen 
+
+    // // to erase key from records we need to name it specificly 
+    // records.delete("Adam");
+
+    // console.log([...records.entries()])
+
+    // // Array.frome(records.entries()) = ([...records.entries()]) same commands almoast do the same 
+</script>
+
+<script id="Abstract Storage - issue">
+
+    // class MyInMemoryDatabase {
+    //     #map = new Map();
+
+    //     save(key, value) {
+    //         this.#map.set(key, value);
+    //     }
+    //     get(key, defaultValue = null) {
+    //         return this.#map.get(key) ?? defaultValue;
+    //     }
+    //     delete(key) {
+    //         this.#map.delete(key);
+    //     }
+    //     clearAll() {
+    //         this.#map.clear();
+    //     }
+    // }
+
+    // const db = new MyInMemoryDatabase();
+
+    // db.save("obj1", { hehe: "xD" });
+    // db.save("obj2", {abc: "def"});
+
+    // const item = db.get("obj1");
+    // console.log("obj1", typeof item, item);
+
+    // console.log("Deleting...");
+    // db.delete("obj1");
+    // // db.clearAll();
+
+    // const obj1 = db.get("obj1");
+    // console.log("obj1", typeof obj1, obj1);
+    // const obj2 = db.get("obj2");
+    // console.log("obj2", typeof obj2, obj2);
+
+
+</script>
+
+<script if="Injecting storage - replaceable">
+
+    // // here we create class that automaticly operate on local storage 
+    // // 
+    
+    // class MyStorage {
+    //     #storage;
+
+    //     constructor(storage) {
+    //         this.#storage = storage;
+    //     }
+
+    //     save(key, value) {
+    //         this.#storage.set(key, value);
+    //     }
+    //     get(key, defaultValue = null) {
+    //         return this.#storage.get(key) ?? defaultValue;
+    //     }
+    //     delete(key) {
+    //         this.#storage.delete(key);
+    //     }
+    //     clearAll() {
+    //         this.#storage.clear();
+    //     }
+    // }
+
+    // class LocalStorageAdapter {
+    //     #serialized;
+    //     #deserialized;
+
+    //     constructor(options) {
+    //         this.#serialized = options?.serialized ?? false;
+    //         this.#deserialized = options?.serialized ?? false;
+    //     }
+
+    //     //save(key, value) {// bad interface
+    //     set(key, value) {
+    //         localStorage.setItem(key, this.#serialize(value));
+    //     }
+    //     get(key, defaultValue = null) {
+    //         return this.#deserialize(localStorage.getItem(key)) ?? defaultValue
+    //     }
+    //     delete(key) {
+    //         localStorage.removeItem(key);
+    //     }
+    //     // clearAll { // bad interface
+    //     clear() {
+    //         localStorage.clear();
+    //     }
+    //     #serialize(value) {
+    //         return this.#serialized
+    //             ? JSON.stringify(value)
+    //             : value
+    //     }
+    //     #deserialize(value) {
+    //         return this.#deserialized
+    //             ? JSON.parse(value)
+    //             : value;
+    //     }
+    // }
+
+    // // const storage = new Map(); // in memory db.
+    // const storage = new LocalStorageAdapter({ serialized: true, deserialized: true }) // persistent
+
+    // const customStorage = new MyStorage(storage);
+
+    // // console.log("Initial obj2:", db.get("obj2"));
+
+    // customStorage.save("obj1", { hehe: "xD"});
+    // customStorage.save("obj2", { abc: "def" });
+
+    // const item = customStorage.get("obj1");
+    // console.log("obj1", typeof item, item);
+
+    // console.log("Deleting...");
+    // customStorage.delete("obj1");
+    // // db.clearAll();
+
+    // const obj1 = customStorage.get("obj1");
+    // console.log("obj1", typeof obj1, obj1);
+    // const obj2 = customStorage.get("obj2");
+    // console.log("obj2", typeof obj2, obj2);
+</script>
+
+<script id="Task">
+    // Task to do Implement a custom Storage class that allows to use 
+    // localStorage/sessionStorage depending on the injected storage
+    //  to the constructor
+
+
+
+    class CustomStorage {
+        #storage
+         
+        constructor(storage) {
+            this.#storage = storage;
+        }
+        setItem(key, value) {
+            const serialized = JSON.stringify(value);
+            this.#storage.setItem(key, serialized)
+        }
+        getItem(key) {
+            const item = this.#storage.getItem(key)
+            return item !== null ? JSON.parse(item) : null;
+        }
+        removeItem(key) {
+            this.#storage.removeItem(key)
+        }
+        clearAll() {
+            this.#storage.clear()
+        }
+    }
+
+    const customStorage = new CustomStorage(localStorage);
+    // const customStorage = new CustomStorage(sessionStorage);
+
+    // const items = [
+    //     {obj1: 15},
+    //     {obj2: 10},
+    //     {obj3: 5}
+    // ]
+    customStorage.setItem("obj1", { hehe: "xD"});
+    customStorage.setItem("obj2", { abc: "def" });
+
+    const item = customStorage.getItem("obj1");
+    console.log("obj1", typeof item, item);
+
+    console.log("Deleting...");
+    customStorage.removeItem("obj1");
+    // customStorage.clearAll();
+
+    const obj1 = customStorage.getItem("obj1");
+    console.log("obj1", typeof obj1, obj1);
+    const obj2 = customStorage.getItem("obj2");
+    console.log("obj2", typeof obj2, obj2);
+
+    const boolian = true
+    JSON.stringify(boolian)
+    console.log(boolian)
+    JSON.parse(boolian)
+    console.log(boolian)
+    Bo
+</script> 
